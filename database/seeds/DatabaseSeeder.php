@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		//Model::unguard();
 
-		$this->call('ParentsSeeder');
+		$this->call('AlbumsSeeder');
 	}
 
 }
@@ -28,5 +28,27 @@ class ParentsSeeder extends Seeder{
 			['email'=>'parent3@gmail.com','password'=>'parent3','fullname'=>'Parent 3'],
 			['email'=>'parent4@gmail.com','password'=>'parent4','fullname'=>'Parent 4']
 		]);
+	}
+}
+class CategoriesSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('categories')->insert([
+			['name' => 'Family'],
+			['name' => 'Natural'],
+			['name' => 'Animal'],
+			['name' => 'Flower']
+			]);
+	}
+}
+class AlbumsSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('albums')->insert([
+			['name'=>'album1', 'description'=>'Family', 'parent_id'=>'3', 'cate_id'=>'1'],
+			['name'=>'album2', 'description'=>'Natural', 'parent_id'=>'5', 'cate_id'=>'2'],
+			['name'=>'album3', 'description'=>'Family', 'parent_id'=>'7', 'cate_id'=>'1'],
+			['name'=>'album4', 'description'=>'Flower', 'parent_id'=>'7', 'cate_id'=>'4']
+			]);
 	}
 }
