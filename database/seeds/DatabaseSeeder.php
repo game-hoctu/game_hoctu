@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder {
 	{
 		//Model::unguard();
 
-		//$this->call('ParentsSeeder');
-		//$this->call('CategoriesSeeder');
 		$this->call('AlbumsSeeder');
 	}
 
@@ -32,29 +30,25 @@ class ParentsSeeder extends Seeder{
 		]);
 	}
 }
-
 class CategoriesSeeder extends Seeder{
 	public function run()
 	{
 		DB::table('categories')->insert([
-			['name'=>'Animal'],
-			['name'=>'Flower'],
-			['name'=>'Nature'],
-			['name'=>'Traffic']
-		]);
+			['name' => 'Family'],
+			['name' => 'Natural'],
+			['name' => 'Animal'],
+			['name' => 'Flower']
+			]);
 	}
 }
-
 class AlbumsSeeder extends Seeder{
 	public function run()
 	{
 		DB::table('albums')->insert([
-			['name'=>'Animal 1', 'parent_id' => '1', 'cate_id' => '1'],
-			['name'=>'Animal 2', 'parent_id' => '1', 'cate_id' => '1'],
-			['name'=>'Animal 3', 'parent_id' => '1', 'cate_id' => '1'],
-			['name'=>'Animal 4', 'parent_id' => '1', 'cate_id' => '1'],
-			['name'=>'Animal 5', 'parent_id' => '1', 'cate_id' => '1'],
-			['name'=>'Animal 6', 'parent_id' => '1', 'cate_id' => '1']
-		]);
+			['name'=>'album1', 'description'=>'Family', 'parent_id'=>'3', 'cate_id'=>'1'],
+			['name'=>'album2', 'description'=>'Natural', 'parent_id'=>'5', 'cate_id'=>'2'],
+			['name'=>'album3', 'description'=>'Family', 'parent_id'=>'7', 'cate_id'=>'1'],
+			['name'=>'album4', 'description'=>'Flower', 'parent_id'=>'7', 'cate_id'=>'4']
+			]);
 	}
 }
