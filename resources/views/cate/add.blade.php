@@ -17,13 +17,13 @@
 						</div>
 					@endif -->
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('getadd') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ route('postadd') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Name</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" required="">
+								<input type="text" class="form-control" name="name" >
 								<label class="label label-danger">{!! $errors->first('name') !!}</label>
 								
 							</div>

@@ -30,8 +30,8 @@
                                 <td> <?php echo $cate['cate_id']; ?> </td>
                                 <td> <?php echo $cate['name']; ?></td>
                                 <td>
-                                    <a href='getlistcategories/<?php echo $cate['cate_id'];?>/edit'> Edit</a>
-                                    <a href='getlistcategories/<?php echo $cate['cate_id'];?>/delete'> Delete</a>
+                                    <a href='categories/<?php echo $cate['cate_id'];?>/edit'> Edit</a>
+                                    <a href='categories/<?php echo $cate['cate_id'];?>/delete'> Delete</a>
                                 </td>
                             </tr>
                           <?php endforeach; ?>

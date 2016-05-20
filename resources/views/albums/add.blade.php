@@ -17,13 +17,13 @@
 						</div>
 					@endif -->
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('create_album-form') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ route('postaddalbum') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Tên Albums</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="txttenalbum" required="">
+								<input type="text" class="form-control" name="tenalbum" required="">
 								<!--<label class="label label-danger">{!! $errors->first('txttenalbum') !!}</label>-->
 								
 							</div>
@@ -31,7 +31,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Mô tả</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="txtmota" required="">
+								<input type="text" class="form-control" name="mota" required="">
 								<!-- <label class="label label-danger">{!! $errors->first('txtmota') !!}
 								</label>-->
 							</div>
@@ -47,10 +47,9 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Thể loại</label>
 							<div class="col-md-6">
-								<select class="form-control "name=txttheloai>
-									<option value="0" >Family <?php selected ?></option>
-									<option value="">Natural  </option>
-									<option value="">Flower</option>
+								<select class="form-control "name=theloai>
+									<option value="0" >Vui lòng chọn thể loại</option>
+									<?php cate_parent($cate); ?>
 								</select>
 								<!--<label class="label label-danger">{!! $errors->first('txttheloai') !!}
 								</label>-->

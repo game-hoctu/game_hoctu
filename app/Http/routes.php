@@ -26,21 +26,12 @@ Route::group(['prefix' => 'parents'], function(){
 		echo json_encode(['response' => 'Message!']);
 	});
 });
-route::get('register', function()
+/*route::get('register', function()
 {
 	return view('parents.register');
 });
-route::POST('register-form',['as'=>'register-form', 'uses'=>'ParentsController@register']);
-route::get('createalbum', function()
-{
-	return view('create');
-});
-//route::POST('create_album', ['as'=>'create_album-form', 'uses'=>'AlbumsController@create']);
-
+route::POST('register-form',['as'=>'register-form', 'uses'=>'ParentsController@register']);*/
 route::get('getlist','ParentsController@getlist');
-
-//route::get('parents/edit/1', 'ParentsController@edit');
-//route::POST('update', ['as'=>'update-parent-form', 'uses'=>'ParentsController@update']);
 Route::get('parent/{id}/edit','ParentsController@edit');
 Route::post('parent/{id}/update','ParentsController@update');
 Route::get('parent/{id}/delete', 'ParentsController@delete');
@@ -68,3 +59,10 @@ route::get('categories/getadd',['as'=>'getadd','uses'=>'CategoriesController@get
 route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd']);
 //Danh sách thể loại
 route::get('getlistcategories','CategoriesController@getlistcate');
+//Cập nhật thông tin thể loại
+Route::get('categories/{id}/edit','CategoriesController@edit');
+Route::post('categories/{id}/update','CategoriesController@update');
+Route::get('categories/{id}/delete', 'CategoriesController@delete');
+//Tạo album
+route::get('album/getaddalbum',['as'=>'getaddalbum','uses'=>'AlbumsController@getaddalbum']);
+route::post('album/postaddalbum',['as'=>'postaddalbum','uses'=>'AlbumsController@postaddalbum']);

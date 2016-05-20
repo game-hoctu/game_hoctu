@@ -37,5 +37,14 @@
           $str = str_replace(' ','-', $str);
           return $str;
      }
+     function cate_parent($data)
+     {
+          foreach($data as $val)
+          {
+               $cate_id = $val['cate_id'];
+               $name = $val['name'];
+               echo "<option>$name</option>";
+          }
+     }
 
 ?>
