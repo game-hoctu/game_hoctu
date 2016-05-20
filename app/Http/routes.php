@@ -57,3 +57,14 @@ Route::get('trangchu', function () {
 	$image = DB::table('images')->get();
     return view('images.home')->with('allAlbum',$allAlbum);
 });*/
+//Trang Register
+route::get('authentication/getregister',['as'=>'getregister','uses'=>'Auth\AuthController@getregister']);
+route::post('authentication/postregister',['as'=>'postregister','uses'=>'Auth\AuthController@postregister']);
+//Trang login
+route::get('authentication/getlogin',['as'=>'getlogin','uses'=>'Auth\AuthController@getlogin']);
+route::post('authentication/postlogin',['as'=>'postlogin','uses'=>'Auth\AuthController@postlogin']);
+//Thêm thể loại
+route::get('categories/getadd',['as'=>'getadd','uses'=>'CategoriesController@getadd']);
+route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd']);
+//Danh sách thể loại
+route::get('getlistcategories','CategoriesController@getlistcate');

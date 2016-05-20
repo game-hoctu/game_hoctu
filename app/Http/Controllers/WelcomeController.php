@@ -22,7 +22,6 @@ class WelcomeController extends Controller {
 	{
 		$this->middleware('guest');
 	}
-
 	/**
 	 * Show the application welcome screen to the user.
 	 *

@@ -12,7 +12,7 @@ class ParentsController extends Controller {
 		$parent = new Parents();
 		$parent->email = $request->txtusername;
 		$parent->password = md5($request->txtpassword);
-		$parent->fullname = $request->txtfullname;
+		$parent->fullname = changeTitle($request->txtfullname);
 		$parent->save();
 		return redirect()->action('ParentsController@getlist');
 

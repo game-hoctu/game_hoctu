@@ -1,7 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\
+//use App\Albums;
 class Categories extends Model {
 	protected $table = 'categories';
 	protected $fillable = ['cate_id','name'];
