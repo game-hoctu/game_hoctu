@@ -5,18 +5,18 @@ use Illuminate\Database\Eloquent\Model;
 class Albums extends Model {
 
 	protected $table = 'albums';
-	protected $fillable = ['album_id','name','description', 'parent_id', 'cate_id'];
+	protected $fillable = ['id','name','description', 'users_id', 'categories_id'];
 	public function images()
 	{
 		return $this -> hasmany("App\Images") ;
 	}
-	public function categori()
+	public function categories()
 	{
 		return $this->belongTo("App\Categories");
 	}
-	public function parent()
+	public function users()
 	{
-		return $this->belongTo("App\Parents");
+		return $this->belongTo("App\Users");
 	}
 
 }

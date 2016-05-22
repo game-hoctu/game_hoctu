@@ -14,22 +14,15 @@ class DatabaseSeeder extends Seeder {
 	{
 		//Model::unguard();
 
+		$this->call('UsersSeeder');
+		$this->call('CategoriesSeeder');
 		$this->call('AlbumsSeeder');
+		$this->call('ImagesSeeder');
 	}
 
 }
 
-class ParentsSeeder extends Seeder{
-	public function run()
-	{
-		DB::table('parents')->insert([
-			['email'=>'parent1@gmail.com','password'=>'parent1','fullname'=>'Parent 1'],
-			['email'=>'parent2@gmail.com','password'=>'parent2','fullname'=>'Parent 2'],
-			['email'=>'parent3@gmail.com','password'=>'parent3','fullname'=>'Parent 3'],
-			['email'=>'parent4@gmail.com','password'=>'parent4','fullname'=>'Parent 4']
-		]);
-	}
-}
+
 class CategoriesSeeder extends Seeder{
 	public function run()
 	{
@@ -41,14 +34,36 @@ class CategoriesSeeder extends Seeder{
 			]);
 	}
 }
+class UsersSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('users')->insert([
+			['name'=>'User 1', 'email'=>'user1@gmail.com', 'password'=> Hash::make(12345)],
+			['name'=>'User 2', 'email'=>'user2@gmail.com', 'password'=> Hash::make(12345)],
+			['name'=>'User 3', 'email'=>'user3@gmail.com', 'password'=> Hash::make(12345)],
+			['name'=>'User 4', 'email'=>'user4@gmail.com', 'password'=> Hash::make(12345)],
+			['name'=>'User 5', 'email'=>'user5@gmail.com', 'password'=> Hash::make(12345)]
+
+			]);
+	}
+}
 class AlbumsSeeder extends Seeder{
 	public function run()
 	{
 		DB::table('albums')->insert([
-			['name'=>'album1', 'description'=>'Family', 'parent_id'=>'3', 'cate_id'=>'1'],
-			['name'=>'album2', 'description'=>'Natural', 'parent_id'=>'5', 'cate_id'=>'2'],
-			['name'=>'album3', 'description'=>'Family', 'parent_id'=>'7', 'cate_id'=>'1'],
-			['name'=>'album4', 'description'=>'Flower', 'parent_id'=>'7', 'cate_id'=>'4']
+			['name'=>'Animal 1', 'description'=>'Family', 'users_id'=>'1', 'categories_id'=>'3'],
+			['name'=>'Animal 2', 'description'=>'Natural', 'users_id'=>'2', 'categories_id'=>'3'],
+			['name'=>'Animal 3', 'description'=>'Family', 'users_id'=>'1', 'categories_id'=>'3'],
+			['name'=>'Animal 4', 'description'=>'Flower', 'users_id'=>'2', 'categories_id'=>'3']
+			]);
+	}
+}
+class ImagesSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('images')->insert([
+			['url'=>'http://r.ddmcdn.com/s_f/o_1/cx_633/cy_0/cw_1725/ch_1725/w_720/APL/uploads/2014/11/too-cute-doggone-it-video-playlist.jpg', 'word'=>'dog', 'albums_id'=>'1'],
+			['url'=>'https://pbs.twimg.com/profile_images/571260078292865024/0EvP5vXn.jpeg', 'word'=>'cat', 'albums_id'=>'1']
 			]);
 	}
 }

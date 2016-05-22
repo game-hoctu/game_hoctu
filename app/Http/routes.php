@@ -14,11 +14,11 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('home','HomeController@index');
-route::get('list','ParentsController@index');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-]);
+	]);
 
 Route::group(['prefix' => 'parents'], function(){
 	Route::get('select-all', function(){
@@ -63,16 +63,15 @@ Route::get('trangchu', function () {
     return view('images.home')->with('allAlbum',$allAlbum);
 });*/
 //Trang Register
-route::get('authentication/getregister',['as'=>'getregister','uses'=>'Auth\AuthController@getregister']);
-route::post('authentication/postregister',['as'=>'postregister','uses'=>'Auth\AuthController@postregister']);
-//Trang login
-route::get('authentication/getlogin',['as'=>'getlogin','uses'=>'Auth\AuthController@getlogin']);
-route::post('authentication/postlogin',['as'=>'postlogin','uses'=>'Auth\AuthController@postlogin']);
+// route::get('Parents/Register',['as'=>'Register','uses'=>'Auth\AuthController@Register']);
+// route::post('Parents/postRegister',['as'=>'postRegister','uses'=>'Auth\AuthController@postRegister']);
+// //Trang login
+// route::get('authentication/getlogin',['as'=>'getlogin','uses'=>'Auth\AuthController@getlogin']);
+// route::post('authentication/postlogin',['as'=>'postlogin','uses'=>'Auth\AuthController@postlogin']);
 //Thêm thể loại
 route::get('categories/getadd',['as'=>'getadd','uses'=>'CategoriesController@getadd']);
 route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd']);
 //Danh sách thể loại
-route::get('getlistcategories','CategoriesController@getlistcate');
 //Cập nhật thông tin thể loại
 Route::get('categories/{id}/edit','CategoriesController@edit');
 Route::post('categories/{id}/update','CategoriesController@update');
@@ -80,3 +79,11 @@ Route::get('categories/{id}/delete', 'CategoriesController@delete');
 //Tạo album
 route::get('album/getaddalbum',['as'=>'getaddalbum','uses'=>'AlbumsController@getaddalbum']);
 route::post('album/postaddalbum',['as'=>'postaddalbum','uses'=>'AlbumsController@postaddalbum']);
+
+Route::group(['prefix' => 'albums'], function(){
+	Route::get('myAlbum', 'AlbumsController@myAlbum');
+});
+
+Route::group(['prefix' => 'categories'], function(){
+	Route::get('all', 'CategoriesController@all');
+});	

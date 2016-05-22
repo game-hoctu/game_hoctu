@@ -4,17 +4,18 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<title>Laravel</title>
+	<title>Game Học Từ Tiếng Anh</title>
 	<link href="{{ asset('/public/css/bootstrap.min.css') }}" rel="stylesheet"/>
-
 	<!-- Custom CSS -->
 	<link href="{{ asset('/public/css/modern-business.css') }}" rel="stylesheet"/>
-
 	<!-- Custom Fonts -->
 	<!-- 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>-->	
 	<!-- <link href="{{ asset('/public/css/app.css') }}" rel="stylesheet">-->
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
+	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
+	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>
+	<script src="{{ asset('/public/js/app.js') }}"></script>
 
 </head>
 <body>
@@ -33,6 +34,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Trang chủ</a></li>
+					@if (!Auth::guest())
+					<li><a href="{{ url('/albums/myAlbum') }}">Album của tôi</a></li>
+					@endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -74,7 +78,7 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ asset('/public/js/bootstrap.min.js') }}"></script>
-
+	
 	<!-- Script to Activate the Carousel -->
 	<script>
 		$('.carousel').carousel({

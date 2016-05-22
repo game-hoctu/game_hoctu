@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -23,8 +24,8 @@ class AlbumsController extends Controller {
 	{
 		$album = new Albums();
 		$album->name = $request->txttenalbum;
-		$album->description = $request->txtmota;v
-		$album->parent_id = $request->txthoten;
+		$album->description = $request->txtmota;
+		$album->user_id = $request->txthoten;
 		$album->cate_id = $request->txttheloai;
 		$album->save();
 		return "Tạo Albums thành công";
@@ -82,6 +83,21 @@ class AlbumsController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function myAlbum()
+	{
+		if(Auth::guest())
+		{
+			return view('auth.login', ['requestLogin' => 'true']);
+		}
+		else
+		{
+			$albums = new Albums(); 
+			$user_id = Auth::user()->id;
+			$result = $albums::where('id', $user_id)->get()->toArray();
+			return view('albums.myAlbum', ['data' => $result]);
+		}
 	}
 
 }

@@ -14,12 +14,12 @@ class CreateImagesTable extends Migration {
 	{
 		Schema::create('images', function(Blueprint $table)
 		{
-			$table->increments('image_id');
+			$table->increments('id');
 			$table->string('url');
 			$table->string('word', 50);
-			$table->integer('album_id')->unsigned();
-			$table->index('album_id');
-			$table->foreign('album_id')->references('album_id')->on('albums')->onDelete('cascade');
+			$table->integer('albums_id')->unsigned();
+			$table->index('albums_id');
+			$table->foreign('albums_id')->references('id')->on('albums')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
