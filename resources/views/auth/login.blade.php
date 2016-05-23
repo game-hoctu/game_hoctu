@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title', 'Đăng nhập')
 @section('content')
 
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="LoginController">
@@ -7,12 +8,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h1>Đăng nhập</h1>
 			<hr/>
-			@if(isset($requestLogin))
-			<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Thông báo!</strong> Bạn cần phải đăng nhập.
-			</div>
-			@endif
+			@include('message')
 			<div class="panel panel-default">
 				<div class="panel-heading">Đăng nhập</div>
 				<div class="panel-body">

@@ -4,7 +4,7 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<title>Game Học Từ Tiếng Anh</title>
+	<title>@yield('title') - Game Học Từ</title>
 	<link href="{{ asset('/public/css/bootstrap.min.css') }}" rel="stylesheet"/>
 	<!-- Custom CSS -->
 	<link href="{{ asset('/public/css/modern-business.css') }}" rel="stylesheet"/>
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	@yield('content')
 
 	<div class="container">

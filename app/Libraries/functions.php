@@ -37,6 +37,7 @@ function changeTitle($str)
      $str = str_replace(' ','-', $str);
      return $str;
 }
+
 function cate_parent($data)
 {
      foreach($data as $val)
@@ -45,6 +46,22 @@ function cate_parent($data)
           $name = $val['name'];
           echo "<option>$name</option>";
      }
+}
+
+function warning($text)
+{
+     $message = array();
+     $message['type'] = 'danger';
+     $message['text'] = $text;
+     return $message;
+}
+
+function success($text)
+{
+     $message = array();
+     $message['type'] = 'success';
+     $message['text'] = $text;
+     return $message;
 }
 
 ?>
