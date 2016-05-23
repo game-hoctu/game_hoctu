@@ -29,7 +29,7 @@ Route::group(['prefix' => 'parents'], function(){
 
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('list', function(){
-		$data = App\Albums::select('album_id','name','description','parent_id','cate_id')->get();
+		$data = App\Albums::select('id','name','description','users_id','categories_id')->get();
 		echo json_encode(['info' => $data]);
 	});
 });
