@@ -4,8 +4,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h1>Cập nhật thông tin</h1>
+            <hr/>
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Cập nhật thông tin</h2></div>
+                <div class="panel-heading">Cập nhật thông tin</div>
                 <div class="panel-body">
                     <!-- @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -16,24 +18,24 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif -->
+                        @endif -->
 
-                    <div class="col-xs-8 col-xs-offset-2" style="margin-top:50px;">
-                         <form class="form-horizontal form-row-seperated" action="{{ URL::action('UsersController@update') }}"method="Post">
+                        <div class="col-xs-8 col-xs-offset-2" style="margin-top:50px;">
+                           <form class="form-horizontal form-row-seperated" action="{{ URL::action('UsersController@update') }}"method="Post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ old('id', $getUserById['id'])}}">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Email:</label>
                                 <div class="col-md-10">
                                     <input type="email" class="form-control" disabled="disabled" 
-                                       value="{{ old('email', $getUserById['email'])}}" name="email">
+                                    value="{{ old('email', $getUserById['email'])}}" name="email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Name:</label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control"
-                                           value="{{ old('name', $getUserById['name'])}}" name="name">
+                                    value="{{ old('name', $getUserById['name'])}}" name="name">
                                 </div>
                             </div>
                             <div class="form-group">

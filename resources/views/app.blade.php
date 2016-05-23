@@ -47,9 +47,11 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ url('/auth/logout') }}">Đăng xuất</a></li>
 							<li><a href="{{ url('/users/edit') }}">Thông tin cá nhân</a></li>
-
+							@if(Auth::user()->role>=3)
+							<li><a href="{{ url('/admin/index') }}">Trang quản trị</a></li>
+							@endif
+							<li><a href="{{ url('/auth/logout') }}">Đăng xuất</a></li>
 						</ul>
 					</li>
 					@endif

@@ -2,7 +2,7 @@
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller {
@@ -18,8 +18,8 @@ class UsersController extends Controller {
         $name = $allRequest['name'];
         //$email = $allRequest['email'];
         $iduser  = $allRequest['id'];
-
         $user = new User();
+
         $getUserById = $user->find($iduser);
         $getUserById->name = $name;
         //$getUserById->email = $email;
@@ -27,5 +27,18 @@ class UsersController extends Controller {
         $getUserById->save();
         return "Cập nhật thông tin thành công";
 
+    }
+
+    public function myProfile()
+    {
+    	if(Auth::guest())
+		{
+			return view('auth.login', ['message' => warning('Bạn cần phải đăng nhập.')]);
+		}
+		else
+		{
+			$id = Auth::user()->id;
+			return $this->callAction("edit", ['id' => $id]);
+		}
     }
 }
