@@ -102,6 +102,11 @@ Route::group(['prefix' => 'admin'], function(){
 		return view('admin.index');
 	});
 	Route::get('categories','CategoriesController@getlist');
+	Route::get('categories/add','CategoriesController@add');
+	Route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd2']);
+	Route::get('categories/{id}/edit2','CategoriesController@edit2');
+	Route::post('categories/{id}/postedit2',['as'=>'postedit2','uses'=>'CategoriesController@postupdate2']);
+	Route::get('categories/{id}/delete2','CategoriesController@delete2');
 	Route::get('albums','AlbumsController@getlist');
 	Route::get('images','ImagesController@getlist');
 	Route::get('users','UsersController@getlist');

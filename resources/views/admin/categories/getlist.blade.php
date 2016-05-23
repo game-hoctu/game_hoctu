@@ -6,6 +6,7 @@
     <div class="col-md-12">
       <h1>Danh sách thể loại</h1>
       <hr/>
+      <a href="{{url('admin/categories/add')}}" class="btn btn-default">Thêm</a>
       <div class="table-responsive">
         <table class="table table-hover">
           <tr class="active">
@@ -18,8 +19,8 @@
             <td>{{$cate['id']}}</td>
             <td>{{$cate['name']}}</td>
             <td>
-              <a href="categories/{{$cate['id']}}/edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="categories/{{$cate['id']}}/delete" class="btn btn-default btn-sm">Xóa</a>
+            <a href="categories/{{$cate['id']}}/edit2" class="btn btn-default btn-sm">Sửa</a>
+              <a href="categories/{{$cate['id']}}/delete2" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
           @endforeach
