@@ -33,4 +33,11 @@ class ImagesController extends Controller {
 		return "Thêm hình ảnh thành công";
 	}
 
+	public function getlist()
+	{
+		$query = new Images();
+		$data = $query->all()->toArray();
+		return view('admin.images.getlist')->with('data', $data);
+	}
+
 }

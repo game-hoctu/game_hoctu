@@ -94,6 +94,15 @@ Route::group(['prefix' => 'users'], function(){
 	Route::get('/{id}/edit','UsersController@edit');
 	Route::post('/{id}/update','UsersController@update');
 });
-Route::group(['prefix']=>'admin'), function(){
-	
-});	
+Route::get('admin', function(){
+	return view('admin.index');
+});
+Route::group(['prefix' => 'admin'], function(){
+	Route::get('index',function(){
+		return view('admin.index');
+	});
+	Route::get('categories','CategoriesController@getlist');
+	Route::get('albums','AlbumsController@getlist');
+	Route::get('images','ImagesController@getlist');
+	Route::get('users','UsersController@getlist');
+});

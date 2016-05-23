@@ -41,4 +41,10 @@ class UsersController extends Controller {
 			return $this->callAction("edit", ['id' => $id]);
 		}
     }
+    public function getlist()
+    {
+        $query = new User();
+        $data = $query->all()->toArray();
+        return view('admin.users.getlist')->with('data', $data);
+    }
 }

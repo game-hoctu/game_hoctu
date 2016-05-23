@@ -8,10 +8,7 @@
 	<link href="{{ asset('/public/css/bootstrap.min.css') }}" rel="stylesheet"/>
 	<!-- Custom CSS -->
 	<link href="{{ asset('/public/css/modern-business.css') }}" rel="stylesheet"/>
-	<!-- Custom Fonts -->
-	<!-- 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>-->	
-	<!-- <link href="{{ asset('/public/css/app.css') }}" rel="stylesheet">-->
-	<!-- Fonts -->
+	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
 	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
 	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>

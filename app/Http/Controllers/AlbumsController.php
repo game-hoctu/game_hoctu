@@ -122,4 +122,11 @@ class AlbumsController extends Controller {
 		}
 	}
 
+	public function getlist()
+	{
+		$query = new Albums();
+		$data = $query->all()->toArray();
+		return view('admin.albums.getlist')->with('data', $data);
+	}
+
 }
