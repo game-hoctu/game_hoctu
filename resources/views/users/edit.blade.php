@@ -22,17 +22,25 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ old('id', $getUserById['id'])}}">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control"
-                                       value="{{ old('name', $getUserById['name'])}}" name="name">
+                                <label class="col-md-2 control-label">Email:</label>
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" disabled="disabled" 
+                                       value="{{ old('email', $getUserById['email'])}}" name="email">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="email">UserName</label>
-                                <input type="email" class="form-control"
-                                       value="{{ old('email', $getUserById['email'])}}" name="email">
+                                <label class="col-md-2 control-label">Name:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control"
+                                           value="{{ old('name', $getUserById['name'])}}" name="name">
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                            <button type="submit" class="btn btn-primary"><a href="{{URL::action('UsersController@edit')}}"></a>Trở về</button>
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-2">
+                                    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+                                    <button type="submit" class="btn btn-default"><a href="{{URL::action('UsersController@edit')}}"></a>Trở về</button>
+                                </div>
+                            </div>     
                         </form>
                     </div>
                 </div>
