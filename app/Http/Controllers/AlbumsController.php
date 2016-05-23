@@ -25,7 +25,7 @@ class AlbumsController extends Controller {
 	{
 		if(Auth::guest())
 		{
-			return view('auth.login', ['requestLogin' => 'true']);
+			return view('auth.login', ['message' => warning('Bạn cần phải đăng nhập.')]);
 		}
 		else
 		{

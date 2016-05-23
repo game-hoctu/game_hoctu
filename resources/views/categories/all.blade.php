@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Albums của tôi')
 @section('content')
 <div class="container">
 	<div class="row">
