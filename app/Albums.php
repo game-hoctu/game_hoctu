@@ -5,7 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 class Albums extends Model {
 
 	protected $table = 'albums';
-	protected $fillable = ['id','name','description', 'users_id', 'categories_id'];
+	protected $fillable = ['id','name','description','categories_id'];
+	protected $hidden = ['users_id'];
 	public function images()
 	{
 		return $this -> hasmany("App\Images") ;

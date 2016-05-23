@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Albums;
+use App\Categories;
 use App\Http\Requests\AlbumsRequest;
 
 class AlbumsController extends Controller {
@@ -20,15 +21,36 @@ class AlbumsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create(AlbumsRequest $request)
+	public function insert()
 	{
-		$album = new Albums();
-		$album->name = $request->txttenalbum;
-		$album->description = $request->txtmota;
-		$album->user_id = $request->txthoten;
-		$album->cate_id = $request->txttheloai;
-		$album->save();
-		return "Tạo Albums thành công";
+		if(Auth::guest())
+		{
+			return view('auth.login', ['requestLogin' => 'true']);
+		}
+		else
+		{
+			$album = Categories::select('id','name')->get()->toArray();
+			return view('albums.insert', compact('album'));
+		}
+		
+	}
+	public function postInsert(AlbumsRequest $request)
+	{
+		if(Auth::guest())
+		{
+			return view('auth.login', ['requestLogin' => 'true']);
+		}
+		else
+		{
+			$album = new Albums();
+			$album->name = $request->name;
+			$album->description = $request->description;
+			$album->users_id = Auth::user()->id;
+			$album->categories_id = $request->categories;
+			$album->save();
+			return route('insert');
+		}
+		
 	}
 
 	/**

@@ -77,13 +77,19 @@ Route::get('categories/{id}/edit','CategoriesController@edit');
 Route::post('categories/{id}/update','CategoriesController@update');
 Route::get('categories/{id}/delete', 'CategoriesController@delete');
 //Tạo album
-route::get('album/getaddalbum',['as'=>'getaddalbum','uses'=>'AlbumsController@getaddalbum']);
-route::post('album/postaddalbum',['as'=>'postaddalbum','uses'=>'AlbumsController@postaddalbum']);
+
 
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');
+	route::get('insert',['as'=>'insert','uses'=>'AlbumsController@insert']);
+	route::post('postInsert',['as'=>'postInsert','uses'=>'AlbumsController@postInsert']);
 });
 
 Route::group(['prefix' => 'categories'], function(){
 	Route::get('all', 'CategoriesController@all');
+});	
+//chỉnh sửa thông tin cá nhân
+Route::group(['prefix' => 'users'], function(){
+	Route::get('user/{id}/edit','UsersController@edit');
+	Route::post('user/{id}/update','UsersController@update');
 });	

@@ -22,18 +22,15 @@ class AlbumsRequest extends Request {
 	public function rules()
 	{
 		return [
-			'txttenalbum'=> 'required|unique:albums,name',
-			'txtmota' => 'required',
-			'txthoten' => 'required',
+			'name'=> 'required|unique:albums,name',
+			'description' => 'required',
 		];
 	}
 	public function messages()
 	{
 		return [
-			'txttenalbum.required' => 'Tên album không được bỏ trống',
-			'txtmota.required' => 'Mô tả không được để trống',
-			'txthoten.required' => 'Tên không được để trống',
-			'txttenalbum.unique' => 'Tên Albums không được trùng'
+			'name.required' => 'Tên album không được bỏ trống',
+			'description.required' => 'Mô tả không được để trống'
 		];
 	}
 

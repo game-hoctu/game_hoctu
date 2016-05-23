@@ -41,9 +41,9 @@
      {
           foreach($data as $val)
           {
-               $cate_id = $val['cate_id'];
+               $id = $val['id'];
                $name = $val['name'];
-               echo "<option>$name</option>";
+               echo "<option value=$id>$name</option>";
           }
      }
 

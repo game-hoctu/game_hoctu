@@ -24,8 +24,8 @@ class CategoriesController extends Controller {
 	}
 	public function getAdd()
 	{
-		//$album = Categories::select('id','name','album_id')->get()->toArray();
-		return view('cate.add');
+		$album = Categories::select('id','name','album_id')->get()->toArray();
+		return view('cate.add', compact('album'));
 	}
 	public function postAdd(AddCategoriesRequests $request)
 	{

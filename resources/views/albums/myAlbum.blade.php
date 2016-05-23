@@ -16,7 +16,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 img-portfolio">
-			<a href="portfolio-item.html">
+			<a href="{{url('albums/insert')}}">
 				<img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
 			</a>
 		</div>
