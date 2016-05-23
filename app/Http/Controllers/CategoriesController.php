@@ -65,24 +65,24 @@ class CategoriesController extends Controller {
 		$data = $cate->all()->toArray();
 		return view('admin.categories.getlist')->with('data', $data);
 	}
-	public function add()
+	public function ad_add()
 	{
 		return view('admin.categories.add');
 	}
-	public function postadd2(Request $request)
+	public function ad_postadd(Request $request)
 	{
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
 		return redirect()->action('CategoriesController@getlist');
 	}
-	public function edit2($id)
+	public function ad_edit($id)
 	{
 		$cate = new Categories();
 		$getcateById = $cate->find($id)->toArray();
 		return view('admin.categories.edit')->with('getcateById',$getcateById);
 	}
-	public function postupdate2(Request $request)
+	public function ad_postupdate(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
@@ -93,7 +93,7 @@ class CategoriesController extends Controller {
 		$getcateById->save();
 		return redirect()->action('CategoriesController@getlist');
 	}
-	public function delete2($id)
+	public function ad_delete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();

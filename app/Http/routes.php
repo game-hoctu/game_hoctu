@@ -94,6 +94,7 @@ Route::group(['prefix' => 'users'], function(){
 	Route::get('/{id}/edit','UsersController@edit');
 	Route::post('/{id}/update','UsersController@update');
 });
+
 Route::get('admin', function(){
 	return view('admin.index');
 });
@@ -102,12 +103,21 @@ Route::group(['prefix' => 'admin'], function(){
 		return view('admin.index');
 	});
 	Route::get('categories','CategoriesController@getlist');
-	Route::get('categories/add','CategoriesController@add');
-	Route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd2']);
-	Route::get('categories/{id}/edit2','CategoriesController@edit2');
-	Route::post('categories/{id}/postedit2',['as'=>'postedit2','uses'=>'CategoriesController@postupdate2']);
-	Route::get('categories/{id}/delete2','CategoriesController@delete2');
+	Route::get('categories/ad_add','CategoriesController@ad_add');
+	Route::post('categories/ad_postadd',['as'=>'ad_postadd','uses'=>'CategoriesController@ad_postadd']);
+	Route::get('categories/{id}/ad_edit','CategoriesController@ad_edit');
+	Route::post('categories/{id}/ad_postedit',['as'=>'ad_postedit','uses'=>'CategoriesController@ad_postupdate']);
+	Route::get('categories/{id}/ad_delete','CategoriesController@ad_delete');
+
 	Route::get('albums','AlbumsController@getlist');
+
+
 	Route::get('images','ImagesController@getlist');
+
 	Route::get('users','UsersController@getlist');
+	Route::get('users/ad_add','UsersController@ad_add');
+	Route::post('users/ad_postadd',['as'=>'ad_postadd','uses'=>'UsersController@ad_postadd']);
+	Route::get('users/{id}/ad_edit','UsersController@ad_edit');
+	Route::post('users/{id}/ad_postedit',['as'=>'ad_postedit','uses'=>'UsersController@ad_postupdate']);
+	Route::get('users/{id}/ad_delete','UsersController@ad_delete');
 });

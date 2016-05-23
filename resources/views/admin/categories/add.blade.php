@@ -23,7 +23,7 @@
 						</div>
 						@endif -->
 
-						<form class="form-horizontal" role="form" method="POST" action="{{ route('postadd') }}">
+						<form class="form-horizontal" role="form" method="POST" action="{{ route('ad_postadd') }}">
 							<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 							<div class="form-group">

@@ -6,6 +6,8 @@
     <div class="col-md-12">
       <h1>Danh sách người dùng</h1>
       <hr/>
+      @include('message')
+      <a href="{{url('admin/users/ad_add')}}" class="btn btn-default">Thêm</a>
       <div class="table-responsive">
         <table class="table table-hover">
           <tr class="active">
@@ -20,8 +22,8 @@
             <td>{{$item['email']}}</td>
             <td>{{$item['name']}}</td>
             <td>
-              <a href="users/{{$item['id']}}/edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="users/{{$item['id']}}/delete" class="btn btn-default btn-sm">Xóa</a>
+              <a href="users/{{$item['id']}}/ad_edit" class="btn btn-default btn-sm">Sửa</a>
+              <a href="users/{{$item['id']}}/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
           @endforeach

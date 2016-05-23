@@ -21,7 +21,7 @@
             <td>{{$item['word']}}</td>
             <td>
               <a href="images/{{$item['id']}}/edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="images/{{$item['id']}}/delete" class="btn btn-default btn-sm">Xóa</a>
+              <a href="images/{{$item['id']}}/delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
           @endforeach

@@ -1,4 +1,5 @@
 <?php
+session_start();
 function  stripUnicode($str) {
      if(!$str) return false;
      $unicode = array(
@@ -50,18 +51,12 @@ function cate_parent($data)
 
 function warning($text)
 {
-     $message = array();
-     $message['type'] = 'danger';
-     $message['text'] = $text;
-     return $message;
+     $_SESSION['warning'] = $text;
 }
 
 function success($text)
 {
-     $message = array();
-     $message['type'] = 'success';
-     $message['text'] = $text;
-     return $message;
+     $_SESSION['success'] = $text;
 }
 
 ?>
