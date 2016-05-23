@@ -94,6 +94,5 @@ Route::group(['prefix' => 'users'], function(){
 	Route::get('/{id}/edit','UsersController@edit');
 	Route::post('/{id}/update','UsersController@update');
 });
-Route::group(['prefix']=>'admin'), function(){
-	
+Route::group(['prefix'=>'admin']), function(){
 });	

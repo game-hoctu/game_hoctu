@@ -59,4 +59,10 @@ class CategoriesController extends Controller {
 		$cate->delete();
 		return redirect()->action('CategoriesController@getlistcate');
 	}
+	public function getlist()
+	{
+		$cate = new Categories();
+		$data = $cate->all()->toArray();
+		return view('admin.categories.getlist')->with('data', $data);
+	}
 }
