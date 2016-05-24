@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title', 'Trang chủ')
 @section('content')
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
