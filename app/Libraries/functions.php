@@ -49,14 +49,14 @@ function cate_parent($data)
      }
 }
 
-function warning($text)
+function warning($arrText)
 {
-     $_SESSION['warning'] = $text;
+     $_SESSION['warning'] = $arrText;
 }
 
-function success($text)
+function success($arrText)
 {
-     $_SESSION['success'] = $text;
+     $_SESSION['success'] = $arrText;
 }
 
 ?>
