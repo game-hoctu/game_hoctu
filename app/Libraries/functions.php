@@ -35,7 +35,7 @@ function changeTitle($str)
      $str = str_replace("'",'',$str);
      $str = stripUnicode($str);
      $str = mb_convert_case($str,MB_CASE_LOWER,'utf-8');
-     $str = str_replace(' ','-', $str);
+     $str = str_replace(' ','_', $str);
      return $str;
 }
 

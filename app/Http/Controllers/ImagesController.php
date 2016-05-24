@@ -45,9 +45,9 @@ class ImagesController extends Controller {
     public function ad_postadd(Request $request)
     {
         $img = $request->file('fImage');
-        $img_name = $img->getClientOriginalName();
+        $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
         $item = new Images();
-        $item->url = $request = $img_name;
+        $item->url  = $img_name;
         $item->word = $request->word;
         $item->albums_id = $request->albums_id;
         $item->save();
@@ -64,18 +64,19 @@ class ImagesController extends Controller {
     }
     public function ad_postupdate(Request $request)
     {
-    	/*$allRequest = $request->all();
+    	$allRequest = $request->all();
     	$url = $allRequest['url'];
     	$word = $allRequest['word'];
-    	$album_id = $allRequest['albums_id']
+    	$albums_id = $allRequest['albums_id']
     	$idimage = $allRequest['id'];
     	$item = new Images();
     	$getimageById = $item->find($idimage);
-    	$getimageById->name = $name;
-    	$getimageById->role = $role;
+    	$getimageById->url = $url;
+    	$getimageById->word = $word;
+        $getimageById->albums_id = $albums_id;
     	$getimageById->save();
         success(["Đã sửa thành công!"]);
-        return redirect()->action('ImagesController@getlist');*/
+        return redirect()->action('ImagesController@getlist');
     }
     public function ad_delete($id)
     {

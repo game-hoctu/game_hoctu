@@ -1,4 +1,5 @@
-var SERVER_PATH = "http://localhost/thuctap/game_hoctu/"
+//var SERVER_PATH = "http://localhost/thuctap/game_hoctu/";
+var SERVER_PATH = "http://phongnguyen.com/framework/game_hoctu/";
 
 var app = angular.module('game_hoctu', ['ngMessages'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
