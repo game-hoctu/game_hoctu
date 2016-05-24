@@ -94,7 +94,7 @@ Route::group(['prefix' => 'users'], function(){
 	Route::get('/{id}/edit','UsersController@edit');
 	Route::post('/{id}/update','UsersController@update');
 });
-
+//làm trang admin
 Route::get('admin', function(){
 	return view('admin.index');
 });
