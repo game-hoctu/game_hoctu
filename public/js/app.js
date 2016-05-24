@@ -30,6 +30,7 @@ app.controller("ImagesController", function($scope, $http){
 
 	$scope.loadImages = function(){
 		$scope.images = undefined;
+		$scope.count = undefined;
 		var albums_id = $scope.albums_id;
 		$http({
 			method  : 'GET',
@@ -41,8 +42,28 @@ app.controller("ImagesController", function($scope, $http){
 			{
 				$scope.images = response.info;
 			}
+			$scope.count = response.info.length;
 		});
 	};
+
+	$scope.loadAllImage = function(){
+		$scope.images = undefined;
+		$scope.count = undefined;
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/images/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.images = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
+
+	$scope.loadAllImage();
 });
 
 

@@ -6,6 +6,12 @@
     <div class="col-md-12">
       <h1>Danh sách hình ảnh</h1>
       <hr/>
+      <div class="btn-group">
+        <button class="btn btn-primary" ng-click="loadAllImage()">Tất cả</button>
+        <a href="{{url('admin/images/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm</a>
+      </div>
+      <hr/>
+
       <form class="form-inline" role="form">
         <div class="form-group">
           <label for="albums_id">Chọn album:</label>
@@ -14,8 +20,8 @@
           </select>
         </div>
       </form>
-      <hr/>
-      <a href="{{url('admin/images/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm</a>
+      <span ng-show="count != undefined">Có tất cả <%count%> hình ảnh.</span>
+      <span ng-show="count == undefined">Không có hình ảnh nào.</span>
       <div class="table-responsive" ng-show="images != undefined">
         <hr/>
         <table class="table table-hover">

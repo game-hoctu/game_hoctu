@@ -166,6 +166,7 @@ Route::group(['prefix' => 'ajax'], function(){
 	});
 	Route::get('categories/getList', 'CategoriesController@ajaxGetList');
 	Route::get('users/getList', 'UsersController@ajaxGetList');
+	Route::get('images/getList', 'ImagesController@ajaxGetList');
 	Route::get('albums/categories/{cate_id}/list', 'AlbumsController@ajaxAlbumByCate');
 	Route::get('albums/users/{users_id}/list', 'AlbumsController@ajaxAlbumByUsers');
 	Route::get('albums/ajaxGetList', 'AlbumsController@ajaxGetList');

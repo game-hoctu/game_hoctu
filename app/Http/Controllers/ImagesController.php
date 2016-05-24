@@ -32,26 +32,28 @@ class ImagesController extends Controller {
 		$image->save();
 		return "Thêm hình ảnh thành công";
 	}
-
 	public function getlist()
 	{
-		//$query = new Images();
-		//$data = $query->all()->toArray();
-		return view('admin.images.getlist');//->with('data', $data);
+		return view('admin.images.getlist');
 	}
 	public function ad_add()
     {
-    	$album = Albums::select('id','name')->get()->toArray();
-        return view('admin.images.add');
+        $users = Albums::all()->toArray();
+    	$albums = Albums::select('id','name')->get()->toArray();
+        return view('admin.images.add', compact('albums', $albums));
     }
     public function ad_postadd(Request $request)
     {
+        $img = $request->file('fImage');
+        $img_name = $img->getClientOriginalName();
         $item = new Images();
-        $item->url = $request->url;
+        $item->url = $request = $img_name;
         $item->word = $request->word;
         $item->albums_id = $request->albums_id;
         $item->save();
-         success(["Đã thêm thành công!"]);
+        $des = 'public/upload/images';
+        $img->move($des, $img_name);
+        success(["Đã thêm thành công!"]);
         return redirect()->action('ImagesController@getlist');
     }
     public function ad_edit($id)
@@ -71,9 +73,9 @@ class ImagesController extends Controller {
     	$getimageById = $item->find($idimage);
     	$getimageById->name = $name;
     	$getimageById->role = $role;
-    	$getimageById->save();*/
+    	$getimageById->save();
         success(["Đã sửa thành công!"]);
-        return redirect()->action('ImagesController@getlist');
+        return redirect()->action('ImagesController@getlist');*/
     }
     public function ad_delete($id)
     {
@@ -81,6 +83,21 @@ class ImagesController extends Controller {
         $item->delete();
         success(["Đã xóa thành công!"]);
         return redirect()->action('ImagesController@getlist');
+    }
+
+
+    //AJAX--------------------------------------------------------------------------------------------
+
+    function ajaxGetList()
+    {
+        $data['status'] = 'ERROR';
+        $result = Images::all();
+        if($result->count() > 0)
+        {
+            $data['status'] = 'SUCCESS';
+            $data['info'] = $result;
+        }
+        return $data;
     }
 
 }
