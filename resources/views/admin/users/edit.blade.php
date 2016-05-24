@@ -22,7 +22,7 @@
 							</ul>
 						</div>
 						@endif -->
-						<form class="form-horizontal" role="form" method="POST" action="{{ route('ad_postedit') }}">
+						<form class="form-horizontal" role="form" method="POST" action="{{ route('users_postedit') }}">
 							<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 							<div class="form-group">
 								<label class="col-md-4 control-label">Mã số</label>
@@ -34,7 +34,7 @@
 							<div class="form-group">
 								<label class="col-md-4 control-label">Email</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" disabled="" name="email" value="{{ old('email', $getuserById['email'])}}">
+									<input type="text" class="form-control" disabled="" name="email" value="{{ old('email', $getuserById['email'])}}" required="">
 									<!--<label class="label label-danger">{!! $errors->first('txttenalbum') !!}</label>-->
 
 								</div>
@@ -42,7 +42,7 @@
 							<div class="form-group">
 								<label class="col-md-4 control-label">Họ tên</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" name="name" value="{{ old('name', $getuserById['name'])}}">
+									<input type="text" class="form-control" name="name" value="{{ old('name', $getuserById['name'])}}" required="">
 									<!--<label class="label label-danger">{!! $errors->first('txttenalbum') !!}</label>-->
 
 								</div>
@@ -51,7 +51,7 @@
 								<label class="col-md-4 control-label">Quyền</label>
 								<div class="col-md-6">
 									<select name="role" class="form-control">
-										<option value="1" @if(old('role', $getuserById['role'])==1) selected="" @endif>Người dung thường</option>
+										<option value="1" @if(old('role', $getuserById['role'])==1) selected="" @endif>Người dùng thường</option>
 										<option value="3" @if(old('role', $getuserById['role'])==3) selected="" @endif>Quản trị viên</option>
 									</select>
 								</div>
@@ -61,6 +61,7 @@
 									<button type="submit" class="btn btn-primary">
 										Sửa
 									</button>
+									<a class="btn btn-default" href="{{url('admin/users/')}}">Trở về</a>
 								</div>
 							</div>
 						</form>

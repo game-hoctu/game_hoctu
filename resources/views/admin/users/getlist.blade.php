@@ -7,7 +7,8 @@
       <h1>Danh sách người dùng</h1>
       <hr/>
       @include('message')
-      <a href="{{url('admin/users/ad_add')}}" class="btn btn-default">Thêm</a>
+      <a href="{{url('admin/users/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Thêm</a>
+      <hr/>
       <div class="table-responsive">
         <table class="table table-hover">
           <tr class="active">

@@ -1,12 +1,23 @@
 @extends('admin')
 @section('title', 'Quản lý hình ảnh')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" ng-app="game_hoctu" ng-controller="ImagesController">
   <div class="row">
     <div class="col-md-12">
-      <h1>Quản lý thể loại</h1>
+      <h1>Danh sách hình ảnh</h1>
       <hr/>
-      <div class="table-responsive">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label for="albums_id">Chọn album:</label>
+          <select name="albums_id" ng-model="albums_id" class="form-control" ng-change="loadImages()">
+            <option ng-repeat="album in albums" value="<%album.id%>"><%album.id%> - <%album.name%></option>
+          </select>
+        </div>
+      </form>
+      <hr/>
+      <a href="{{url('admin/images/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm</a>
+      <div class="table-responsive" ng-show="images != undefined">
+        <hr/>
         <table class="table table-hover">
           <tr class="active">
             <th>Mã số</th>
@@ -14,17 +25,15 @@
             <th>Từ ngữ</th>
             <th>Hành động</th>
           </tr>
-          @foreach($data as $item)
-          <tr>
-            <td>{{$item['id']}}</td>
-            <td>{{$item['url']}}</td>
-            <td>{{$item['word']}}</td>
+          <tr ng-repeat="image in images">
+            <td><%image.id%></td>
+            <td><%image.url%></td>
+            <td><%image.word%></td>
             <td>
-              <a href="images/{{$item['id']}}/edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="images/{{$item['id']}}/delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              <a href="categories/<%image.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
+              <a href="categories/<%image.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
-          @endforeach
         </table>
       </div>
     </div>

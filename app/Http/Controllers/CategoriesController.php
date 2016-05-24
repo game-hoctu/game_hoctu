@@ -14,7 +14,6 @@ class CategoriesController extends Controller {
 		$data = $cate->all()->toArray();
 		for($i = 0; $i < count($data); $i++)
 		{
-			
 			$data[$i]['albums'] = $cate->find($data[$i]['id'])->get()->toArray();
 		}
 		return view('categories.all')->with('data', $data);
@@ -74,6 +73,7 @@ class CategoriesController extends Controller {
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
+		success(["Đã thêm thành công!"]);
 		return redirect()->action('CategoriesController@getlist');
 	}
 	public function ad_edit($id)
@@ -91,12 +91,28 @@ class CategoriesController extends Controller {
 		$getcateById = $cate->find($idcate);
 		$getcateById->name = $name;
 		$getcateById->save();
+		success(["Đã sửa thành công!"]);
 		return redirect()->action('CategoriesController@getlist');
 	}
 	public function ad_delete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
+		success(["Đã xóa thành công!"]);
 		return redirect()->action('CategoriesController@getlist');
+	}
+
+
+	//Ajax--------------------------------------------------
+	function ajaxGetList()
+	{
+		$data['status'] = "ERROR";
+        $result = Categories::all();
+        if($result->count() > 0)
+        {
+            $data['status'] = "SUCCESS";
+            $data['info'] = $result;
+        }
+        return $data;
 	}
 }

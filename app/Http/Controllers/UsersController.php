@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
+use App\Http\Requests\UsersRequest;
 
 class UsersController extends Controller {
 	public function edit($id)
@@ -52,7 +53,7 @@ class UsersController extends Controller {
     {
         return view('admin.users.add');
     }
-    public function ad_postadd(Request $request)
+    public function ad_postadd(UsersRequest $request)
     {
         $item = new User();
         $item->name = $request->name;
@@ -61,6 +62,7 @@ class UsersController extends Controller {
         $item->role = $request->role;
         //$user->remember_token = $request->_token;
         $item->save();
+         success(["Đã thêm thành công!"]);
         return redirect()->action('UsersController@getlist');
     }
     public function ad_edit($id)
@@ -80,13 +82,28 @@ class UsersController extends Controller {
         $getuserById->name = $name;
         $getuserById->role = $role;
         $getuserById->save();
+        success(["Đã sửa thành công!"]);
         return redirect()->action('UsersController@getlist');
     }
     public function ad_delete($id)
     {
         $item = User::findOrFail($id);
         $item->delete();
-        success("Đã xóa thành công!");
+        success(["Đã xóa thành công!"]);
         return redirect()->action('UsersController@getlist');
+    }
+
+
+    //Ajax----------------------------------------------------
+    function ajaxGetList()
+    {
+        $data['status'] = "ERROR";
+        $result = User::all();
+        if($result->count() > 0)
+        {
+            $data['status'] = "SUCCESS";
+            $data['info'] = $result;
+        }
+        return $data;
     }
 }

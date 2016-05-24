@@ -6,7 +6,8 @@
     <div class="col-md-12">
       <h1>Danh sách thể loại</h1>
       <hr/>
-      <a href="{{url('admin/categories/ad_add')}}" class="btn btn-default">Thêm</a>
+      <a href="{{url('admin/categories/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Thêm</a>
+      <hr/>
       <div class="table-responsive">
         <table class="table table-hover">
           <tr class="active">

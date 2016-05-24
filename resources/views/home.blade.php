@@ -14,7 +14,7 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner">
 		<div class="item active">
-		<div class="fill" style="background-image:url('public/images/bg2.jpg');"></div>
+			<div class="fill" style="background-image:url('public/images/bg2.jpg');"></div>
 			<div class="carousel-caption">
 				<h2>Nơi tình yêu bắt đầu</h2>
 			</div>
@@ -41,4 +41,7 @@
 		<span class="icon-next"></span>
 	</a>
 </header>
+<div class="container">
+	@include('message')
+</div>
 @endsection

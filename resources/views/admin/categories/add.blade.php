@@ -1,6 +1,6 @@
 @extends('admin')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" ng-app="game_hoctu">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			@if(isset($insertSuccess))
@@ -11,6 +11,7 @@
 			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">Thêm Thể Loại</div>
+				</hr>
 				<div class="panel-body">
 					<!-- @if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -23,28 +24,31 @@
 						</div>
 						@endif -->
 
-						<form class="form-horizontal" role="form" method="POST" action="{{ route('ad_postadd') }}">
-							<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+						<form name="formAdd" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postadd') }}">
+							<input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
 							<div class="form-group">
-								<label class="col-md-4 control-label">Name</label>
+								<label class="col-md-4 control-label">Tên thể loại</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" name="name" required="">
-									<!--<label class="label label-danger">{!! $errors->first('txttenalbum') !!}</label>-->
-
+									<input type="text" class="form-control" name="name" required="" ng-model="name">
+									<div ng-show="formAdd.name.$touched" ng-messages="formAdd.name.$error">
+										<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+									</div>
 								</div>
 							</div>
-					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<button type="submit" class="btn btn-primary">
-								Thêm
-							</button>
-						</div>
+							<div class="form-group">
+								<div class="col-md-6 col-md-offset-4">
+									<button type="submit" class="btn btn-primary">
+										Thêm
+									</button>
+									<a class="btn btn-default" href="{{url('admin/categories/')}}">Trở về</a>
+								</div>
+							</div>
+						</form>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 @endsection
