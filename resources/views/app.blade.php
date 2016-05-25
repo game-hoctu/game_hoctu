@@ -45,13 +45,13 @@
 					<li><a href="{{ url('/auth/register') }}">Đăng ký</a></li>
 					@else
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ url('/users/myProfile') }}">Thông tin cá nhân</a></li>
+							<li><a href="{{ url('/users/myProfile') }}"><span class="glyphicon glyphicon-eye-open"></span> Thông tin cá nhân</a></li>
 							@if(Auth::user()->role>=3)
-							<li><a href="{{ url('/admin/index') }}">Trang quản trị</a></li>
+							<li><a href="{{ url('/admin/index') }}"><span class="glyphicon glyphicon-pencil"></span> Trang quản trị</a></li>
 							@endif
-							<li><a href="{{ url('/auth/logout') }}">Đăng xuất</a></li>
+							<li><a href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
 						</ul>
 					</li>
 					@endif

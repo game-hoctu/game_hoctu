@@ -38,8 +38,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{Auth::user()->name}} <b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ url('/') }}">Quay lại trang chủ</a></li>
-						<li><a href="{{ url('/auth/logout') }}">Đăng xuất</a></li>
+						<li><a href="{{ url('/') }}"><i class="fa fa-arrow-circle-o-left"></i> Trang chủ</a></li>
+						<li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -47,7 +47,7 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li>
-						<a href="{{ url('/admin/index') }}"><i class="fa fa-fw fa-dashboard"></i> Trang chủ</a>
+						<a href="{{ url('/admin/index') }}"><i class="fa fa-fw fa-dashboard"></i> Trang tổng quan</a>
 					</li>
 					<li>
 						<a href="{{ url('/admin/users') }}"><i class="fa fa-fw fa-user"></i> Quản lý người dùng</a>
