@@ -8,7 +8,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Sửa hình ảnh</div>
 				<div class="panel-body">
-					<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postEdit') }}">
+					<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postEdit') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<div class="form-group">
 							<label class="col-md-4 control-label">Mã số</label>
@@ -18,9 +18,16 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-4 control-label"></label>
+							<div class="col-md-6">
+								<img src="{{ UPLOAD_FOLDER.old('url', $getimageById['url'])}}" width="200px" />
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-4 control-label">Hình ảnh</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="url" value="{{ old('url', $getimageById['url'])}}" required="">
+								<input type="file" class="form-control" name="fImage" required="">
+								<input type="hidden" class="form-control" name="url" value="{{ old('url', $getimageById['url'])}}" required="">
 							</div>
 						</div>
 						<div class="form-group">

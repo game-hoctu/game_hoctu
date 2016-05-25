@@ -21,7 +21,8 @@
 			"App\\": "app/"
 		},
 		"files": [
-			"app/Libraries/functions.php"
+			"app/Libraries/functions.php",
+			"app/Libraries/config.php"
 		]
 	},
 	"autoload-dev": {
