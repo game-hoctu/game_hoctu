@@ -1,4 +1,5 @@
 @extends('admin')
+@section('title','Sửa hình ảnh')
 @section('content')
 <div class="container-fluid" ng-app="game_hoctu">
 	<div class="row">
@@ -7,7 +8,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Sửa hình ảnh</div>
 				<div class="panel-body">
-					<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postedit') }}">
+					<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postEdit') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<div class="form-group">
 							<label class="col-md-4 control-label">Mã số</label>
