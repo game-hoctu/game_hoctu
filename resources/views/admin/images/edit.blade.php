@@ -6,17 +6,23 @@
 		<div class="col-md-8 col-md-offset-2">
 			@include('message')
 			<div class="panel panel-default">
-				<div class="panel-heading">Thêm hình ảnh</div>
+				<div class="panel-heading">Sửa hình ảnh</div>
 			</hr>
 			<div class="panel-body">
-				<form name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postadd') }}">
+				<form name="form_imgEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postedit') }}">
 					<input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
-
+					<div class="form-group">
+							<label class="col-md-4 control-label">Mã số</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" disabled="" value="{{ old('id', $getimageById['id'])}}">
+								<input type="hidden" class="form-control" name="id_image" value="{{ old('id', $getimageById['id'])}}">
+							</div>
+						</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Hình ảnh</label>
 						<div class="col-md-6">
-							<input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
-							<div ng-show="form_imgAdd.fImage.$touched" ng-messages="form_imgAdd.fImage.$error">
+							<input type="file" class="form-control" name="fImage" required="" ng-model="fImage" value="{{ old('url', $getimageById[url])}}">
+							<div ng-show="form_imgEdit.fImage.$touched" ng-messages="form_imgEdit.fImage.$error">
 								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 							</div>
 						</div>
@@ -24,21 +30,21 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">Từ ngữ</label>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="word" required="" ng-model="word">
-							<div ng-show="form_imgAdd.word.$touched" ng-messages="form_imgAdd.word.$error">
+							<input type="text" class="form-control" name="word" required="" ng-model="word" value="{{ word('word', $getimageById['word'])}}">
+							<div ng-show="form_imgEdit.word.$touched" ng-messages="form_imgEdit.word.$error">
 								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 							</div>
 						</div>
-					</div>form_imgAdd
+					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Album</label>
 						<div class="col-md-6">
-							<select name="albums_id" class="form-control">
+							<select name="albums_id" class="form-control" value="{{ albums_id('albums_id', $getimageById['albums_id'])}} >
 								@foreach($albums as $album )
 								<option value="{{$album['id']}}">{{$album['name']}}</option>
 								@endforeach
 							</select>
-							<div ng-show="form_imgAdd.user.$touched" ng-messages="form_imgAdd.user.$error">
+							<div ng-show="form_imgEdit.albums_id.$touched" ng-messages="form_imgEdit.albums_id.$error">
 								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 							</div>
 						</div>

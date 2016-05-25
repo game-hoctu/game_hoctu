@@ -39,7 +39,7 @@ class ImagesController extends Controller {
 	public function ad_add()
     {
         $users = Albums::all()->toArray();
-    	$albums = Albums::select('id','name')->get()->toArray();
+        $albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.add', compact('albums', $albums));
     }
     public function ad_postadd(Request $request)
@@ -64,18 +64,19 @@ class ImagesController extends Controller {
     }
     public function ad_postupdate(Request $request)
     {
-    	/*$allRequest = $request->all();
-    	$url = $allRequest['url'];
-    	$word = $allRequest['word'];
-    	$album_id = $allRequest['albums_id']
-    	$idimage = $allRequest['id'];
-    	$item = new Images();
-    	$getimageById = $item->find($idimage);
-    	$getimageById->name = $name;
-    	$getimageById->role = $role;
-    	$getimageById->save();
-        success(["Đã sửa thành công!"]);
-        return redirect()->action('ImagesController@getlist');*/
+    	// $allRequest = $request->all();
+    	// $url = $allRequest['url'];
+    	// $word = $allRequest['word'];
+    	// $album_id = $allRequest['albums_id']
+    	// $id_image = $allRequest['id'];
+    	// $item = new Images();
+    	// $getimageById = $item->find($id_image);
+    	// $getimageById->url = $url;
+    	// $getimageById->word = $word;
+        // $getimageById->album_id = $album_id;
+    	// $getimageById->save();
+        // success(["Đã sửa thành công!"]);
+        return redirect()->action('ImagesController@getlist');
     }
     public function ad_delete($id)
     {
