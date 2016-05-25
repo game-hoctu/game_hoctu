@@ -37,11 +37,6 @@ class ImagesController extends Controller {
 		$albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.getlist', compact('albums', $albums));
 	}
-	public function ad_add()
-    {
-        $albums = Albums::select('id','name')->get()->toArray();
-        return view('admin.images.add', compact('albums', $albums));
-    }
     public function ad_postadd(Request $request)
     {
         $img = $request->file('fImage');

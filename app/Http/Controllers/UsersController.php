@@ -53,10 +53,6 @@ class UsersController extends Controller {
         $data = $query->all()->toArray();
         return view('admin.users.getlist')->with('data', $data);
     }
-    public function ad_add()
-    {
-        return view('admin.users.add');
-    }
     public function ad_postadd(UsersRequest $request)
     {
         $item = new User();
@@ -75,7 +71,7 @@ class UsersController extends Controller {
         $getuserById = $item->find($id)->toArray();
         return view('admin.users.edit')->with('getuserById',$getuserById);
     }
-    public function ad_postupdate(Request $request)
+    public function ad_postEdit(Request $request)
     {
         $allRequest = $request->all();
         $name = $allRequest['name'];

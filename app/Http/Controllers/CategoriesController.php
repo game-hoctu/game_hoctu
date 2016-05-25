@@ -55,7 +55,7 @@ class CategoriesController extends Controller {
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
-		success(["Đã xóa thành công!"]);
+		success("Đã xóa thành công!");
 		return redirect()->action('CategoriesController@all');
 	}
 	//ADMIN-------------------------------------------------------------------------------
@@ -64,10 +64,6 @@ class CategoriesController extends Controller {
 		$cate = new Categories();
 		$data = $cate->all()->toArray();
 		return view('admin.categories.getlist')->with('data', $data);
-	}
-	public function ad_add()
-	{
-		return view('admin.categories.add');
 	}
 	public function ad_postadd(Request $request)
 	{
@@ -83,7 +79,7 @@ class CategoriesController extends Controller {
 		$getcateById = $cate->find($id)->toArray();
 		return view('admin.categories.edit')->with('getcateById',$getcateById);
 	}
-	public function ad_postupdate(Request $request)
+	public function ad_postEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];

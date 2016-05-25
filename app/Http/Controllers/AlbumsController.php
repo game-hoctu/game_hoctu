@@ -74,12 +74,6 @@ class AlbumsController extends Controller {
 		$cates = Categories::all()->toArray();
 		return view('admin.albums.getlist', compact('users', 'cates'));
 	}
-	public function ad_add()
-	{
-		$users = User::all()->toArray();
-		$cates = Categories::all()->toArray();
-		return view('admin.albums.add', compact('users', 'cates'));
-	}
 	public function ad_postadd(Request $request)
 	{
 		$item = new Albums();
@@ -87,7 +81,6 @@ class AlbumsController extends Controller {
 		$item->description = $request->description;
 		$item->users_id = $request->users_id;
 		$item->categories_id = $request->categories_id;
-        //$user->remember_token = $request->_token;
 		$item->save();
 		success("Đã thêm thành công!");
 		return redirect()->action('AlbumsController@getlist');
@@ -100,7 +93,7 @@ class AlbumsController extends Controller {
 		$getalbumById = $item->find($id)->toArray();
 		return view('admin.albums.edit', compact('users', 'cates'))->with('getalbumById',$getalbumById);
 	}
-	public function ad_postupdate(Request $request)
+	public function ad_postEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
