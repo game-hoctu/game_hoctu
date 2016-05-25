@@ -1,0 +1,23 @@
+.album-item{
+	position: relative;
+}
+.album-info{
+	width: 80%;
+	position: absolute;
+	bottom: 0px;
+	margin: 0px 10% 5%;
+}
+.album-info a{
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 0px 0px 5px #111;
+}
+
+.album-info a:hover{
+	text-shadow: 0px 0px 5px red;
+}
+
+.album-info p{
+	color: #fff;
+	text-shadow: 0px 0px 3px #111;
+}

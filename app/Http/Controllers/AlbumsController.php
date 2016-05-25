@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use App\Albums;
+use App\Images;
 use App\Categories;
 use App\Http\Requests\AlbumsRequest;
+use File;
 
 class AlbumsController extends Controller {
 
@@ -53,18 +55,51 @@ class AlbumsController extends Controller {
 		
 	}
 
-	public function myAlbum()
+	function listByUser($user_id)
 	{
 		if(Auth::guest())
 		{
-			return view('auth.login', ['requestLogin' => 'true']);
+			warning("Bạn cần phải đăng nhập!");
+			return view('auth.login');
 		}
 		else
 		{
 			$albums = new Albums(); 
-			$user_id = Auth::user()->id;
-			$result = $albums::where('id', $user_id)->get()->toArray();
-			return view('albums.myAlbum', ['data' => $result]);
+			$result = $albums::where('users_id', $user_id)->get()->toArray();
+			for($i = 0; $i < count($result); $i++)
+			{
+				$urlAlbumImage = ALBUM_IMAGE.$result[$i]['id'].".jpg";
+				if(!File::exists($urlAlbumImage))
+				{
+					$image = Images::where('albums_id', $result[$i]['id'])->get()->toArray();
+					if(count($image) > 0)
+					{
+						$albumimage = new SimpleImage();
+						$albumimage->load(UPLOAD_FOLDER.$image[0]['url']);
+						$albumimage->resize(700, 400);
+						$albumimage->save($urlAlbumImage);
+					}
+					else
+					{
+						$urlAlbumImage = SERVER_PATH."public/images/no-image.png";
+					}
+				}
+				$result[$i]['image'] = $urlAlbumImage;
+			}
+			return view('albums.list', ['data' => $result]);
+		}
+	}
+
+	public function myAlbum()
+	{
+		if(Auth::guest())
+		{
+			warning("Bạn cần phải đăng nhập!");
+			return view('auth.login');
+		}
+		else
+		{
+			return $this->callAction('listByUser', ['user_id' => Auth::user()->id]);
 		}
 	}
 
