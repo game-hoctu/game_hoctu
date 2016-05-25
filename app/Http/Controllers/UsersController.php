@@ -38,13 +38,13 @@ class UsersController extends Controller {
         $getuserById->name = $name;
         $getuserById->role = $role;
         $getuserById->save();
-        success(["Đã sửa thành công!"]);
+        success("Đã sửa thành công!");
         return redirect()->action('UsersController@edit');
     }
 
     public function myProfile()
     {
-    	
+    	return $this->callAction('edit', ['id' => Auth::user()->id]);
     }
 //ADMIN-----------------------------------------------------------------------------------
     public function getlist()
@@ -66,7 +66,7 @@ class UsersController extends Controller {
         $item->role = $request->role;
         //$user->remember_token = $request->_token;
         $item->save();
-        success(["Đã thêm thành công!"]);
+        success("Đã thêm thành công!");
         return redirect()->action('UsersController@getlist');
     }
     public function ad_edit($id)
@@ -86,14 +86,14 @@ class UsersController extends Controller {
         $getuserById->name = $name;
         $getuserById->role = $role;
         $getuserById->save();
-        success(["Đã sửa thành công!"]);
+        success("Đã sửa thành công!");
         return redirect()->action('UsersController@getlist');
     }
     public function ad_delete($id)
     {
         $item = User::findOrFail($id);
         $item->delete();
-        success(["Đã xóa thành công!"]);
+        success("Đã xóa thành công!");
         return redirect()->action('UsersController@getlist');
     }
 

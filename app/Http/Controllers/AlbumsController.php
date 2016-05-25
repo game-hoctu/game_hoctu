@@ -70,7 +70,9 @@ class AlbumsController extends Controller {
 
 	public function getlist()
 	{
-		return view('admin.albums.getlist');
+		$users = User::all()->toArray();
+		$cates = Categories::all()->toArray();
+		return view('admin.albums.getlist', compact('users', 'cates'));
 	}
 	public function ad_add()
 	{
@@ -87,7 +89,7 @@ class AlbumsController extends Controller {
 		$item->categories_id = $request->categories_id;
         //$user->remember_token = $request->_token;
 		$item->save();
-		success(["Đã thêm thành công!"]);
+		success("Đã thêm thành công!");
 		return redirect()->action('AlbumsController@getlist');
 	}
 	public function ad_edit($id)
@@ -113,14 +115,14 @@ class AlbumsController extends Controller {
 		$getalbumById->users_id = $user;
 		$getalbumById->categories_id = $theloai;
 		$getalbumById->save();
-		success(["Đã sửa thành công!"]);
+		success("Đã sửa thành công!");
 		return redirect()->action('AlbumsController@getlist');
 	}
 	public function ad_delete($id)
 	{
 		$item = Albums::findOrFail($id);
 		$item->delete();
-		success(["Đã xóa thành công!"]);
+		success("Đã xóa thành công!");
 		return redirect()->action('AlbumsController@getlist');
 	}
 

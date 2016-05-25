@@ -34,7 +34,8 @@ class ImagesController extends Controller {
 	}
 	public function getlist()
 	{
-		return view('admin.images.getlist');
+		$albums = Albums::select('id','name')->get()->toArray();
+        return view('admin.images.getlist', compact('albums', $albums));
 	}
 	public function ad_add()
     {
@@ -52,7 +53,7 @@ class ImagesController extends Controller {
         $item->save();
         $des = 'public/upload/images';
         $img->move($des, $img_name);
-        success(["Đã thêm thành công!"]);
+        success("Đã thêm thành công!");
         return redirect()->action('ImagesController@getlist');
     }
     public function ad_edit($id)
@@ -81,14 +82,14 @@ class ImagesController extends Controller {
         $img_name = $url;
         $des = 'public/upload/images';
         $img->move($des, $img_name);
-        success(["Đã sửa thành công!"]);
+        success("Đã sửa thành công!");
         return redirect()->action('ImagesController@getlist');
     }
     public function ad_delete($id)
     {
         $item = Images::findOrFail($id);
         $item->delete();
-        success(["Đã xóa thành công!"]);
+        success("Đã xóa thành công!");
         return redirect()->action('ImagesController@getlist');
     }
 

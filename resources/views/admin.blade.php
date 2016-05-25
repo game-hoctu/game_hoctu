@@ -7,6 +7,7 @@
 	<title>@yield('title') - Trang Quản Trị</title>
 	<link href="{{ asset('/public/css/bootstrap.min.css') }}" rel="stylesheet"/>
 	<link href="{{ asset('/public/css/sb-admin.css') }}" rel="stylesheet">
+	<link href="{{ asset('/public/css/site.css') }}" rel="stylesheet">
 	<!-- Custom Fonts -->
 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
@@ -36,16 +37,23 @@
 			<ul class="nav navbar-right top-nav">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{Auth::user()->name}} <b class="caret"></b></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ url('/') }}">Quay lại trang chủ</a></li>
+						<li><a href="{{ url('/auth/logout') }}">Đăng xuất</a></li>
+					</ul>
 				</li>
 			</ul>
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li class="active">
+					<li>
 						<a href="{{ url('/admin/index') }}"><i class="fa fa-fw fa-dashboard"></i> Trang chủ</a>
 					</li>
 					<li>
 						<a href="{{ url('/admin/users') }}"><i class="fa fa-fw fa-user"></i> Quản lý người dùng</a>
+					</li>
+					<li>
+						<a href="{{ url('/admin/users') }}"><i class="fa fa-fw fa-user"></i> Quản lý những đứa trẻ</a>
 					</li>
 					<li>
 						<a href="{{ url('/admin/categories') }}"><i class="fa fa-fw fa-table"></i> Quản lý thể loại</a>

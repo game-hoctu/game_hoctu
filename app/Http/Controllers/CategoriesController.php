@@ -30,7 +30,7 @@ class CategoriesController extends Controller {
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
-		success(["Đã thêm thành công!"]);
+		success("Đã thêm thành công!");
 		return redirect()->action('CategoriesController@add');
 	}
 	public function edit($id)
@@ -48,7 +48,7 @@ class CategoriesController extends Controller {
 		$getcateById = $cate->find($idcate);
 		$getcateById->name = $name;
 		$getcateById->save();
-		success(["Đã sửa thành công!"]);
+		success("Đã sửa thành công!");
 		return redirect()->action('CategoriesController@edit');
 	}
 	public function delete($id)
@@ -74,7 +74,7 @@ class CategoriesController extends Controller {
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
-		success(["Đã thêm thành công!"]);
+		success("Đã thêm thành công!");
 		return redirect()->action('CategoriesController@getlist');
 	}
 	public function ad_edit($id)
@@ -92,14 +92,14 @@ class CategoriesController extends Controller {
 		$getcateById = $cate->find($idcate);
 		$getcateById->name = $name;
 		$getcateById->save();
-		success(["Đã sửa thành công!"]);
+		success("Đã sửa thành công!");
 		return redirect()->action('CategoriesController@getlist');
 	}
 	public function ad_delete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
-		success(["Đã xóa thành công!"]);
+		success("Đã xóa thành công!");
 		return redirect()->action('CategoriesController@getlist');
 	}
 

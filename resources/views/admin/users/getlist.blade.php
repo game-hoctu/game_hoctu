@@ -11,7 +11,7 @@
         <li class="active"><a data-toggle="tab" href="#home">Danh sách người dùng</a></li>
         <li><a data-toggle="tab" href="#insert"><span class="glyphicon glyphicon-plus"></span>Thêm</a></li>
       </ul>
-
+      <hr/>
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
           <div class="table-responsive">

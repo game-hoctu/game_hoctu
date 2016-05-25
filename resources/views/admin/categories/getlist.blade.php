@@ -10,11 +10,11 @@
         <li class="active"><a data-toggle="tab" href="#home">Danh sách thể loại</a></li>
         <li><a data-toggle="tab" href="#insert"><span class="glyphicon glyphicon-plus"></span>Thêm</a></li>
       </ul>
-
+      <hr/>
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
           <div class="table-responsive">
-          <table class="table table-hover table-bordered table-striped">
+            <table class="table table-hover table-bordered table-striped">
               <tr class="active">
                 <th>Mã số</th>
                 <th>Tên album</th>

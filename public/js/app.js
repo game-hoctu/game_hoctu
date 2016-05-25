@@ -67,11 +67,11 @@ app.controller("ImagesController", function($scope, $http){
 
 app.controller('AlbumsController', function($scope, $http){
 	$scope.albums = undefined;
-	$scope.viewbyCate = true;
 
 	$scope.loadAllAlbums = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
+		console.log($scope.insert);
 		$http({
 			method  : 'GET',
 			url     : SERVER_PATH + "ajax/albums/ajaxGetList",
@@ -83,7 +83,6 @@ app.controller('AlbumsController', function($scope, $http){
 				$scope.albums = response.info;
 			}
 			$scope.count = response.info.length;
-
 		});
 	};
 
@@ -92,6 +91,7 @@ app.controller('AlbumsController', function($scope, $http){
 	$scope.loadCate = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
+
 		$http({
 			method  : 'GET',
 			url     : SERVER_PATH + "ajax/categories/getList",
@@ -104,9 +104,11 @@ app.controller('AlbumsController', function($scope, $http){
 			}
 		});
 	};
+
 	$scope.loadUsers = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
+
 		$http({
 			method  : 'GET',
 			url     : SERVER_PATH + "ajax/users/getList",
@@ -119,14 +121,11 @@ app.controller('AlbumsController', function($scope, $http){
 			}
 		});
 	};
-	$scope.loadCate();
 
 	$scope.viewByCate = function(){
-		$scope.viewbyCate = true;
 		$scope.loadCate();
 	};
 	$scope.viewByUsers = function(){
-		$scope.viewbyCate = false;
 		$scope.loadUsers();
 	};
 

@@ -7,15 +7,14 @@
 			@include('message')
 			<div class="panel panel-default">
 				<div class="panel-heading">Thêm hình ảnh</div>
-			</hr>
-			<div class="panel-body">
-				<form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postadd') }}">
-					<input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
+				<div class="panel-body">
+					<form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postadd') }}">
+						<input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label">Hình ảnh</label>
-						<div class="col-md-6">
-							<input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
+						<div class="form-group">
+							<label class="col-md-4 control-label">Hình ảnh</label>
+							<div class="col-md-6">
+								<input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
 							<!--<div ng-show="form_imgAdd.fImage.$touched" ng-messages="form_imgAdd.fImage.$error">
 								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 							</div>-->

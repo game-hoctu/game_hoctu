@@ -8,6 +8,8 @@
 	<link href="{{ asset('/public/css/bootstrap.min.css') }}" rel="stylesheet"/>
 	<!-- Custom CSS -->
 	<link href="{{ asset('/public/css/modern-business.css') }}" rel="stylesheet"/>
+	<link href="{{ asset('/public/css/site.css') }}" rel="stylesheet">
+
 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
 	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
@@ -45,7 +47,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ url('/users/edit') }}">Thông tin cá nhân</a></li>
+							<li><a href="{{ url('/users/myProfile') }}">Thông tin cá nhân</a></li>
 							@if(Auth::user()->role>=3)
 							<li><a href="{{ url('/admin/index') }}">Trang quản trị</a></li>
 							@endif
@@ -61,14 +63,12 @@
 	@yield('content')
 
 	<div class="container">
-
-
 		<hr>
 		<!-- Footer -->
 		<footer>
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Your Website 2014</p>
+					<p>Copyright &copy; Your Website 2016</p>
 				</div>
 			</div>
 		</footer>
