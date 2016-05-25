@@ -35,7 +35,7 @@ function changeTitle($str)
      $str = str_replace("'",'',$str);
      $str = stripUnicode($str);
      $str = mb_convert_case($str,MB_CASE_LOWER,'utf-8');
-     $str = str_replace(' ','_', $str);
+     $str = str_replace(' ','-', $str);
      return $str;
 }
 
@@ -49,14 +49,14 @@ function cate_parent($data)
      }
 }
 
-function warning($arrText)
+function warning($text)
 {
-     $_SESSION['warning'] = $arrText;
+     $_SESSION['warning'] = $text;
 }
 
-function success($arrText)
+function success($text)
 {
-     $_SESSION['success'] = $arrText;
+     $_SESSION['success'] = $text;
 }
 
 ?>

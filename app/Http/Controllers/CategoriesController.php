@@ -21,43 +21,44 @@ class CategoriesController extends Controller {
 		// print_r($data);
 		// echo "</pre>";
 	}
-	public function getAdd()
+	public function add()
 	{
-		$album = Categories::select('id','name','album_id')->get()->toArray();
-		return view('cate.add', compact('album'));
+		return view('categories.add');
 	}
-	public function postAdd(AddCategoriesRequests $request)
+	public function postAdd(Requests $request)
 	{
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
-		return redirect()->action('CategoriesController@getlistcate');
+		success(["Đã thêm thành công!"]);
+		return redirect()->action('CategoriesController@add');
 	}
 	public function edit($id)
 	{
 		$cate = new Categories();
 		$getcateById = $cate->find($id)->toArray();
-		return view('cate.edit')->with('getcateById',$getcateById);
+		return view('categories.edit')->with('getcateById',$getcateById);
 	}
-	public function update(Request $request)
+	public function postEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
 		$idcate = $allRequest['id'];
-
 		$cate = new Categories();
 		$getcateById = $cate->find($idcate);
 		$getcateById->name = $name;
 		$getcateById->save();
-
-		return redirect()->action('CategoriesController@getlistcate');
+		success(["Đã sửa thành công!"]);
+		return redirect()->action('CategoriesController@edit');
 	}
 	public function delete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
-		return redirect()->action('CategoriesController@getlistcate');
+		success(["Đã xóa thành công!"]);
+		return redirect()->action('CategoriesController@all');
 	}
+	//ADMIN-------------------------------------------------------------------------------
 	public function getlist()
 	{
 		$cate = new Categories();

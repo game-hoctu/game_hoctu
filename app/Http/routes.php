@@ -40,40 +40,42 @@ Route::group(['prefix' => 'images'], function(){
 		echo json_encode(['info' => $data]);
 	});
 });
+
 /*route::get('register', function()
 {
 	return view('parents.register');
 });
 route::POST('register-form',['as'=>'register-form', 'uses'=>'ParentsController@register']);*/
-route::get('getlist','ParentsController@getlist');
-Route::get('parent/{id}/edit','ParentsController@edit');
-Route::post('parent/{id}/update','ParentsController@update');
-Route::get('parent/{id}/delete', 'ParentsController@delete');
+// route::get('getlist','ParentsController@getlist');
+// Route::get('parent/{id}/edit','ParentsController@edit');
+// Route::post('parent/{id}/update','ParentsController@update');
+// Route::get('parent/{id}/delete', 'ParentsController@delete');
 
 route::get('categories/getadd',['as'=>'getadd','uses'=>'CategoriesController@getadd']);
 route::post('categories/postadd',['as'=>'postadd','uses'=>'CategoriesController@postadd']);
 //Danh sách thể loại
-//Cập nhật thông tin thể loại
-Route::get('categories/{id}/edit','CategoriesController@edit');
-Route::post('categories/{id}/update','CategoriesController@update');
-Route::get('categories/{id}/delete', 'CategoriesController@delete');
-//Tạo album
-
-
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');
-	route::get('insert',['as'=>'insert','uses'=>'AlbumsController@insert']);
-	route::post('postInsert',['as'=>'postInsert','uses'=>'AlbumsController@postInsert']);
+	Route::get('/add','AlbumsController@add');
+	Route::post('/postadd',['as'=>'albums_postadd','uses'=>'AlbumsController@postAdd']);
+	Route::get('/{id}/edit','AlbumsController@edit');
+	Route::post('/{id}/postedit',['as'=>'albums_postedit','uses'=>'AlbumsController@postEdit']);
+	Route::get('/{id}/delete','AlbumsController@delete');
 });
 
 Route::group(['prefix' => 'categories'], function(){
 	Route::get('all', 'CategoriesController@all');
+	Route::get('/add','CategoriesController@add');
+	Route::post('/postadd',['as'=>'cate_postadd','uses'=>'CategoriesController@postAdd']);
+	Route::get('/{id}/edit','CategoriesController@edit');
+	Route::post('/{id}/postedit',['as'=>'cate_postedit','uses'=>'CategoriesController@postEdit']);
+	Route::get('/{id}/delete','CategoriesController@delete');
 });	
 //chỉnh sửa thông tin cá nhân
 Route::group(['prefix' => 'users'], function(){
-	Route::get('/myProfile','UsersController@myProfile');
+	Route::get('myProfile','UsersController@myProfile');
 	Route::get('/{id}/edit','UsersController@edit');
-	Route::post('/{id}/update','UsersController@update');
+	Route::post('/{id}/postedit',['as'=>'postedit','uses'=>'UsersController@postEdit']);
 });
 
 //ADMIN----------------------------------------------------------------------------------
