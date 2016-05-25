@@ -27,5 +27,12 @@ Route::group(['prefix' => 'ajax'], function(){
 	Route::get('albums/categories/{cate_id}/list', 'AlbumsController@ajaxAlbumByCate');
 	Route::get('albums/users/{users_id}/list', 'AlbumsController@ajaxAlbumByUsers');
 	Route::get('albums/ajaxGetList', 'AlbumsController@ajaxGetList');
+
+
+	Route::get('childs/getListByUser/{users_id}', 'ChildsController@ajaxGetListByUser');
+	Route::get('childs/getInfo/{childs_id}', 'ChildsController@ajaxGetInfo');
+
+	Route::get('results/addResult/{childs_id}/{images_id}/{word}/{correct}/{incorrect}', 'ResultsController@ajaxAddResult');
+
 });
 ?>
