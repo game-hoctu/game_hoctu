@@ -64,17 +64,23 @@ class ImagesController extends Controller {
     }
     public function ad_postEdit(Request $request)
     {
-    	$allRequest = $request->all();
-    	$url = $allRequest['url'];
-    	$word = $allRequest['word'];
-    	$albums_id = $allRequest['albums_id'];
+        $img = $request->file('fImage');
+        $item = new Images();
+        $allRequest = $request->all();
+        $url = $allRequest['url'];
+        $word = $allRequest['word'];
+        $albums_id = $allRequest['albums_id'];
         $id = $allRequest['id'];
-    	$item = new Images();
-    	$getimageById = $item->find($id);
-    	$getimageById->url = $url;
-    	$getimageById->word = $word;
+
+        $item = new Images();
+        $getimageById = $item->find($id);
+        $getimageById->word = $word;
         $getimageById->albums_id = $albums_id;
-    	$getimageById->save();
+        $getimageById->save();
+
+        $img_name = $url;
+        $des = 'public/upload/images';
+        $img->move($des, $img_name);
         success(["Đã sửa thành công!"]);
         return redirect()->action('ImagesController@getlist');
     }
