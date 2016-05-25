@@ -42,7 +42,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm Album</div>
             <div class="panel-body">
-              <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albums_postadd') }}">
+              <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albums_postAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">

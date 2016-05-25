@@ -32,12 +32,12 @@ class ImagesController extends Controller {
 		$image->save();
 		return "Thêm hình ảnh thành công";
 	}
-	public function getlist()
+	public function getList()
 	{
 		$albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.getlist', compact('albums', $albums));
 	}
-    public function ad_postadd(Request $request)
+    public function ad_postAdd(Request $request)
     {
         $img = $request->file('fImage');
         $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
@@ -49,7 +49,7 @@ class ImagesController extends Controller {
         $des = 'public/upload/images';
         $img->move($des, $img_name);
         success("Đã thêm thành công!");
-        return redirect()->action('ImagesController@getlist');
+        return redirect()->action('ImagesController@getList');
     }
     public function ad_edit($id)
     {
@@ -78,14 +78,14 @@ class ImagesController extends Controller {
         $des = 'public/upload/images';
         $img->move($des, $img_name);
         success("Đã sửa thành công!");
-        return redirect()->action('ImagesController@getlist');
+        return redirect()->action('ImagesController@getList');
     }
     public function ad_delete($id)
     {
         $item = Images::findOrFail($id);
         $item->delete();
         success("Đã xóa thành công!");
-        return redirect()->action('ImagesController@getlist');
+        return redirect()->action('ImagesController@getList');
     }
 
 

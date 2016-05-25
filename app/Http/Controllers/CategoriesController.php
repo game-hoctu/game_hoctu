@@ -59,19 +59,19 @@ class CategoriesController extends Controller {
 		return redirect()->action('CategoriesController@all');
 	}
 	//ADMIN-------------------------------------------------------------------------------
-	public function getlist()
+	public function getList()
 	{
 		$cate = new Categories();
 		$data = $cate->all()->toArray();
-		return view('admin.categories.getlist')->with('data', $data);
+		return view('admin.categories.getList')->with('data', $data);
 	}
-	public function ad_postadd(Request $request)
+	public function ad_postAdd(Request $request)
 	{
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
 		success("Đã thêm thành công!");
-		return redirect()->action('CategoriesController@getlist');
+		return redirect()->action('CategoriesController@getList');
 	}
 	public function ad_edit($id)
 	{
@@ -89,14 +89,14 @@ class CategoriesController extends Controller {
 		$getcateById->name = $name;
 		$getcateById->save();
 		success("Đã sửa thành công!");
-		return redirect()->action('CategoriesController@getlist');
+		return redirect()->action('CategoriesController@getList');
 	}
 	public function ad_delete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
 		success("Đã xóa thành công!");
-		return redirect()->action('CategoriesController@getlist');
+		return redirect()->action('CategoriesController@getList');
 	}
 
 

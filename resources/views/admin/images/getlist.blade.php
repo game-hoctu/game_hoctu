@@ -49,7 +49,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm hình ảnh</div>
             <div class="panel-body">
-              <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postadd') }}">
+              <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">
