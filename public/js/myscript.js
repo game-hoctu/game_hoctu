@@ -1,3 +1,5 @@
 $(document).ready(function(){
-	$(".message").delay(5000).slideUp();
+	$(document).click(function(){
+		$(".message").slideUp();
+	});
 });
