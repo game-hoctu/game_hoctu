@@ -16,9 +16,9 @@
 						<label class="col-md-4 control-label">Hình ảnh</label>
 						<div class="col-md-6">
 							<input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
-							<div ng-show="form_imgAdd.fImage.$touched" ng-messages="form_imgAdd.fImage.$error">
+							<!--<div ng-show="form_imgAdd.fImage.$touched" ng-messages="form_imgAdd.fImage.$error">
 								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 					<div class="form-group">

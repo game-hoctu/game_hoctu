@@ -38,8 +38,7 @@ class ImagesController extends Controller {
 	}
 	public function ad_add()
     {
-        $users = Albums::all()->toArray();
-    	$albums = Albums::select('id','name')->get()->toArray();
+        $albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.add', compact('albums', $albums));
     }
     public function ad_postadd(Request $request)
@@ -60,17 +59,18 @@ class ImagesController extends Controller {
     {
         $item = new Images();
         $getimageById = $item->find($id)->toArray();
-        return view('admin.images.edit')->with('getimageById',$getimageById);
+        $albums = Albums::select('id','name')->get()->toArray();
+        return view('admin.images.edit', compact('albums', $albums))->with('getimageById',$getimageById);
     }
-    public function ad_postupdate(Request $request)
+    public function ad_postEdit(Request $request)
     {
     	$allRequest = $request->all();
     	$url = $allRequest['url'];
     	$word = $allRequest['word'];
-    	$albums_id = $allRequest['albums_id']
-    	$idimage = $allRequest['id'];
+    	$albums_id = $allRequest['albums_id'];
+        $id = $allRequest['id'];
     	$item = new Images();
-    	$getimageById = $item->find($idimage);
+    	$getimageById = $item->find($id);
     	$getimageById->url = $url;
     	$getimageById->word = $word;
         $getimageById->albums_id = $albums_id;

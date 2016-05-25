@@ -129,7 +129,7 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('images/ad_add','ImagesController@ad_add');
 	Route::post('images/ad_postadd',['as'=>'images_postadd','uses'=>'ImagesController@ad_postadd']);
 	Route::get('images/{id}/ad_edit','ImagesController@ad_edit');
-	Route::post('images/{id}/ad_postedit',['as'=>'images_postedit','uses'=>'ImagesController@ad_postupdate']);
+	Route::post('images/{id}/ad_postEdit',['as'=>'images_postEdit','uses'=>'ImagesController@ad_postEdit']);
 	Route::get('images/{id}/ad_delete','ImagesController@ad_delete');
 //thêm, sửa, xóa trang users
 	Route::get('users','UsersController@getlist');
