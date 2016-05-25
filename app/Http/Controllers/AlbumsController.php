@@ -103,13 +103,13 @@ class AlbumsController extends Controller {
 		}
 	}
 
-	public function getlist()
+	public function getList()
 	{
 		$users = User::all()->toArray();
 		$cates = Categories::all()->toArray();
 		return view('admin.albums.getlist', compact('users', 'cates'));
 	}
-	public function ad_postadd(Request $request)
+	public function ad_postAdd(Request $request)
 	{
 		$item = new Albums();
 		$item->name = $request->name;

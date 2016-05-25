@@ -47,13 +47,13 @@ class UsersController extends Controller {
     	return $this->callAction('edit', ['id' => Auth::user()->id]);
     }
 //ADMIN-----------------------------------------------------------------------------------
-    public function getlist()
+    public function getList()
     {
         $query = new User();
         $data = $query->all()->toArray();
         return view('admin.users.getlist')->with('data', $data);
     }
-    public function ad_postadd(UsersRequest $request)
+    public function ad_postAdd(UsersRequest $request)
     {
         $item = new User();
         $item->name = $request->name;
@@ -63,7 +63,7 @@ class UsersController extends Controller {
         //$user->remember_token = $request->_token;
         $item->save();
         success("Đã thêm thành công!");
-        return redirect()->action('UsersController@getlist');
+        return redirect()->action('UsersController@getList');
     }
     public function ad_edit($id)
     {
@@ -83,14 +83,14 @@ class UsersController extends Controller {
         $getuserById->role = $role;
         $getuserById->save();
         success("Đã sửa thành công!");
-        return redirect()->action('UsersController@getlist');
+        return redirect()->action('UsersController@getList');
     }
     public function ad_delete($id)
     {
         $item = User::findOrFail($id);
         $item->delete();
         success("Đã xóa thành công!");
-        return redirect()->action('UsersController@getlist');
+        return redirect()->action('UsersController@getList');
     }
 
 

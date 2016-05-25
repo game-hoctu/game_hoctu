@@ -165,4 +165,66 @@ app.controller('AlbumsController', function($scope, $http){
 			$scope.count = response.info.length;
 		});
 	};
+
+});
+
+app.controller('ChildsController', function($scope, $http){
+	$scope.childs = undefined;
+	$scope.count = undefined;
+
+	$scope.loadAllChild = function(){
+		$scope.childs = undefined;
+		$scope.count = undefined;
+
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/childs/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.childs = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
+	$scope.loadAllChild();
+	$scope.loadChildsByUsers = function(){
+		$scope.childs = undefined;
+		$scope.count = undefined;
+		var users_id = $scope.users_id;
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/childs/users/"+users_id+"/list",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.childs = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
+	$scope.loadUsers = function(){
+		$scope.albums = undefined;
+		$scope.count = undefined;
+
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/users/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.users = response.info;
+			}
+		});
+	};
+	$scope.viewByUsers = function(){
+		$scope.loadUsers();
+	};
+
 });

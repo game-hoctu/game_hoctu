@@ -40,7 +40,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm người dùng mới</div>
             <div class="panel-body">
-              <form name=formadduser class="form-horizontal" role="form" method="POST" action="{{ route('users_postadd') }}">
+              <form name=formadduser class="form-horizontal" role="form" method="POST" action="{{ route('users_postAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">

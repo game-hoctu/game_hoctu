@@ -113,27 +113,33 @@ Route::group(['prefix' => 'admin'], function(){
 		}
 	});
 //thêm, sửa, xóa trang thể loại
-	Route::get('categories','CategoriesController@getlist');
-	Route::post('categories/ad_postadd',['as'=>'cate_postadd','uses'=>'CategoriesController@ad_postadd']);
+	Route::get('categories','CategoriesController@getList');
+	Route::post('categories/ad_postAdd',['as'=>'cate_postAdd','uses'=>'CategoriesController@ad_postAdd']);
 	Route::get('categories/{id}/ad_edit','CategoriesController@ad_edit');
-	Route::post('categories/{id}/ad_postedit',['as'=>'cate_postedit','uses'=>'CategoriesController@ad_postEdit']);
+	Route::post('categories/{id}/ad_postEdit',['as'=>'cate_postEdit','uses'=>'CategoriesController@ad_postEdit']);
 	Route::get('categories/{id}/ad_delete','CategoriesController@ad_delete');
 //thêm, sửa, xóa trang albums
-	Route::get('albums','AlbumsController@getlist');
-	Route::post('albums/ad_postadd',['as'=>'albums_postadd','uses'=>'AlbumsController@ad_postadd']);
+	Route::get('albums','AlbumsController@getList');
+	Route::post('albums/ad_postAdd',['as'=>'albums_postAdd','uses'=>'AlbumsController@ad_postAdd']);
 	Route::get('albums/{id}/ad_edit','AlbumsController@ad_edit');
-	Route::post('albums/{id}/ad_postedit',['as'=>'albums_postedit','uses'=>'AlbumsController@ad_postEdit']);
+	Route::post('albums/{id}/ad_postEdit',['as'=>'albums_postEdit','uses'=>'AlbumsController@ad_postEdit']);
 	Route::get('albums/{id}/ad_delete','AlbumsController@ad_delete');
 //thêm, sửa, xóa trang images
-	Route::get('images','ImagesController@getlist');
-	Route::post('images/ad_postadd',['as'=>'images_postadd','uses'=>'ImagesController@ad_postadd']);
+	Route::get('images','ImagesController@getList');
+	Route::post('images/ad_postAdd',['as'=>'images_postAdd','uses'=>'ImagesController@ad_postAdd']);
 	Route::get('images/{id}/ad_edit','ImagesController@ad_edit');
 	Route::post('images/{id}/ad_postEdit',['as'=>'images_postEdit','uses'=>'ImagesController@ad_postEdit']);
 	Route::get('images/{id}/ad_delete','ImagesController@ad_delete');
 //thêm, sửa, xóa trang users
-	Route::get('users','UsersController@getlist');
-	Route::post('users/ad_postadd',['as'=>'users_postadd','uses'=>'UsersController@ad_postadd']);
+	Route::get('users','UsersController@getList');
+	Route::post('users/ad_postAdd',['as'=>'users_postAdd','uses'=>'UsersController@ad_postAdd']);
 	Route::get('users/{id}/ad_edit','UsersController@ad_edit');
-	Route::post('users/{id}/ad_postedit',['as'=>'users_postedit','uses'=>'UsersController@ad_postEdit']);
+	Route::post('users/{id}/ad_postEdit',['as'=>'users_postEdit','uses'=>'UsersController@ad_postEdit']);
 	Route::get('users/{id}/ad_delete','UsersController@ad_delete');
+//thêm, sửa, xóa trang childs
+	Route::get('childs','ChildsController@getList');
+	Route::post('childs/ad_postAdd',['as'=>'childs_postAdd','uses'=>'UsersController@ad_postAdd']);
+	Route::get('childs/{id}/ad_edit','UsersController@ad_edit');
+	Route::post('childs/{id}/ad_postEdit',['as'=>'childs_postEdit','uses'=>'UsersController@ad_postEdit']);
+	Route::get('childs/{id}/ad_delete','UsersController@ad_delete');
 });

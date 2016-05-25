@@ -35,9 +35,9 @@
         </div>
         <div id="insert" class="tab-pane fade">
           <div class="panel panel-default">
-            <div class="panel-heading">Thêm người dùng mới</div>
+            <div class="panel-heading">Thêm thể loại mới</div>
             <div class="panel-body">
-              <form name="formAdd" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postadd') }}">
+              <form name="formAdd" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">
