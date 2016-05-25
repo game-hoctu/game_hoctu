@@ -6,6 +6,7 @@
     <div class="col-md-12">
       <h1>Danh sách hình ảnh</h1>
       <hr/>
+      @include('message')
       <div class="btn-group">
         <button class="btn btn-primary" ng-click="loadAllImage()">Tất cả</button>
         <a href="{{url('admin/images/ad_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm</a>
@@ -36,8 +37,8 @@
             <td><%image.url%></td>
             <td><%image.word%></td>
             <td>
-              <a href="categories/<%image.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="categories/<%image.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              <a href="images/<%image.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
+              <a href="images/<%image.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
         </table>
