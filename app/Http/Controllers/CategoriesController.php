@@ -59,27 +59,27 @@ class CategoriesController extends Controller {
 		return redirect()->action('CategoriesController@all');
 	}
 	//ADMIN-------------------------------------------------------------------------------
-	public function getList()
+	public function adGetList()
 	{
 		$cate = new Categories();
 		$data = $cate->all()->toArray();
-		return view('admin.categories.getList')->with('data', $data);
+		return view('admin.categories.getlist')->with('data', $data);
 	}
-	public function ad_postAdd(Request $request)
+	public function adPostAdd(Request $request)
 	{
 		$cate = new Categories();
 		$cate->name = $request->name;
 		$cate->save();
 		success("Đã thêm thành công!");
-		return redirect()->action('CategoriesController@getList');
+		return redirect()->action('CategoriesController@adGetList');
 	}
-	public function ad_edit($id)
+	public function adEdit($id)
 	{
 		$cate = new Categories();
 		$getcateById = $cate->find($id)->toArray();
 		return view('admin.categories.edit')->with('getcateById',$getcateById);
 	}
-	public function ad_postEdit(Request $request)
+	public function adPostEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
@@ -89,19 +89,19 @@ class CategoriesController extends Controller {
 		$getcateById->name = $name;
 		$getcateById->save();
 		success("Đã sửa thành công!");
-		return redirect()->action('CategoriesController@getList');
+		return redirect()->action('CategoriesController@adGetList');
 	}
-	public function ad_delete($id)
+	public function adDelete($id)
 	{
 		$cate = Categories::findOrFail($id);
 		$cate->delete();
 		success("Đã xóa thành công!");
-		return redirect()->action('CategoriesController@getList');
+		return redirect()->action('CategoriesController@adGetList');
 	}
 
 
 	//Ajax--------------------------------------------------
-	function ajaxGetList()
+	function ajaxadGetList()
 	{
 		$data['status'] = "ERROR";
         $result = Categories::all();

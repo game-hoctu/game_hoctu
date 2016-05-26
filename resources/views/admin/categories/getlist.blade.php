@@ -25,8 +25,8 @@
                 <td>{{$cate['id']}}</td>
                 <td>{{$cate['name']}}</td>
                 <td>
-                  <a href="categories/{{$cate['id']}}/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="categories/{{$cate['id']}}/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="categories/{{$cate['id']}}/adEdit" class="btn btn-default btn-sm">Sửa</a>
+                  <a href="categories/{{$cate['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
                 </td>
               </tr>
               @endforeach
@@ -37,7 +37,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm thể loại mới</div>
             <div class="panel-body">
-              <form name="formAdd" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postAdd') }}">
+              <form name="formAdd" class="form-horizontal" role="form" method="POST" action="{{ route('cateAdPostAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">

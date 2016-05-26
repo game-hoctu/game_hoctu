@@ -14,7 +14,7 @@ app.controller("ImagesController", function($scope, $http){
 	$scope.loadAlbum = function(){
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/albums/list",
+			url     : SERVER_PATH + "ajax/albums/getList",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);
@@ -74,7 +74,7 @@ app.controller('AlbumsController', function($scope, $http){
 		console.log($scope.insert);
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/albums/ajaxGetList",
+			url     : SERVER_PATH + "ajax/albums/getList",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);
@@ -190,23 +190,7 @@ app.controller('ChildsController', function($scope, $http){
 		});
 	};
 	$scope.loadAllChild();
-	$scope.loadChildsByUsers = function(){
-		$scope.childs = undefined;
-		$scope.count = undefined;
-		var users_id = $scope.users_id;
-		$http({
-			method  : 'GET',
-			url     : SERVER_PATH + "ajax/childs/users/"+users_id+"/list",
-			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).success(function(response) {
-			console.log(response);
-			if(response.status == 'SUCCESS')
-			{
-				$scope.childs = response.info;
-			}
-			$scope.count = response.info.length;
-		});
-	};
+
 	$scope.loadUsers = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
@@ -223,8 +207,23 @@ app.controller('ChildsController', function($scope, $http){
 			}
 		});
 	};
-	$scope.viewByUsers = function(){
-		$scope.loadUsers();
-	};
 
+	$scope.loadChildByUser = function(){
+		$scope.childs = undefined;
+		$scope.count = undefined;
+		var users_id = $scope.users_id;
+		console.log(users_id);
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/childs/getListByUser/" + users_id,
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.childs = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
 });

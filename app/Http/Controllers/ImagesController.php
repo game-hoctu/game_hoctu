@@ -32,12 +32,12 @@ class ImagesController extends Controller {
 		$image->save();
 		return "Thêm hình ảnh thành công";
 	}
-	public function getList()
+	public function adGetList()
 	{
 		$albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.getlist', compact('albums', $albums));
 	}
-    public function ad_postAdd(Request $request)
+    public function adPostAdd(Request $request)
     {
         $img = $request->file('fImage');
         $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
@@ -49,16 +49,16 @@ class ImagesController extends Controller {
         $des = 'public/upload/images';
         $img->move($des, $img_name);
         success("Đã thêm thành công!");
-        return redirect()->action('ImagesController@getList');
+        return redirect()->action('ImagesController@adGetList');
     }
-    public function ad_edit($id)
+    public function adEdit($id)
     {
         $item = new Images();
         $getimageById = $item->find($id)->toArray();
         $albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.edit', compact('albums', $albums))->with('getimageById',$getimageById);
     }
-    public function ad_postEdit(Request $request)
+    public function adPostEdit(Request $request)
     {
         $img = $request->file('fImage');
         $item = new Images();
@@ -78,14 +78,14 @@ class ImagesController extends Controller {
         $des = 'public/upload/images';
         $img->move($des, $img_name);
         success("Đã sửa thành công!");
-        return redirect()->action('ImagesController@getList');
+        return redirect()->action('ImagesController@adGetList');
     }
-    public function ad_delete($id)
+    public function adDelete($id)
     {
         $item = Images::findOrFail($id);
         $item->delete();
         success("Đã xóa thành công!");
-        return redirect()->action('ImagesController@getList');
+        return redirect()->action('ImagesController@adGetList');
     }
 
 

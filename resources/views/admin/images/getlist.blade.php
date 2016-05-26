@@ -38,8 +38,8 @@
                 <td><%image.url%></td>
                 <td><%image.word%></td>
                 <td>
-                  <a href="images/<%image.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="images/<%image.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
+                  <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
                 </td>
               </tr>
             </table>
@@ -49,7 +49,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm hình ảnh</div>
             <div class="panel-body">
-              <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('images_postAdd') }}">
+              <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">

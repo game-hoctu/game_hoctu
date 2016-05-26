@@ -7,7 +7,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Sửa thể loại</div>
 				<div class="panel-body">
-					<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postEdit') }}">
+					<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('cateAdPostEdit') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<div class="form-group">
 							<label class="col-md-4 control-label">Mã số</label>

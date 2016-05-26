@@ -8,7 +8,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Sửa hình ảnh</div>
 				<div class="panel-body">
-					<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('images_postEdit') }}">
+					<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostEdit') }}">
 						<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 						<div class="form-group">
 							<label class="col-md-4 control-label">Mã số</label>

@@ -42,7 +42,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Thêm Album</div>
             <div class="panel-body">
-              <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albums_postAdd') }}">
+              <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">
@@ -94,7 +94,7 @@
                     <button type="submit" class="btn btn-primary">
                       Thêm
                     </button>
-                    <a class="btn btn-default" href="{{url('admin/Albums/')}}">Trở về</a>
+                    <a class="btn btn-default" href="{{url('admin/albums/')}}">Trở về</a>
                   </div>
                 </div>
               </form>
@@ -119,8 +119,8 @@
             <td><%album.name%></td>
             <td><%album.description%></td>
             <td>
-              <a href="albums/<%album.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="albums/<%album.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
+              <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
         </table>

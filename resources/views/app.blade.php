@@ -16,7 +16,6 @@
 	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>
 	<script src="{{ asset('/public/js/app.js') }}"></script>
 	<script src="{{ asset('/public/js/config.js') }}"></script>
-
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">

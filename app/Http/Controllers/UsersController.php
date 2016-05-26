@@ -47,13 +47,13 @@ class UsersController extends Controller {
     	return $this->callAction('edit', ['id' => Auth::user()->id]);
     }
 //ADMIN-----------------------------------------------------------------------------------
-    public function getList()
+    public function adGetList()
     {
         $query = new User();
         $data = $query->all()->toArray();
         return view('admin.users.getlist')->with('data', $data);
     }
-    public function ad_postAdd(UsersRequest $request)
+    public function adPostAdd(UsersRequest $request)
     {
         $item = new User();
         $item->name = $request->name;
@@ -63,15 +63,15 @@ class UsersController extends Controller {
         //$user->remember_token = $request->_token;
         $item->save();
         success("Đã thêm thành công!");
-        return redirect()->action('UsersController@getList');
+        return redirect()->action('UsersController@adGetList');
     }
-    public function ad_edit($id)
+    public function adEdit($id)
     {
         $item = new User();
         $getuserById = $item->find($id)->toArray();
         return view('admin.users.edit')->with('getuserById',$getuserById);
     }
-    public function ad_postEdit(Request $request)
+    public function adPostEdit(Request $request)
     {
         $allRequest = $request->all();
         $name = $allRequest['name'];
@@ -83,14 +83,14 @@ class UsersController extends Controller {
         $getuserById->role = $role;
         $getuserById->save();
         success("Đã sửa thành công!");
-        return redirect()->action('UsersController@getList');
+        return redirect()->action('UsersController@adGetList');
     }
-    public function ad_delete($id)
+    public function adDelete($id)
     {
         $item = User::findOrFail($id);
         $item->delete();
         success("Đã xóa thành công!");
-        return redirect()->action('UsersController@getList');
+        return redirect()->action('UsersController@adGetList');
     }
 
 

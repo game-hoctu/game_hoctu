@@ -35,7 +35,7 @@ class ChildsController extends Controller {
 	}
 
 	//Lấy thông tin chi tiết của child
-	function ajaxGetInfo($childs_id)
+	function ajaxDetail($childs_id)
 	{
 		$data['status'] = "ERROR";
 		$result = Childs::find($childs_id);
@@ -47,53 +47,46 @@ class ChildsController extends Controller {
 		return $data;
 	}
 //ADMIN---------------------------------------------------------------------
-	public function getList()
+	public function adGetList()
 	{
 		$users = User::all()->toArray();
-		return view('admin.childs.getlist', compact('users'));
+		return view('admin.childs.getList', compact('users'));
 	}
-	public function ad_postAdd(Request $request)
+	public function adPostAdd(Request $request)
 	{
-		$item = new Albums();
+		$item = new Childs();
 		$item->name = $request->name;
-		$item->description = $request->description;
 		$item->users_id = $request->users_id;
-		$item->categories_id = $request->categories_id;
 		$item->save();
 		success("Đã thêm thành công!");
-		return redirect()->action('AlbumsController@getList');
+		return redirect()->action('ChildsController@adGetList');
 	}
-	public function ad_edit($id)
+	public function adEdit($id)
 	{
 		$users = User::all()->toArray();
-		$cates = Categories::all()->toArray();
-		$item = new Albums();
-		$getalbumById = $item->find($id)->toArray();
-		return view('admin.albums.edit', compact('users', 'cates'))->with('getalbumById',$getalbumById);
+		$item = new Childs();
+		$getchildById = $item->find($id)->toArray();
+		return view('admin.childs.edit', compact('users', 'cates'))->with('getchildById',$getchildById);
 	}
-	public function ad_postEdit(Request $request)
+	public function adPostEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
-		$mota = $allRequest['description'];
 		$user = $allRequest['users_id'];
-		$theloai = $allRequest['categories_id'];
 		$idalbum = $allRequest['id'];
-		$item = new Albums();
-		$getalbumById = $item->find($idalbum);
-		$getalbumById->name = $name;
-		$getalbumById->description = $mota;
-		$getalbumById->users_id = $user;
-		$getalbumById->categories_id = $theloai;
-		$getalbumById->save();
+		$item = new Childs();
+		$getchildById = $item->find($idalbum);
+		$getchildById->name = $name;
+		$getchildById->users_id = $user;
+		$getchildById->save();
 		success("Đã sửa thành công!");
-		return redirect()->action('AlbumsController@getList');
+		return redirect()->action('ChildsController@adGetList');
 	}
-	public function ad_delete($id)
+	public function adDelete($id)
 	{
-		$item = Albums::findOrFail($id);
+		$item = Childs::findOrFail($id);
 		$item->delete();
 		success("Đã xóa thành công!");
-		return redirect()->action('AlbumsController@getList');
+		return redirect()->action('ChildsController@adGetList');
 	}
 }

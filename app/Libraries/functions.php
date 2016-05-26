@@ -58,5 +58,10 @@ function success($text)
 {
      $_SESSION['success'] = $text;
 }
-
+function debugArr($arr)
+{
+     echo "<pre>";
+     print_r($arr);
+     echo "</pre>";
+}
 ?>

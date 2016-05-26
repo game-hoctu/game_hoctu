@@ -11,7 +11,7 @@ use App\Categories;
 use App\Http\Requests\AlbumsRequest;
 use File;
 use Image;
-
+use Input;
 class AlbumsController extends Controller {
 
 	public function index()
@@ -24,7 +24,7 @@ class AlbumsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function insert()
+	public function add()
 	{
 		if(Auth::guest())
 		{
@@ -33,11 +33,13 @@ class AlbumsController extends Controller {
 		else
 		{
 			$album = Categories::select('id','name')->get()->toArray();
-			return view('albums.insert', compact('album'));
+			//$users = User::select('id','name')->get()->toArray();
+			$cates = Categories::select('id','name')->get()->toArray();
+			return view('albums.add', compact('album','cates'));
 		}
 		
 	}
-	public function postInsert(AlbumsRequest $request)
+	public function postAdd(AlbumsRequest $request)
 	{
 		if(Auth::guest())
 		{
@@ -45,18 +47,42 @@ class AlbumsController extends Controller {
 		}
 		else
 		{
+			$words = Input::all()['words'];
 			$album = new Albums();
 			$album->name = $request->name;
 			$album->description = $request->description;
 			$album->users_id = Auth::user()->id;
-			$album->categories_id = $request->categories;
+			$album->categories_id = $request->categories_id;
 			$album->save();
-			return route('insert');
+			$albums_id = $album->id;
+			if(Input::hasFile('fImage'))
+			{
+				$i = 0;
+				foreach(Input::file('fImage') as $img) {
+					$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+					$item = new Images();
+					$item->url  = $img_name;
+					$item->word = $words[$i];
+					$item->albums_id = $albums_id;
+					$item->save();
+					$des = "/public/upload/images/";
+					$img->move($des, $img_name);
+					if($i == 0)
+					{
+						$imageName = UPLOAD_FOLDER.$img_name;
+						$path = public_path("/upload/albums/".$albums_id.".jpg");
+						Image::make($imageName)->resize(700, 400)->save($path);
+					}
+					$i++;
+				}
+			}
+			success("Đã thêm thành công!");
+			return redirect()->action('AlbumsController@myAlbum');
 		}
 		
 	}
 
-	function listByUser($user_id)
+	function getListByUser($user_id)
 	{
 		if(Auth::guest())
 		{
@@ -101,7 +127,7 @@ class AlbumsController extends Controller {
 		}
 		else
 		{
-			return $this->callAction('listByUser', ['user_id' => Auth::user()->id]);
+			return $this->callAction('getListByUser', ['user_id' => Auth::user()->id]);
 		}
 	}
 
@@ -109,22 +135,24 @@ class AlbumsController extends Controller {
 	{
 		$model = new Albums();
 		$data = $model->find($albums_id)->toArray();
-		$data['categories'] = $model->categories()->name;
-		$data['images'] = $model->images()->get()->toArray();
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
+		//Lấy thông tin categories của album
+		$data['categories'] = Categories::where('id', $data['categories_id'])->get()->first()->toArray();
+		$data['users'] = User::where('id', $data['users_id'])->get()->first()->toArray();
+		//Lấy danh sách các image trong album
+		$data['images'] = Images::where('albums_id', $albums_id)->get()->toArray();
+		//debugArr($data);
+		return view('albums.detail',['data'=>$data]);
 	}
 
 
 	//ADMIN---------------------------------------------------
-	public function getList()
+	public function adGetList()
 	{
 		$users = User::all()->toArray();
 		$cates = Categories::all()->toArray();
 		return view('admin.albums.getlist', compact('users', 'cates'));
 	}
-	public function ad_postAdd(Request $request)
+	public function adPostAdd(Request $request)
 	{
 		$item = new Albums();
 		$item->name = $request->name;
@@ -133,9 +161,9 @@ class AlbumsController extends Controller {
 		$item->categories_id = $request->categories_id;
 		$item->save();
 		success("Đã thêm thành công!");
-		return redirect()->action('AlbumsController@getlist');
+		return redirect()->action('AlbumsController@adGetlist');
 	}
-	public function ad_edit($id)
+	public function adEdit($id)
 	{
 		$users = User::all()->toArray();
 		$cates = Categories::all()->toArray();
@@ -143,7 +171,7 @@ class AlbumsController extends Controller {
 		$getalbumById = $item->find($id)->toArray();
 		return view('admin.albums.edit', compact('users', 'cates'))->with('getalbumById',$getalbumById);
 	}
-	public function ad_postEdit(Request $request)
+	public function adPostEdit(Request $request)
 	{
 		$allRequest = $request->all();
 		$name = $allRequest['name'];
@@ -159,14 +187,14 @@ class AlbumsController extends Controller {
 		$getalbumById->categories_id = $theloai;
 		$getalbumById->save();
 		success("Đã sửa thành công!");
-		return redirect()->action('AlbumsController@getlist');
+		return redirect()->action('AlbumsController@adGetlist');
 	}
-	public function ad_delete($id)
+	public function adDelete($id)
 	{
 		$item = Albums::findOrFail($id);
 		$item->delete();
 		success("Đã xóa thành công!");
-		return redirect()->action('AlbumsController@getlist');
+		return redirect()->action('AlbumsController@adGetlist');
 	}
 
 	//Ajax------------------------------------------------------

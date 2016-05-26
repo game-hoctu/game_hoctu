@@ -9,8 +9,8 @@
       @include('message')
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home" ng-click="loadAllChild()">Tất cả những đứa trẻ</a></li>
-        <li><a data-toggle="tab" href="#user" ng-click="viewByUsers()">Theo người dùng</a></li>
-        <li><a data-toggle="tab" href="#insert" ng-click="insert()"><span class="glyphicon glyphicon-plus"></span>Thêm</a></li>
+        <li><a data-toggle="tab" href="#user" ng-click="loadUsers()">Theo người dùng</a></li>
+        <li><a data-toggle="tab" href="#insert"><span class="glyphicon glyphicon-plus"></span>Thêm</a></li>
       </ul>
       <hr/>
 
@@ -20,7 +20,7 @@
           <form class="form-inline" role="form" >
             <div class="form-group">
               <label for="users_id">Chọn người dùng:</label>
-              <select name="users_id" ng-model="users_id" class="form-control" ng-change="loadChildsByUsers()">
+              <select name="users_id" ng-model="users_id" class="form-control" ng-change="loadChildByUser()">
                 <option ng-repeat="user in users" value="<%user.id%>"><%user.id%> - <%user.name%></option>
               </select>
             </div>
@@ -28,13 +28,13 @@
         </div>
         <div id="insert" class="tab-pane fade">
           <div class="panel panel-default">
-            <div class="panel-heading">Thêm Childs</div>
+            <div class="panel-heading">Thêm trẻ em</div>
             <div class="panel-body">
-              <form name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childs_postAdd') }}">
+              <form name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">
-                  <label class="col-md-4 control-label">Tên trẻ em</label>
+                  <label class="col-md-4 control-label">Tên đứa trẻ:</label>
                   <div class="col-md-6">
                     <input type="text" class="form-control" name="name" required="" ng-model="name">
                     <div ng-show="form_childAdd.name.$touched" ng-messages="form_childAdd.name.$error">
@@ -43,7 +43,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-4 control-label">Người dùng</label>
+                  <label class="col-md-4 control-label">Cha mẹ:</label>
                   <div class="col-md-6">
                     <select name="users_id" class="form-control">
                       @foreach($users as $user )
@@ -60,7 +60,7 @@
                     <button type="submit" class="btn btn-primary">
                       Thêm
                     </button>
-                    <a class="btn btn-default" href="{{url('admin/Albums/')}}">Trở về</a>
+                    <a class="btn btn-default" href="{{url('admin/childs/')}}">Trở về</a>
                   </div>
                 </div>
               </form>
@@ -81,8 +81,8 @@
             <td><%child.id%></td>
             <td><%child.name%></td>
             <td>
-              <a href="albums/<%child.id%>/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="albums/<%child.id%>/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
+              <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
             </td>
           </tr>
         </table>

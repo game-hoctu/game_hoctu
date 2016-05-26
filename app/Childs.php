@@ -7,7 +7,7 @@ class Childs extends Model {
 	protected $table = 'childs';
 	protected $fillable = ['id','name','users_id'];
 
-	public function users()
+	public function user()
 	{
 		return $this->belongsTo("App\User");
 	}

@@ -35,6 +35,7 @@
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
+				@if(!Auth::guest())
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{Auth::user()->name}} <b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
@@ -42,6 +43,7 @@
 						<li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
 					</ul>
 				</li>
+				@endif
 			</ul>
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -53,7 +55,7 @@
 						<a href="{{ url('/admin/users') }}"><i class="fa fa-fw fa-user"></i> Quản lý người dùng</a>
 					</li>
 					<li>
-						<a href="{{ url('/admin/users') }}"><i class="fa fa-fw fa-user"></i> Quản lý những đứa trẻ</a>
+						<a href="{{ url('/admin/childs') }}"><i class="fa fa-fw fa-user"></i> Quản lý những đứa trẻ</a>
 					</li>
 					<li>
 						<a href="{{ url('/admin/categories') }}"><i class="fa fa-fw fa-table"></i> Quản lý thể loại</a>

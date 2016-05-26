@@ -13,11 +13,12 @@
 				</li>
 				<li class="active">Three Column Portfolio</li>
 			</ol>
+			@include('message')
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4 img-portfolio">
-			<a href="{{url('albums/insert')}}">
+			<a href="{{url('albums/add')}}">
 				<img class="img-responsive img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="">
 			</a>
 		</div>

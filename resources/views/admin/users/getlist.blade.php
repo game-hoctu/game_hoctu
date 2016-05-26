@@ -28,8 +28,8 @@
                 <td>{{$item['email']}}</td>
                 <td>{{$item['name']}}</td>
                 <td>
-                  <a href="users/{{$item['id']}}/ad_edit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="users/{{$item['id']}}/ad_delete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="users/{{$item['id']}}/adEdit" class="btn btn-default btn-sm">Sửa</a>
+                  <a href="users/{{$item['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
                 </td>
               </tr>
               @endforeach
@@ -37,10 +37,11 @@
           </div>
         </div>
         <div id="insert" class="tab-pane fade">
+
           <div class="panel panel-default">
             <div class="panel-heading">Thêm người dùng mới</div>
             <div class="panel-body">
-              <form name=formadduser class="form-horizontal" role="form" method="POST" action="{{ route('users_postAdd') }}">
+              <form name=formadduser class="form-horizontal" role="form" method="POST" action="{{ route('usersAdPostAdd') }}">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
                 <div class="form-group">

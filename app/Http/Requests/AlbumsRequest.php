@@ -22,7 +22,7 @@ class AlbumsRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name'=> 'required|unique:albums,name',
+			'name'=> 'required',
 			'description' => 'required',
 		];
 	}
