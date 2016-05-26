@@ -9,15 +9,15 @@ class Albums extends Model {
 	protected $hidden = ['users_id'];
 	public function images()
 	{
-		return $this -> hasmany("App\Images") ;
+		return $this -> hasMany("App\Images", 'foreign_key') ;
 	}
 	public function categories()
 	{
-		return $this->belongTo("App\Categories");
+		return $this->belongsTo("App\Categories");
 	}
 	public function users()
 	{
-		return $this->belongTo("App\Users");
+		return $this->belongsTo("App\Users");
 	}
 
 }

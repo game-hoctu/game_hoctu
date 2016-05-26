@@ -10,6 +10,7 @@ use App\Images;
 use App\Categories;
 use App\Http\Requests\AlbumsRequest;
 use File;
+use Image;
 
 class AlbumsController extends Controller {
 
@@ -65,26 +66,27 @@ class AlbumsController extends Controller {
 		else
 		{
 			$albums = new Albums(); 
-			$result = $albums::where('users_id', $user_id)->get()->toArray();
+			$result = $albums::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
 			for($i = 0; $i < count($result); $i++)
 			{
 				$urlAlbumImage = ALBUM_IMAGE.$result[$i]['id'].".jpg";
 				if(!File::exists($urlAlbumImage))
 				{
 					$image = Images::where('albums_id', $result[$i]['id'])->get()->toArray();
-					if(count($image) > 0)
+					$numImage = count($image);
+					if($numImage > 0)
 					{
-						$albumimage = new SimpleImage();
-						$albumimage->load(UPLOAD_FOLDER.$image[0]['url']);
-						$albumimage->resize(700, 400);
-						$albumimage->save($urlAlbumImage);
+						$imageName = UPLOAD_FOLDER.$image[0]['url'];
+						$path = public_path("/upload/albums/".$result[$i]['id'].".jpg");
+						Image::make($imageName)->resize(700, 400)->save($path);
 					}
 					else
 					{
-						$urlAlbumImage = SERVER_PATH."public/images/no-image.png";
+						$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
 					}
 				}
 				$result[$i]['image'] = $urlAlbumImage;
+				$result[$i]['count'] = $numImage;
 			}
 			return view('albums.list', ['data' => $result]);
 		}
@@ -103,6 +105,19 @@ class AlbumsController extends Controller {
 		}
 	}
 
+	function detail($albums_id)
+	{
+		$model = new Albums();
+		$data = $model->find($albums_id)->toArray();
+		$data['categories'] = $model->categories()->name;
+		$data['images'] = $model->images()->get()->toArray();
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+	}
+
+
+	//ADMIN---------------------------------------------------
 	public function getList()
 	{
 		$users = User::all()->toArray();
@@ -171,7 +186,8 @@ class AlbumsController extends Controller {
 	{
 		$data['status'] = 'ERROR';
 		$albums = Albums::where('users_id', $users_id)->get();
-		if($albums->count() > 0)
+		$albumCount = $albums->count();
+		if($albumCount > 0)
 		{
 			$data['status'] = 'SUCCESS';
 			$data['info'] = $albums;
@@ -183,8 +199,14 @@ class AlbumsController extends Controller {
 	{
 		$data['status'] = 'ERROR';
 		$albums = Albums::all();
-		if($albums->count() > 0)
+		$albumCount = $albums->count();
+		if($albumCount > 0)
 		{
+			for($i = 0; $i < $albumCount; $i++)
+			{
+				$image = Images::where('albums_id', $albums[$i]['id'])->get();
+				$albums[$i]['count'] = $image->count();
+			}
 			$data['status'] = 'SUCCESS';
 			$data['info'] = $albums;
 		}

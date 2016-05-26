@@ -61,6 +61,7 @@ Route::group(['prefix' => 'albums'], function(){
 	Route::get('/{id}/edit','AlbumsController@edit');
 	Route::post('/{id}/postedit',['as'=>'albums_postedit','uses'=>'AlbumsController@postEdit']);
 	Route::get('/{id}/delete','AlbumsController@delete');
+	Route::get('/{albums_id}/detail','AlbumsController@detail');
 });
 
 Route::group(['prefix' => 'categories'], function(){

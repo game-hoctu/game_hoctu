@@ -2,10 +2,9 @@
 	position: relative;
 }
 .album-info{
-	width: 80%;
 	position: absolute;
 	bottom: 0px;
-	margin: 0px 10% 5%;
+	margin: 0px 10% 0px;
 }
 .album-info a{
 	color: #fff;

@@ -10,10 +10,10 @@ class Results extends Model {
 	protected $primaryKey = ['childs_id','images_id'];
 	public function childs()
 	{
-		return $this->belongTo("App\Childs");
+		return $this->belongsTo("App\Childs");
 	}
 	public function images()
 	{
-		return $this->belongTo("App\Images");
+		return $this->belongsTo("App\Images");
 	}
 }

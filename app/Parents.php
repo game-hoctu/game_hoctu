@@ -11,6 +11,6 @@ class Parents extends Model {
 	protected $hidden = ['password'];
 	public function album()
 	{
-		return $this->hasmany('App\Albums');
+		return $this->hasMany('App\Albums');
 	}
 }

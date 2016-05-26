@@ -8,7 +8,7 @@ class Images extends Model {
 	protected $fillable = ['id','url','word', 'albums_id'];
 	public function albums()
 	{
-		return $this->belongTo("App\Albums");
+		return $this->belongsTo("App\Albums");
 	}
 
 }

@@ -145,6 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'SimpleSoftwareIO\QrCode\QrCodeServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 
 	],
 
@@ -194,7 +195,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'QrCode' 	=> 'SimpleSoftwareIO\QrCode\Facades\QrCode',
-
+		'Image'     => 'Intervention\Image\Facades\Image',
 	],
 
 ];

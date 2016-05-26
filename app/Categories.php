@@ -7,7 +7,7 @@ class Categories extends Model {
 	protected $fillable = ['id','name'];
 	public function albums()
 	{
-		return $this->hasmany("App\Albums") ;
+		return $this->hasMany("App\Albums") ;
 	}
 	
 }

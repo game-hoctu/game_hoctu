@@ -18,19 +18,20 @@
 	<div class="row">
 		<div class="col-md-4 img-portfolio">
 			<a href="{{url('albums/insert')}}">
-				<img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
+				<img class="img-responsive img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="">
 			</a>
 		</div>
 		@foreach($data as $item)
 		<div class="col-md-4 img-portfolio album-item">
-			<a href="portfolio-item.html">
+			<a href="{{url('/albums/'.$item['id'].'/detail')}}">
 				<img class="album-image img-responsive img-hover" src="{{$item['image']}}" alt="{{$item['name']}}">
 			</a>
 			<div class="album-info">
 				<h2>
-					<a href="#">{{$item['name']}}</a>
+					<a href="{{url('/albums/'.$item['id'].'/detail')}}">{{$item['name']}}</a>
 				</h2>
 				<p>{{$item['description']}}</p>
+				<p>Số lượng ảnh: {{$item['count']}}</p>
 			</div>
 		</div>
 		@endforeach
