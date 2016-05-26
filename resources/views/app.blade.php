@@ -35,6 +35,7 @@
 					<li><a href="{{ url('/') }}">Trang chủ</a></li>
 					@if (!Auth::guest())
 					<li><a href="{{ url('/albums/myAlbum') }}">Album của tôi</a></li>
+					<li><a href="{{ url('/childs/myChild') }}">Những đứa trẻ của tôi</a></li>
 					@endif
 				</ul>
 

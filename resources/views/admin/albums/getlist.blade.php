@@ -39,91 +39,87 @@
           </form>
         </div>
         <div id="insert" class="tab-pane fade">
-          <div class="panel panel-default">
-            <div class="panel-heading">Thêm Album</div>
-            <div class="panel-body">
-              <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostAdd') }}">
-                <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
+          <form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostAdd') }}">
+            <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Tên album</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="name" required="" ng-model="name">
-                    <div ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Tên album</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="name" required="" ng-model="name">
+                <div ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Mô tả</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="description" required="" ng-model="description">
-                    <div ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Người dùng</label>
-                  <div class="col-md-6">
-                    <select name="users_id" class="form-control">
-                      @foreach($users as $user )
-                      <option value="{{$user['id']}}">{{$user['name']}}</option>
-                      @endforeach
-                    </select>
-                    <div ng-show="form_AbAdd.user.$touched" ng-messages="form_AbAdd.user.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Thể loại</label>
-                  <div class="col-md-6">
-                    <select name="categories_id" class="form-control">
-                      @foreach($cates as $cate )
-                      <option value="{{$cate['id']}}">{{$cate['name']}}</option>
-                      @endforeach
-                    </select>
-                    <div ng-show="form_AbAdd.theloai.$touched" ng-messages="form_AbAdd.theloai.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-primary">
-                      Thêm
-                    </button>
-                    <a class="btn btn-default" href="{{url('admin/albums/')}}">Trở về</a>
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <span ng-show="count != undefined">Có tất cả <%count%> album.</span>
-      <span ng-show="count == undefined">Không có album nào.</span>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Mô tả</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="description" required="" ng-model="description">
+                <div ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Người dùng</label>
+              <div class="col-md-6">
+                <select name="users_id" class="form-control">
+                  @foreach($users as $user )
+                  <option value="{{$user['id']}}">{{$user['name']}}</option>
+                  @endforeach
+                </select>
+                <div ng-show="form_AbAdd.user.$touched" ng-messages="form_AbAdd.user.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Thể loại</label>
+              <div class="col-md-6">
+                <select name="categories_id" class="form-control">
+                  @foreach($cates as $cate )
+                  <option value="{{$cate['id']}}">{{$cate['name']}}</option>
+                  @endforeach
+                </select>
+                <div ng-show="form_AbAdd.theloai.$touched" ng-messages="form_AbAdd.theloai.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">
+                  Thêm
+                </button>
+                <a class="btn btn-default" href="{{url('admin/albums/')}}">Trở về</a>
+              </div>
+            </div>
+          </form>
 
-      <div class="table-responsive" ng-show="albums != undefined">
-        <hr/>
-        <table class="table table-hover table-bordered table-striped">
-          <tr class="active">
-            <th>Mã số</th>
-            <th>Tên album</th>
-            <th>Mô tả</th>
-            <th>Hành động</th>
-          </tr>
-          <tr ng-repeat="album in albums">
-            <td><%album.id%></td>
-            <td><%album.name%></td>
-            <td><%album.description%></td>
-            <td>
-              <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
-            </td>
-          </tr>
-        </table>
+        </div>
+        <span ng-show="count != undefined">Có tất cả <%count%> album.</span>
+        <span ng-show="count == undefined">Không có album nào.</span>
+
+        <div class="table-responsive" ng-show="albums != undefined">
+          <hr/>
+          <table class="table table-hover table-bordered table-striped">
+            <tr class="active">
+              <th>Mã số</th>
+              <th>Tên album</th>
+              <th>Mô tả</th>
+              <th>Hành động</th>
+            </tr>
+            <tr ng-repeat="album in albums">
+              <td><%album.id%></td>
+              <td><%album.name%></td>
+              <td><%album.description%></td>
+              <td>
+                <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
+                <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>

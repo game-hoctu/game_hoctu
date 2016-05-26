@@ -60,13 +60,13 @@ class AlbumsController extends Controller {
 				$i = 0;
 				foreach(Input::file('fImage') as $img) {
 					$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+					$path = public_path('/upload/images/' . $img_name);
+					Image::make($img->getRealPath())->save($path);
 					$item = new Images();
 					$item->url  = $img_name;
 					$item->word = $words[$i];
 					$item->albums_id = $albums_id;
 					$item->save();
-					$des = "/public/upload/images/";
-					$img->move($des, $img_name);
 					if($i == 0)
 					{
 						$imageName = UPLOAD_FOLDER.$img_name;

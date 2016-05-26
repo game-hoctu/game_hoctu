@@ -9,7 +9,7 @@
 				<div class="panel-heading">Thêm Album</div>
 			</hr>
 			<div class="panel-body">
-				<form name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostAdd') }}" enctype="multipart/form-data" novalidate>
+				<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostAdd') }}" novalidate>
 					<input type="hidden" name="_token" value="{!! csrf_token() !!}" >
 					<div class="form-group">
 						<label class="col-md-4 control-label">Tên album:</label>

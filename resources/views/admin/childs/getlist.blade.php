@@ -1,10 +1,10 @@
 @extends('admin')
-@section('title', 'Quản lý trẻ')
+@section('title', 'Danh sách những đứa trẻ')
 @section('content')
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="ChildsController">
   <div class="row">
     <div class="col-md-12">
-    <h1>Danh sách những đứa trẻ</h1>
+      <h1>Danh sách những đứa trẻ</h1>
       <hr/>
       @include('message')
       <ul class="nav nav-tabs">
@@ -27,45 +27,42 @@
           </form>
         </div>
         <div id="insert" class="tab-pane fade">
-          <div class="panel panel-default">
-            <div class="panel-heading">Thêm trẻ em</div>
-            <div class="panel-body">
-              <form name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostAdd') }}">
-                <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Tên đứa trẻ:</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="name" required="" ng-model="name">
-                    <div ng-show="form_childAdd.name.$touched" ng-messages="form_childAdd.name.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
+          <form name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostAdd') }}">
+            <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Tên đứa trẻ:</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="name" required="" ng-model="name">
+                <div ng-show="form_childAdd.name.$touched" ng-messages="form_childAdd.name.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Cha mẹ:</label>
-                  <div class="col-md-6">
-                    <select name="users_id" class="form-control">
-                      @foreach($users as $user )
-                      <option value="{{$user['id']}}">{{$user['name']}}</option>
-                      @endforeach
-                    </select>
-                    <div ng-show="form_childAdd.user.$touched" ng-messages="form_childAdd.user.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-primary">
-                      Thêm
-                    </button>
-                    <a class="btn btn-default" href="{{url('admin/childs/')}}">Trở về</a>
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Cha mẹ:</label>
+              <div class="col-md-6">
+                <select name="users_id" class="form-control">
+                  @foreach($users as $user )
+                  <option value="{{$user['id']}}">{{$user['name']}}</option>
+                  @endforeach
+                </select>
+                <div ng-show="form_childAdd.user.$touched" ng-messages="form_childAdd.user.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">
+                  Thêm
+                </button>
+                <a class="btn btn-default" href="{{url('admin/childs/')}}">Trở về</a>
+              </div>
+            </div>
+          </form>
+
         </div>
       </div>
       <span ng-show="count != undefined">Có tất cả <%count%> đứa trẻ.</span>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Childs;
 use App\User;
+use Auth;
 class ChildsController extends Controller {
 
 	//
@@ -88,5 +89,33 @@ class ChildsController extends Controller {
 		$item->delete();
 		success("Đã xóa thành công!");
 		return redirect()->action('ChildsController@adGetList');
+	}
+	//Người dùng bình thường
+	public function myChild()
+	{
+		if(Auth::guest())
+		{
+			warning("Bạn cần phải đăng nhập!");
+			return view('auth.login');
+		}
+		else
+		{
+			return $this->callAction('getListByUser', ['user_id' => Auth::user()->id]);
+		}
+	}
+
+	function getListByUser($user_id)
+	{
+		if(Auth::guest())
+		{
+			warning("Bạn cần phải đăng nhập!");
+			return view('auth.login');
+		}
+		else
+		{
+			$child = new Childs(); 
+			$result = $child::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
+			return view('childs.list', ['data' => $result]);
+		}
 	}
 }

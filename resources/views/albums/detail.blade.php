@@ -50,128 +50,45 @@
 		</div>
 		<div class="col-md-5">
 			<h2>{{$data['name']}}</h2>
-			<p>Mô tả: {{$data['description']}}</p>
-			<p>Người tạo: {{$data['users']['name']}}</p>
-			<p>Số lượng ảnh: {{count($data['images'])}}</p>
+			<h5><span class="glyphicon glyphicon-tag"></span> Mô tả: {{$data['description']}}</h5>
+			<h5><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$data['users']['name']}}</h5>
+			<h5><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{count($data['images'])}}</h5>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-lg-12">
-			<h2 class="page-header">Our Team</h2>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 text-center">
-			<div class="thumbnail">
-				<img class="img-responsive" src="http://placehold.it/750x450" alt="">
-				<div class="caption">
-					<h3>John Smith<br>
-						<small>Job Title</small>
-					</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
-					<ul class="list-inline">
-						<li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
-						</li>
-						<li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-						</li>
-					</ul>
-				</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2>Danh sách hình ảnh</h2>
+			<div class="table-responsive">
+				<table class="table table-hover table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Mã số</th>
+							<th>Hình ảnh</th>
+							<th>Từ ngữ</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($data['images'] as $image)
+						<?php $url = $image['url']; ?>
+						<tr>
+							<td>{{$image['id']}}</td>
+							<td>
+								<button data-toggle="collapse" data-target="#image{{$image['id']}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon glyphicon-eye-open"></span> Xem hình ảnh</button>
+								<div id="image{{$image['id']}}" class="collapse">
+									<img src="{{UPLOAD_FOLDER}}{{$image['url']}}" width="300"/>
+								</div>
+							</td>
+							<td>{{strtoupper($image['word'])}}</td>
+							<td>
+								<a href="{{url('/images/$url/edit')}}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+								<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('/images/$url/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+							</td>
+						</tr>
+						@endforeach	
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

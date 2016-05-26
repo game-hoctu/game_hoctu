@@ -35,7 +35,12 @@
               </tr>
               <tr ng-repeat="image in images">
                 <td><%image.id%></td>
-                <td><%image.url%></td>
+                <td>
+                  <button data-toggle="collapse" data-target="#image<%image.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
+                  <div id="image<%image.id%>" class="collapse">
+                    <img src="{{UPLOAD_FOLDER}}<%image.url%>" width="300"/>
+                  </div>
+                </td>
                 <td><%image.word%></td>
                 <td>
                   <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
@@ -46,53 +51,51 @@
           </div>
         </div>
         <div id="insert" class="tab-pane fade">
-          <div class="panel panel-default">
-            <div class="panel-heading">Thêm hình ảnh</div>
-            <div class="panel-body">
-              <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostAdd') }}">
-                <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Hình ảnh</label>
-                  <div class="col-md-6">
-                    <input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Từ ngữ</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="word" required="" ng-model="word">
-                    <div ng-show="form_imgAdd.word.$touched" ng-messages="form_imgAdd.word.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Album</label>
-                  <div class="col-md-6">
-                    <select name="albums_id" class="form-control">
-                      @foreach($albums as $album )
-                      <option value="{{$album['id']}}">{{$album['name']}}</option>
-                      @endforeach
-                    </select>
-                    <div ng-show="form_imgAdd.user.$touched" ng-messages="form_imgAdd.user.$error">
-                      <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-primary">
-                      Thêm
-                    </button>
-                    <a class="btn btn-default" href="{{url('admin/images/')}}">Trở về</a>
-                  </div>
-                </div>
-              </form>
+          <form enctype="multipart/form-data" name="form_imgAdd" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostAdd') }}">
+            <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Hình ảnh</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
+              </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Từ ngữ</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="word" required="" ng-model="word">
+                <div ng-show="form_imgAdd.word.$touched" ng-messages="form_imgAdd.word.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Album</label>
+              <div class="col-md-6">
+                <select name="albums_id" class="form-control">
+                  @foreach($albums as $album )
+                  <option value="{{$album['id']}}">{{$album['name']}}</option>
+                  @endforeach
+                </select>
+                <div ng-show="form_imgAdd.user.$touched" ng-messages="form_imgAdd.user.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">
+                  Thêm
+                </button>
+                <a class="btn btn-default" href="{{url('admin/images/')}}">Trở về</a>
+              </div>
+            </div>
+          </form>
         </div>
+
       </div>
     </div>
   </div>
-  @endsection
+</div>
+@endsection

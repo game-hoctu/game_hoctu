@@ -38,7 +38,7 @@
 	</a>
 </header>
 <div class="container">
-	<h1>Trang chủ</h1>
+	<h1><span class="glyphicon glyphicon-home"></span> Trang chủ</h1>
 	<hr/>
 	@include('message')
 </div>
