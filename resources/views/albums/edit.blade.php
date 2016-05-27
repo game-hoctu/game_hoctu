@@ -7,7 +7,7 @@
 			@include('message')
 			<h1>Sửa Album</h1>
 			<hr/>
-			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostEdit') }}">
+			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số</label>
@@ -28,6 +28,7 @@
 						<input type="text" class="form-control" name="description" value="{{ old('description', $getalbumById['description'])}}" required="">
 					</div>
 				</div>
+				<input type="hidden" class="form-control" name=users_id value="{{ old('users_id', $getalbumById['users_id'])}}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Thể loại</label>
 					<div class="col-md-6">
@@ -43,7 +44,7 @@
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('albums/')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('albums/myAlbum')}}">Trở về</a>
 					</div>
 				</div>
 			</form>

@@ -1,13 +1,13 @@
-@extends('admin')
+@extends('app')
 @section('title','Sửa thông tin những đứa trẻ')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container" ng-app="game_hoctu">
 	<div class="row">
 		<div class="col-md-12">
 			<h1>Sửa thông tin những đứa trẻ</h1>
 			<hr/>
 			@include('message')
-			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostEdit') }}">
+			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số: </label>
@@ -23,21 +23,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Người dùng: </label>
-					<div class="col-md-6">
-						<select name="users_id" class="form-control">
-							@foreach($users as $user )
-							<option value="{{$user['id']}}"  @if($getchildById['users_id'] == $user['id']){{"selected"}}@endif>{{$user['name']}}</option>
-							@endforeach
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('admin/childs/')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('childs/myChild')}}">Trở về</a>
 					</div>
 				</div>
 			</form>

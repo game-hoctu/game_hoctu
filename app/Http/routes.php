@@ -39,6 +39,9 @@ Route::group(['prefix' => 'images'], function(){
 		$data = App\Images::where('album_id', $album_id)->get();
 		echo json_encode(['info' => $data]);
 	});
+	Route::get('{id}/edit','ImagesController@edit');
+	Route::post('{id}/postEdit',['as'=>'imagesPostEdit','uses'=>'ImagesController@postEdit']);
+	Route::get('{id}/delete','ImagesController@delete');
 });
 Route::group(['prefix' => 'childs'], function(){
 	Route::get('myChild', 'ChildsController@myChild');

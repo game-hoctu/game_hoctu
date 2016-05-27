@@ -8,7 +8,53 @@ use App\User;
 use Auth;
 class ChildsController extends Controller {
 
-	//
+	function add()
+	{
+		if(Auth::guest())
+		{
+			return view('auth.login', ['message' => warning('Bạn cần phải đăng nhập.')]);
+		}
+		else
+		{
+			return view('childs.add');
+		}
+	}
+	function postAdd(Request $request)
+	{
+		$item = new Childs();
+		$item->name = $request->name;
+		$item->users_id = Auth::user()->id;
+		$item->save();
+		success("Đã thêm thành công!");
+		return redirect()->action('ChildsController@myChild');
+	}
+
+	function edit($id)
+	{
+		$item = new Childs();
+		$getchildById = $item->find($id)->toArray();
+		return view('childs.edit')->with('getchildById',$getchildById);
+	}
+	function postEdit(Request $request)
+	{
+		$allRequest = $request->all();
+		$name = $allRequest['name'];
+		//$user = $allRequest['users_id'];
+		$idchild = $allRequest['id'];
+		$item = new Childs();
+		$getchildById = $item->find($idchild);
+		$getchildById->name = $name;
+		$getchildById->save();
+		success("Đã sửa thành công!");
+		return redirect()->action('ChildsController@myChild');
+	}
+	function delete($id)
+	{
+		$item = Childs::findOrFail($id);
+		$item->delete();
+		success("Đã xóa thành công!");
+		return redirect()->action('ChildsController@myChild');
+	}
 	//AJAX------------------------------------------------------------------------------
 	//Lấy danh sách child theo user id
 	function ajaxGetListByUser($users_id)
@@ -78,7 +124,6 @@ class ChildsController extends Controller {
 		$item = new Childs();
 		$getchildById = $item->find($idalbum);
 		$getchildById->name = $name;
-		$getchildById->users_id = $user;
 		$getchildById->save();
 		success("Đã sửa thành công!");
 		return redirect()->action('ChildsController@adGetList');

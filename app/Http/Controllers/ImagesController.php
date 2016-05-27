@@ -4,39 +4,54 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Images;
 use App\Albums;
+use Input;
 use Illuminate\Http\Request;
 
 class ImagesController extends Controller {
+    public function edit($id)
+    {
+        $item = new Images();
+        $getimageById = $item->find($id)->toArray();
+        $albums = Albums::select('id','name')->get()->toArray();
+        return view('images.edit', compact('albums', $albums))->with('getimageById',$getimageById);
+    }
+    public function postEdit(Request $request)
+    {
+        if(Input::hasFile('fImage'))
+        {
+            $img = $request->file('fImage');
+        }
+        $item = new Images();
+        $allRequest = $request->all();
+        $word = $allRequest['word'];
+        $id = $allRequest['id'];
 
-	//Xem 1 image trong album
-	/*public function getdetailimages($id_image)
-	{
-		$image = Images::where('id_image','=',$id_image)->first();
-		$allAlbum = Albums::all();
-		if(is_null($image))
-		{
-			return redirect::to('/');
-		}
-		else
-		{
-			return view('images.image')->with('image', $image)
-										->with('allAlbum', $allAlbum);
-		}
-	}*/
-	public function create(Request $request)
-	{
-		$image = new Images();
-		$image->url = $request->txturl;
-		$image->word = $request->txtword;
-		$image->album_id = $request->cbbalbum;
-		$image->save();
-		return "Thêm hình ảnh thành công";
-	}
-	public function adGetList()
-	{
-		$albums = Albums::select('id','name')->get()->toArray();
+        $item = new Images();
+        $getimageById = $item->find($id);
+        $getimageById->word = $word;
+        $getimageById->save();
+        if(Input::hasFile('fImage'))
+        {
+            $des = 'public/upload/images';
+            $img->move($des, $getimageById->url);
+        }   
+        success("Đã sửa thành công!");
+        return redirect()->action('AlbumsController@detail', ['albums_id'=>$getimageById->albums_id]);
+    }
+    public function delete($id)
+    {
+        $item = Images::findOrFail($id);
+        $item->delete();
+        success("Đã xóa thành công!");
+        return redirect()->action('AlbumsController@detail');
+    }
+
+//ADMIN----------------------------------------------------------------------------------------
+    public function adGetList()
+    {
+        $albums = Albums::select('id','name')->get()->toArray();
         return view('admin.images.getlist', compact('albums', $albums));
-	}
+    }
     public function adPostAdd(Request $request)
     {
         $img = $request->file('fImage');

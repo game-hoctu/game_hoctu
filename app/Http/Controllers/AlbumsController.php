@@ -81,6 +81,40 @@ class AlbumsController extends Controller {
 		}
 		
 	}
+	function edit($id)
+	{
+		//$users = User::all()->toArray();
+		$cates = Categories::all()->toArray();
+		$item = new Albums();
+		$getalbumById = $item->find($id)->toArray();
+		return view('albums.edit', compact('cates'))->with('getalbumById',$getalbumById);
+	}
+	function postEdit(Request $request)
+	{
+		$allRequest = $request->all();
+		$name = $allRequest['name'];
+		$mota = $allRequest['description'];
+		$user = $allRequest['users_id'];
+		$theloai = $allRequest['categories_id'];
+		$idalbum = $allRequest['id'];
+		$item = new Albums();
+		$getalbumById = $item->find($idalbum);
+		$getalbumById->name = $name;
+		$getalbumById->description = $mota;
+		//$getalbumById->users_id = $user;
+		$getalbumById->categories_id = $theloai;
+		$getalbumById->save();
+		success("Đã sửa thành công!");
+		return redirect()->action('AlbumsController@myAlbum');
+	}
+
+	 function delete($id)
+	{
+		$item = Albums::findOrFail($id);
+		$item->delete();
+		success("Đã xóa thành công!");
+		return redirect()->action('AlbumsController@myAlbum');
+	}
 
 	function getListByUser($user_id)
 	{

@@ -7,6 +7,7 @@
 			<h1 class="page-header">{{$data['name']}}
 				<small>Chi tiết album</small>
 			</h1>
+			@include('message')
 			<ol class="breadcrumb">
 				<li><a href="/">Trang chủ</a>
 				</li>
@@ -53,6 +54,11 @@
 			<h5><span class="glyphicon glyphicon-tag"></span> Mô tả: {{$data['description']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$data['users']['name']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{count($data['images'])}}</h5>
+			@if(Auth::user()->id == $data['users']['id'])
+
+				<a href="{{url('albums/'.$data['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+				<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('albums/'.$data['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+			@endif
 		</div>
 	</div>
 
@@ -82,8 +88,8 @@
 							</td>
 							<td>{{strtoupper($image['word'])}}</td>
 							<td>
-								<a href="{{url('/images/$url/edit')}}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-								<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('/images/$url/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+								<a href="{{url('/images/'.$image['id'].'/edit')}}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+								<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('/images/'.$image['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
 							</td>
 						</tr>
 						@endforeach	

@@ -53,7 +53,7 @@
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('admin/categories/')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('admin/albums/')}}">Trở về</a>
 					</div>
 				</div>
 			</form>
