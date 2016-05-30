@@ -8,6 +8,9 @@ Route::group(['prefix' => 'ajax'], function(){
 		$result = $images->where('albums_id', $albums_id)->get();
 		if($result->count() > 0)
 		{
+			foreach ($result as $item) {
+				$item['url'] = UPLOAD_FOLDER.$item['url'];
+			}
 			$data['status'] = 'SUCCESS';
 			$data['info'] = $result;
 		}
