@@ -92,12 +92,19 @@
             <th>Mã số</th>
             <th>Tên trẻ</th>
             <th>Ngày sinh</th>
+            <th>Hình ảnh</th>
             <th>Hành động</th>
           </tr>
           <tr ng-repeat="child in childs | filter:search">
             <td><%child.id%></td>
             <td><%child.name%></td>
             <td><%child.date_of_birth%></td>
+            <td>
+              <button data-toggle="collapse" data-target="#child<%child.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
+              <div id="child<%child.id%>" class="collapse">
+                <img src="{{UPLOAD_FOLDER}}<%child.image%>" width="200"/>
+              </div>
+            </td>
             <td>
               <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
               <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>

@@ -38,8 +38,8 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Hình ảnh: </label>
 					<div class="col-md-6">
-						<input type="file" class="form-control" name="fImage" required="">
-						<input type="hidden" class="form-control" name="image" value="{{ old('url', $getchildById['image'])}}" required="">
+						<input type="file" class="form-control" name="fImage">
+						<input type="hidden" class="form-control" name="image" value="{{ old('url', $getchildById['image'])}}">
 					</div>
 				</div>
 				<div class="form-group">

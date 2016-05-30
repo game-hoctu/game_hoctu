@@ -75,10 +75,13 @@ class ImagesController extends Controller {
     }
     public function adPostEdit(Request $request)
     {
-        $img = $request->file('fImage');
+
+        if(Input::hasFile('fImage'))
+        {
+            $img = $request->file('fImage');
+        }   
         $item = new Images();
         $allRequest = $request->all();
-        $url = $allRequest['url'];
         $word = $allRequest['word'];
         $albums_id = $allRequest['albums_id'];
         $id = $allRequest['id'];
@@ -89,9 +92,12 @@ class ImagesController extends Controller {
         $getimageById->albums_id = $albums_id;
         $getimageById->save();
 
-        $img_name = $url;
-        $des = 'public/upload/images';
-        $img->move($des, $img_name);
+        if(Input::hasFile('fImage'))
+        {
+            $des = 'public/upload/images';
+            $img->move($des, $getimageById->url);
+        }  
+         
         success("Đã sửa thành công!");
         return redirect()->action('ImagesController@adGetList');
     }

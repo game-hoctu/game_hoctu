@@ -23,7 +23,7 @@ class ChildsController extends Controller {
 	function postAdd(Request $request)
 	{
 		$img = $request->file('fImage');
-        $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+		$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
 		
 		$item = new Childs();
 		$item->name = $request->name;
@@ -33,7 +33,7 @@ class ChildsController extends Controller {
 		$item->save();
 
 		$des = 'public/upload/images';
-        $img->move($des, $img_name);
+		$img->move($des, $img_name);
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@myChild');
 	}
@@ -46,13 +46,14 @@ class ChildsController extends Controller {
 	}
 	function postEdit(Request $request)
 	{
-
-		$img = $request->file('fImage');  		
+		if(Input::hasFile('fImage'))
+		{
+			$img = $request->file('fImage');
+		}		
 		$allRequest = $request->all();
 		$image = $allRequest['image'];
 		$name = $allRequest['name'];
 		$date_of_birth = $allRequest['date_of_birth'];
-		//$user = $allRequest['users_id'];
 		$idchild = $allRequest['id'];
 		$item = new Childs();
 		$getchildById = $item->find($idchild);
@@ -60,9 +61,11 @@ class ChildsController extends Controller {
 		$getchildById->date_of_birth = $date_of_birth;
 		$getchildById->save();
 
-		$img_name = $image;
-        $des = 'public/upload/images';
-        $img->move($des, $img_name);
+		if(Input::hasFile('fImage'))
+		{
+			$des = 'public/upload/images';
+			$img->move($des, $getchildById->image);
+		}
 
 		success("Đã sửa thành công!");
 		return redirect()->action('ChildsController@myChild');
@@ -121,7 +124,7 @@ class ChildsController extends Controller {
 	public function adPostAdd(Request $request)
 	{
 		$img = $request->file('fImage');
-        $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+		$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
 		$item = new Childs();
 		$item->name = $request->name;
 		$item->users_id = $request->users_id;
@@ -129,7 +132,7 @@ class ChildsController extends Controller {
 		$item->image  = $img_name;
 		$item->save();
 		$des = 'public/upload/images';
-        $img->move($des, $img_name);
+		$img->move($des, $img_name);
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@adGetList');
 	}
@@ -142,22 +145,27 @@ class ChildsController extends Controller {
 	}
 	public function adPostEdit(Request $request)
 	{
-
-		$img = $request->file('fImage');  
+		if(Input::hasFile('fImage'))
+		{
+			$img = $request->file('fImage');
+		}		
 		$allRequest = $request->all();
-		$image = $allRequest['image'];
 		$name = $allRequest['name'];
+		$date_of_birth = $allRequest['date_of_birth'];
 		$user = $allRequest['users_id'];
 		$idchild = $allRequest['id'];
 
 		$item = new Childs();
 		$getchildById = $item->find($idchild);
 		$getchildById->name = $name;
+		$getchildById->date_of_birth = $date_of_birth;
 		$getchildById->save();
 
-		$img_name = $image;
-        $des = 'public/upload/images';
-        $img->move($des, $img_name);
+		if(Input::hasFile('fImage'))
+		{
+			$des = 'public/upload/images';
+			$img->move($des, $getchildById->image);
+		}
 
 		success("Đã sửa thành công!");
 		return redirect()->action('ChildsController@adGetList');
