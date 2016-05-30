@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Ngày sinh: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $getchildById['date_of_birth'])}}" required="">
+						<input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $getchildById['date_of_birth'])}}" required="">
 					</div>
 				</div>
 
