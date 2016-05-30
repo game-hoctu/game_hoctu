@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', 'HomeController@index');
 
 Route::get('home','HomeController@index');
@@ -50,7 +49,7 @@ Route::group(['prefix' => 'childs'], function(){
 	Route::get('{id}/edit','ChildsController@edit');
 	Route::post('{id}/postEdit',['as'=>'childsPostEdit','uses'=>'ChildsController@postEdit']);
 	Route::get('{id}/delete','ChildsController@delete');
-	Route::get('{albums_id}/detail','ChildsController@detail');
+	//Route::get('detail','ChildsController@detail');
 });
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');

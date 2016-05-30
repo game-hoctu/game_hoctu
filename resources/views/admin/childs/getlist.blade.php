@@ -28,7 +28,7 @@
         </div>
         <div id="insert" class="tab-pane fade">
 
-          <form name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostAdd') }}">
+          <form  enctype="multipart/form-data" name="form_childAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostAdd') }}">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
@@ -54,6 +54,24 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-md-4 control-label">Ngày sinh:</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="date_of_birth" required="" ng-model="date_of_birth">
+                <div ng-show="form_childAdd.date_of_birth.$touched" ng-messages="form_childAdd.date_of_birth.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Hình ảnh:</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control" name="fImage" ng-model="fImage">
+                <div ng-show="form_childAdd.fImage.$touched" ng-messages="form_childAdd.fImage.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary">
                   Thêm
@@ -68,15 +86,18 @@
       <span ng-show="count != undefined">Có tất cả <%count%> đứa trẻ.</span>
       <span ng-show="count == undefined">Không có đứa trẻ nào.</span>
       <div class="table-responsive" ng-show="childs != undefined">
+        @include('admin.search')
         <table class="table table-hover table-bordered table-striped">
           <tr class="active">
             <th>Mã số</th>
             <th>Tên trẻ</th>
+            <th>Ngày sinh</th>
             <th>Hành động</th>
           </tr>
-          <tr ng-repeat="child in childs">
+          <tr ng-repeat="child in childs | filter:search">
             <td><%child.id%></td>
             <td><%child.name%></td>
+            <td><%child.date_of_birth%></td>
             <td>
               <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
               <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>

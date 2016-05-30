@@ -81,7 +81,7 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ asset('/public/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/public/js/myscript.js') }}"></script>
-	
+	<script src="{{ asset('/public/js/jquery.dataTables.min.js') }}"></script>
 	<!-- Script to Activate the Carousel -->
 	<script>
 		$('.carousel').carousel({

@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			@include('message')
-			<h1>Sửa Album</h1>
+			<h1><span class="glyphicon glyphicon-pencil"></span>Sửa Album</h1>
 			<hr/>
 			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">

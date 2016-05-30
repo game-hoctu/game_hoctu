@@ -21,6 +21,24 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-4 control-label">Ngày sinh:</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="date_of_birth" required="" ng-model="date_of_birth">
+							<div ng-show="form_childAdd.date_of_birth.$touched" ng-messages="form_childAdd.date_of_birth.$error">
+								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Hình ảnh:</label>
+						<div class="col-md-6">
+							<input type="file" class="form-control" name="fImage" ng-model="fImage">
+							<div ng-show="form_childAdd.fImage.$touched" ng-messages="form_childAdd.fImage.$error">
+								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<div class="col-md-6 col-md-offset-4">
 							<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
 								Thêm

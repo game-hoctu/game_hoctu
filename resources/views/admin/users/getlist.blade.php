@@ -1,7 +1,7 @@
 @extends('admin')
 @section('title', 'Quản lý người dùng')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" ng-app="game_hoctu">
   <div class="row">
     <div class="col-md-12">
       <h1>Quản lý người dùng</h1>
@@ -15,24 +15,28 @@
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
           <div class="table-responsive">
+            <input type="hidden" name="data" ng-model="data" ng-init="data = {{json_encode($data)}}">
+            @include('admin.search')
             <table class="table table-hover table-bordered table-striped">
-              <tr class="active">
-                <th>Mã số</th>
-                <th>Email</th>
-                <th>Họ tên</th>
-                <th>Hành động</th>
-              </tr>
-              @foreach($data as $item)
-              <tr>
-                <td>{{$item['id']}}</td>
-                <td>{{$item['email']}}</td>
-                <td>{{$item['name']}}</td>
-                <td>
-                  <a href="users/{{$item['id']}}/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-                  <a href="users/{{$item['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-                </td>
-              </tr>
-              @endforeach
+              <thead>
+                <tr>
+                  <th>Mã số</th>
+                  <th>Email</th>
+                  <th>Họ tên</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in data | filter:search">
+                  <td><%item.id%></td>
+                  <td><%item.email%></td>
+                  <td><%item.name%></td>
+                  <td>
+                    <a href="users/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                    <a href="users/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

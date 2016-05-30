@@ -26,6 +26,7 @@
           <span ng-show="count == undefined">Không có hình ảnh nào.</span>
           <div class="table-responsive" ng-show="images != undefined">
             <hr/>
+            @include('admin.search')
             <table class="table table-hover table-bordered table-striped">
               <tr class="active">
                 <th>Mã số</th>
@@ -33,7 +34,7 @@
                 <th>Từ ngữ</th>
                 <th>Hành động</th>
               </tr>
-              <tr ng-repeat="image in images">
+              <tr ng-repeat="image in images | filter:search">
                 <td><%image.id%></td>
                 <td>
                   <button data-toggle="collapse" data-target="#image<%image.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
