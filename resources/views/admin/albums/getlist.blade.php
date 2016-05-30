@@ -43,7 +43,7 @@
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Tên album</label>
+              <label class="col-md-4 control-label">Tên album: </label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" required="" ng-model="name">
                 <div ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Mô tả</label>
+              <label class="col-md-4 control-label">Mô tả: </label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="description" required="" ng-model="description">
                 <div ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Người dùng</label>
+              <label class="col-md-4 control-label">Người dùng: </label>
               <div class="col-md-6">
                 <select name="users_id" class="form-control">
                   @foreach($users as $user )
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Thể loại</label>
+              <label class="col-md-4 control-label">Thể loại: </label>
               <div class="col-md-6">
                 <select name="categories_id" class="form-control">
                   @foreach($cates as $cate )
@@ -114,8 +114,8 @@
               <td><%album.name%></td>
               <td><%album.description%></td>
               <td>
-                <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
-                <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
               </td>
             </tr>
           </table>

@@ -28,8 +28,8 @@
                 <td>{{$item['email']}}</td>
                 <td>{{$item['name']}}</td>
                 <td>
-                  <a href="users/{{$item['id']}}/adEdit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="users/{{$item['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="users/{{$item['id']}}/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                  <a href="users/{{$item['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
                 </td>
               </tr>
               @endforeach
@@ -41,7 +41,7 @@
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Họ tên</label>
+              <label class="col-md-4 control-label">Họ tên: </label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" required="" ng-model="name">
                 <div ng-show="formadduser.name.$touched" ng-messages="formadduser.name.$error">
@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Email</label>
+              <label class="col-md-4 control-label">Email: </label>
               <div class="col-md-6">
                 <input type="email" class="form-control" name="email" required="" ng-model="email">
                 <label class="label label-danger">{!! $errors->first('email') !!}</label>
@@ -62,7 +62,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Mật khẩu</label>
+              <label class="col-md-4 control-label">Mật khẩu: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="password" required="" ng-model="password">
                 <div ng-show="formadduser.password.$touched" ng-messages="formadduser.password.$error">
@@ -72,7 +72,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Quyền</label>
+              <label class="col-md-4 control-label">Quyền: </label>
               <div class="col-md-6">
                 <select name="role" class="form-control">
                   <option value="1">Người dùng thường</option>

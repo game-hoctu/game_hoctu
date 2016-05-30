@@ -27,7 +27,7 @@ Route::group(['prefix' => 'ajax'], function(){
 
 
 	Route::get('childs/getListByUser/{users_id}', 'ChildsController@ajaxGetListByUser');
-	Route::get('childs/getDetailt/{childs_id}', 'ChildsController@ajaxGetInfo');
+	Route::get('childs/getDetailt/{childs_id}', 'ChildsController@ajaxDetail');
 	Route::get('childs/getList', 'ChildsController@ajaxGetList');
 
 	Route::get('results/addResult/{childs_id}/{images_id}/{word}/{correct}/{incorrect}', 'ResultsController@ajaxAddResult');

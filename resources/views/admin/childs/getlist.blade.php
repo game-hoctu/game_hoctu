@@ -78,8 +78,8 @@
             <td><%child.id%></td>
             <td><%child.name%></td>
             <td>
-              <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
-              <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+              <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+              <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
             </td>
           </tr>
         </table>

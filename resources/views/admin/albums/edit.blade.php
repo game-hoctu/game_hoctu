@@ -10,26 +10,26 @@
 			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
-					<label class="col-md-4 control-label">Mã số</label>
+					<label class="col-md-4 control-label">Mã số: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" disabled="" value="{{ old('id', $getalbumById['id'])}}">
 						<input type="hidden" class="form-control" name="id" value="{{ old('id', $getalbumById['id'])}}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Tên Album</label>
+					<label class="col-md-4 control-label">Tên Album: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="name" value="{{ old('name', $getalbumById['name'])}}" required="">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Mô tả</label>
+					<label class="col-md-4 control-label">Mô tả: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="description" value="{{ old('description', $getalbumById['description'])}}" required="">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Người dùng</label>
+					<label class="col-md-4 control-label">Người dùng: </label>
 					<div class="col-md-6">
 						<select name="users_id" class="form-control">
 							@foreach($users as $user )
@@ -39,7 +39,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Thể loại</label>
+					<label class="col-md-4 control-label">Thể loại: </label>
 					<div class="col-md-6">
 						<select name="categories_id" class="form-control">
 							@foreach($cates as $cate )

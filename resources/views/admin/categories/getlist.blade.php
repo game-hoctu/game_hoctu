@@ -25,8 +25,8 @@
                 <td>{{$cate['id']}}</td>
                 <td>{{$cate['name']}}</td>
                 <td>
-                  <a href="categories/{{$cate['id']}}/adEdit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="categories/{{$cate['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="categories/{{$cate['id']}}/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                  <a href="categories/{{$cate['id']}}/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
                 </td>
               </tr>
               @endforeach
@@ -39,7 +39,7 @@
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Tên thể loại</label>
+              <label class="col-md-4 control-label">Tên thể loại: </label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" required="" ng-model="name">
                 <div ng-show="formAdd.name.$touched" ng-messages="formAdd.name.$error">

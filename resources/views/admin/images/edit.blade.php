@@ -10,7 +10,7 @@
 			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
-					<label class="col-md-4 control-label">Mã số</label>
+					<label class="col-md-4 control-label">Mã số: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" disabled="" value="{{ old('id', $getimageById['id'])}}">
 						<input type="hidden" class="form-control" name="id" value="{{ old('id', $getimageById['id'])}}">
@@ -23,20 +23,20 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Hình ảnh</label>
+					<label class="col-md-4 control-label">Hình ảnh: </label>
 					<div class="col-md-6">
 						<input type="file" class="form-control" name="fImage" required="">
 						<input type="hidden" class="form-control" name="url" value="{{ old('url', $getimageById['url'])}}" required="">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Từ ngữ</label>
+					<label class="col-md-4 control-label">Từ ngữ: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="word" value="{{ old('word', $getimageById['word'])}}" required="">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Album</label>
+					<label class="col-md-4 control-label">Album: </label>
 					<div class="col-md-6">
 						<select name="albums_id" class="form-control">
 							@foreach($albums as $album )

@@ -43,8 +43,8 @@
                 </td>
                 <td><%image.word%></td>
                 <td>
-                  <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm">Sửa</a>
-                  <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')">Xóa</a>
+                  <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                  <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
                 </td>
               </tr>
             </table>
@@ -56,13 +56,13 @@
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Hình ảnh</label>
+              <label class="col-md-4 control-label">Hình ảnh: </label>
               <div class="col-md-6">
                 <input type="file" class="form-control" name="fImage" required="" ng-model="fImage">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Từ ngữ</label>
+              <label class="col-md-4 control-label">Từ ngữ: </label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="word" required="" ng-model="word">
                 <div ng-show="form_imgAdd.word.$touched" ng-messages="form_imgAdd.word.$error">
@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Album</label>
+              <label class="col-md-4 control-label">Album: </label>
               <div class="col-md-6">
                 <select name="albums_id" class="form-control">
                   @foreach($albums as $album )

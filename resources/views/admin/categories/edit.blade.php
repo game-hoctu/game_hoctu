@@ -10,14 +10,14 @@
 			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('cateAdPostEdit') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
-					<label class="col-md-4 control-label">Mã số</label>
+					<label class="col-md-4 control-label">Mã số: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" disabled="" value="{{ old('id', $getcateById['id'])}}">
 						<input type="hidden" class="form-control" name="id" value="{{ old('id', $getcateById['id'])}}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Tên thể loại</label>
+					<label class="col-md-4 control-label">Tên thể loại: </label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="name" value="{{ old('name', $getcateById['name'])}}" required="">
 					</div>
