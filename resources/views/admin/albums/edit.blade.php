@@ -1,13 +1,13 @@
 @extends('admin')
 @section('title','Sửa Album')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-init="data = {{json_encode($getalbumById)}}">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			@include('message')
 			<h1>Sửa Album</h1>
 			<hr/>
-			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostEdit') }}">
+			<form name="form" class="form-horizontal" role="form" method="POST" action="{{ route('albumsAdPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số: </label>
@@ -19,32 +19,34 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Tên Album: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="name" value="{{ old('name', $getalbumById['name'])}}" required="">
+						<input type="text" class="form-control" name="name" ng-model="data.name" required="" minlength="6">
+						<div ng-show="form.name.$touched" ng-messages="form.name.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mô tả: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="description" value="{{ old('description', $getalbumById['description'])}}" required="">
+						<input type="text" class="form-control" name="description" ng-model="data.description" required="" minlength="6">
+						<div ng-show="form.description.$touched" ng-messages="form.description.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Người dùng: </label>
 					<div class="col-md-6">
-						<select name="users_id" class="form-control">
-							@foreach($users as $user )
-							<option value="{{$user['id']}}">{{$user['name']}}</option>
-							@endforeach
+						<select name="users_id" class="form-control" ng-init="users = {{json_encode($users)}}">
+							<option ng-repeat="user in users" value="<%user.id%>" ng-selected="users.id == data.users_id"><%user.name%></option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Thể loại: </label>
 					<div class="col-md-6">
-						<select name="categories_id" class="form-control">
-							@foreach($cates as $cate )
-							<option value="{{$cate['id']}}">{{$cate['name']}}</option>
-							@endforeach
+						<select name="categories_id" class="form-control" ng-init="categories = {{json_encode($cates)}}">
+							<option ng-repeat="cate in categories" value="<%cate.id%>" ng-selected="cate.id == data.categories_id"><%cate.name%></option>
 						</select>
 					</div>
 				</div>

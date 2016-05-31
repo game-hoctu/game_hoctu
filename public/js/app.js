@@ -32,7 +32,7 @@ app.controller("ImagesController", function($scope, $http){
 		var albums_id = $scope.albums_id;
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/images/" + albums_id + "/list",
+			url     : SERVER_PATH + "ajax/images/" + albums_id + "/getListByAlbums",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);
@@ -135,7 +135,7 @@ app.controller('AlbumsController', function($scope, $http){
 		var cate_id = $scope.cate_id;
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/albums/categories/"+cate_id+"/list",
+			url     : SERVER_PATH + "ajax/albums/"+cate_id+"/getListByCates",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);
@@ -154,7 +154,7 @@ app.controller('AlbumsController', function($scope, $http){
 		var users_id = $scope.users_id;
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/albums/users/"+users_id+"/list",
+			url     : SERVER_PATH + "ajax/albums/"+users_id+"/getListByUsers",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);
@@ -215,7 +215,7 @@ app.controller('ChildsController', function($scope, $http){
 		console.log(users_id);
 		$http({
 			method  : 'GET',
-			url     : SERVER_PATH + "ajax/childs/getListByUser/" + users_id,
+			url     : SERVER_PATH + "ajax/childs/" + users_id +"/getListByUser",
 			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(response) {
 			console.log(response);

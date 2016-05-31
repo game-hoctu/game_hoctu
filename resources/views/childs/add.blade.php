@@ -6,7 +6,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			@include('message')
 			<div class="panel panel-default">
-				<div class="panel-heading">Thêm những đứa trẻ mới</div>
+				<div class="panel-heading">Thêm đứa trẻ mới</div>
 			</hr>
 			<div class="panel-body">
 				<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostAdd') }}">

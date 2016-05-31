@@ -1,13 +1,13 @@
 @extends('admin')
-@section('title','Sửa thông tin những đứa trẻ')
+@section('title','Sửa thông tin đứa trẻ')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-init="data = {{json_encode($getchildById)}}">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Sửa thông tin những đứa trẻ</h1>
+			<h1>Sửa thông tin đứa trẻ</h1>
 			<hr/>
 			@include('message')
-			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostEdit') }}">
+			<form enctype="multipart/form-data" name="form" class="form-horizontal" role="form" method="POST" action="{{ route('childsAdPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số: </label>
@@ -17,39 +17,42 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Tên đứa trẻ: </label>
+					<label class="col-md-4 control-label">Họ tên: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="name" value="{{ old('name', $getchildById['name'])}}" required="">
+						<input type="text" class="form-control" name="name" ng-model="data.name" required="" minlength="6" maxlength="30">
+						<div ng-show="form.name.$touched" ng-messages="form.name.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Người dùng: </label>
 					<div class="col-md-6">
-						<select name="users_id" class="form-control">
-							@foreach($users as $user )
-							<option value="{{$user['id']}}"  @if($getchildById['users_id'] == $user['id']){{"selected"}}@endif>{{$user['name']}}</option>
-							@endforeach
+						<select name="users_id" class="form-control" ng-init="users = {{json_encode($users)}}">
+							<option ng-repeat="user in users" value="<%user.id%>" ng-selected="user.id == data.users_id"><%user.name%></option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Ngày sinh: </label>
 					<div class="col-md-6">
-						<input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $getchildById['date_of_birth'])}}" required="">
+						<input type="date" class="form-control" name="date_of_birth" required="" ng-model="data.date_of_birth">
+						<div ng-show="form.date_of_birth.$touched" ng-messages="form.date_of_birth.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-6">
-						<img src="{{ UPLOAD_FOLDER.old('image', $getchildById['image'])}}" width="200px" />
+						<img src="{{ CHILD_IMAGE }}<%data.image%> " width="200px">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Hình ảnh: </label>
 					<div class="col-md-6">
 						<input type="file" class="form-control" name="fImage">
-						<input type="hidden" class="form-control" name="image" value="{{ old('url', $getchildById['image'])}}" >
+						<input type="hidden" class="form-control" name="image" value="data.image" >
 					</div>
 				</div>
 				<div class="form-group">

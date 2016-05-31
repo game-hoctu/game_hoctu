@@ -1,10 +1,10 @@
 @extends('app')
-@section('title','Sửa thông tin những đứa trẻ')
+@section('title','Cập nhật thông tin đứa trẻ')
 @section('content')
 <div class="container" ng-app="game_hoctu">
 	<div class="row">
 		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-pencil"></span>Sửa thông tin những đứa trẻ</h1>
+			<h1><span class="glyphicon glyphicon-pencil"></span> Cập nhật thông tin đứa trẻ</h1>
 			<hr/>
 			@include('message')
 			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostEdit') }}">

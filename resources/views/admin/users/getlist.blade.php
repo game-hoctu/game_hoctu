@@ -62,7 +62,6 @@
                 <div ng-show="formadduser.email.$touched" ng-messages="formadduser.email.$error">
                   <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
                 </div>
-
               </div>
             </div>
             <div class="form-group">

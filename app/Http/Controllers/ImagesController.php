@@ -97,7 +97,7 @@ class ImagesController extends Controller {
             $des = 'public/upload/images';
             $img->move($des, $getimageById->url);
         }  
-         
+
         success("Đã sửa thành công!");
         return redirect()->action('ImagesController@adGetList');
     }
@@ -123,5 +123,18 @@ class ImagesController extends Controller {
         }
         return $data;
     }
-
+    function ajaxGetListByAlbums($albums_id){
+        $data['status'] = 'ERROR';
+        $images = new Images();
+        $result = $images->where('albums_id', $albums_id)->get();
+        if($result->count() > 0)
+        {
+            foreach ($result as $item) {
+                $item['url'] = UPLOAD_FOLDER.$item['url'];
+            }
+            $data['status'] = 'SUCCESS';
+            $data['info'] = $result;
+        }
+        return $data;
+    }
 }

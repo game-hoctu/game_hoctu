@@ -63,7 +63,7 @@ class ChildsController extends Controller {
 
 		if(Input::hasFile('fImage'))
 		{
-			$des = 'public/upload/images';
+			$des = 'public/upload/childs';
 			$img->move($des, $getchildById->image);
 		}
 
@@ -131,7 +131,7 @@ class ChildsController extends Controller {
 		$item->date_of_birth = $request->date_of_birth;
 		$item->image  = $img_name;
 		$item->save();
-		$des = 'public/upload/images';
+		$des = 'public/upload/childs';
 		$img->move($des, $img_name);
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@adGetList');
@@ -163,7 +163,7 @@ class ChildsController extends Controller {
 
 		if(Input::hasFile('fImage'))
 		{
-			$des = 'public/upload/images';
+			$des = 'public/upload/childs';
 			$img->move($des, $getchildById->image);
 		}
 

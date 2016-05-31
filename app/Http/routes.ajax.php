@@ -2,38 +2,37 @@
 
 //AJAX------------------------------------------------------------------------------------------
 Route::group(['prefix' => 'ajax'], function(){
-	Route::get('images/{albums_id}/list', function($albums_id){
-		$data['status'] = 'ERROR';
-		$images = new App\Images();
-		$result = $images->where('albums_id', $albums_id)->get();
-		if($result->count() > 0)
-		{
-			foreach ($result as $item) {
-				$item['url'] = UPLOAD_FOLDER.$item['url'];
-			}
-			$data['status'] = 'SUCCESS';
-			$data['info'] = $result;
-		}
-		return $data;
+	Route::group(['prefix' => 'images'], function(){
+		Route::get('{albums_id}/getListByAlbums', 'ImagesController@ajaxGetListByAlbums');
+		Route::get('getList', 'ImagesController@ajaxGetList');
 	});
-	Route::get('categories/getList', 'CategoriesController@ajaxGetList');
-	Route::get('users/getList', 'UsersController@ajaxGetList');
-	Route::get('images/getList', 'ImagesController@ajaxGetList');
 
+	Route::group(['prefix' => 'albums'], function(){
+		Route::get('{cates_id}/getListByCates', 'AlbumsController@ajaxGetListByCates');
+		Route::get('{users_id}/getListByUsers', 'AlbumsController@ajaxGetListByUsers');
+		Route::get('getList', 'AlbumsController@ajaxGetList');
+	});
 
-	Route::get('albums/categories/{cate_id}/list', 'AlbumsController@ajaxAlbumByCate');
-	Route::get('albums/users/{users_id}/list', 'AlbumsController@ajaxAlbumByUsers');
-	Route::get('albums/getList', 'AlbumsController@ajaxGetList');
+	Route::group(['prefix' => 'categories'], function(){
+		Route::get('getList', 'CategoriesController@ajaxGetList');
 
+	});
 
-	Route::get('childs/getListByUser/{users_id}', 'ChildsController@ajaxGetListByUser');
-	Route::get('childs/getDetailt/{childs_id}', 'ChildsController@ajaxDetail');
-	Route::get('childs/getList', 'ChildsController@ajaxGetList');
+	Route::group(['prefix' => 'users'], function(){
+		Route::get('getList', 'UsersController@ajaxGetList');
 
-	Route::get('results/addResult/{childs_id}/{images_id}/{word}/{correct}/{incorrect}', 'ResultsController@ajaxAddResult');
+	});
+	
+	Route::group(['prefix' => 'childs'], function(){
+		Route::get('{users_id}/getListByUser', 'ChildsController@ajaxGetListByUser');
+		Route::get('{childs_id}/detail', 'ChildsController@ajaxDetail');
+		Route::get('getList', 'ChildsController@ajaxGetList');
+	});
 
+	Route::group(['prefix' => 'results'], function(){
+		Route::get('add/{childs_id}/{images_id}/{word}/{correct}/{incorrect}', 'ResultsController@ajaxAdd');
+	});
 });
-
 
 
 Route::get('{any}', function(){

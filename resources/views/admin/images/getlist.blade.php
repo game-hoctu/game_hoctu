@@ -39,7 +39,7 @@
                 <td>
                   <button data-toggle="collapse" data-target="#image<%image.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
                   <div id="image<%image.id%>" class="collapse">
-                    <img src="{{UPLOAD_FOLDER}}<%image.url%>" width="300"/>
+                    <img src="{{CHILD_IMAGE}}<%image.url%>" width="300"/>
                   </div>
                 </td>
                 <td><%image.word%></td>

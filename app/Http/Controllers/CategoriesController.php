@@ -101,7 +101,7 @@ class CategoriesController extends Controller {
 
 
 	//Ajax--------------------------------------------------
-	function ajaxadGetList()
+	function ajaxGetList()
 	{
 		$data['status'] = "ERROR";
         $result = Categories::all();

@@ -1,13 +1,13 @@
 @extends('admin')
 @section('title','Sửa hình ảnh')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-init="data = {{json_encode($getimageById)}}">
 	<div class="row">
 		<div class="col-md-12">
 			<h1>Cập nhật hình ảnh</h1>
 			<hr/>
 			@include('message')
-			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostEdit') }}">
+			<form enctype="multipart/form-data" name="form" class="form-horizontal" role="form" method="POST" action="{{ route('imagesAdPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số: </label>
@@ -32,16 +32,17 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Từ ngữ: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="word" value="{{ old('word', $getimageById['word'])}}" required="">
+						<input type="text" class="form-control" name="word" value="{{ old('word', $getimageById['word'])}}" required="" ng-model="data.word">
+						<div ng-show="form.word.$touched" ng-messages="form.word.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Album: </label>
 					<div class="col-md-6">
-						<select name="albums_id" class="form-control">
-							@foreach($albums as $album )
-							<option value="{{$album['id']}}" @if($getimageById['albums_id'] == $album['id']){{"selected"}}@endif>{{$album['name']}}</option>
-							@endforeach
+						<select name="albums_id" class="form-control" ng-init="albums = {{json_encode($albums)}}">
+							<option ng-repeat="album in albums" value="<%album.id%>" ng-selected="album.id == data.albums_id"><%album.name%></option>
 						</select>
 					</div>
 				</div>

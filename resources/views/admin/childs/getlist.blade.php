@@ -32,7 +32,7 @@
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Tên đứa trẻ:</label>
+              <label class="col-md-4 control-label">Họ tên:</label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" required="" ng-model="name">
                 <div ng-show="form_childAdd.name.$touched" ng-messages="form_childAdd.name.$error">

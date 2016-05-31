@@ -232,10 +232,10 @@ class AlbumsController extends Controller {
 	}
 
 	//Ajax------------------------------------------------------
-	public function ajaxAlbumByCate($cate_id)
+	public function ajaxGetListByCates($cates_id)
 	{
 		$data['status'] = 'ERROR';
-		$albums = Albums::where('categories_id', $cate_id)->get();
+		$albums = Albums::where('categories_id', $cates_id)->get();
 		if($albums->count() > 0)
 		{
 			$data['status'] = 'SUCCESS';
@@ -244,7 +244,7 @@ class AlbumsController extends Controller {
 		return $data;
 	}
 
-	public function ajaxAlbumByUsers($users_id)
+	public function ajaxGetListByUsers($users_id)
 	{
 		$data['status'] = 'ERROR';
 		$albums = Albums::where('users_id', $users_id)->get();
