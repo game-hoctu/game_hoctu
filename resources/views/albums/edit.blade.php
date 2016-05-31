@@ -1,13 +1,13 @@
 @extends('app')
 @section('title','Sửa Album')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-init="data = {{json_encode($getalbumById)}}">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			@include('message')
 			<h1><span class="glyphicon glyphicon-pencil"></span>Sửa Album</h1>
 			<hr/>
-			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}">
+			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mã số: </label>
@@ -19,13 +19,19 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Tên Album: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="name" value="{{ old('name', $getalbumById['name'])}}" required="">
+						<input type="text" class="form-control" name="name" value="{{ old('name', $getalbumById['name'])}}" ng-model="data.name" required="" minlength="6">
+						<div ng-show="form_cateEdit.name.$touched" ng-messages="form_cateEdit.name.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Mô tả: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="description" value="{{ old('description', $getalbumById['description'])}}" required="">
+						<input type="text" class="form-control" name="description" value="{{ old('description', $getalbumById['description'])}}" ng-model='data.description' required="">
+						<div ng-show="form_cateEdit.description.$touched" ng-messages="form_cateEdit.description.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
 					</div>
 				</div>
 				<input type="hidden" class="form-control" name=users_id value="{{ old('users_id', $getalbumById['users_id'])}}">

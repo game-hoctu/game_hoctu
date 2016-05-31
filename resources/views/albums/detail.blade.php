@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header"><span class="glyphicon glyphicon-list-alt"></span>{{$data['name']}}
+			<h1 class="page-header"><span class="glyphicon glyphicon-list-alt"></span> {{$data['name']}}
 				<small>Chi tiết album</small>
 			</h1>
 			@include('message')
@@ -64,7 +64,7 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<h2><span class="glyphicon glyphicon-book"></span>Danh sách hình ảnh</h2>
+			<h2><span class="glyphicon glyphicon-book"></span> Danh sách hình ảnh</h2>
 			<div class="table-responsive">
 				<table class="table table-hover table-bordered table-striped">
 					<thead>

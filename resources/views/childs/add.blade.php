@@ -1,7 +1,7 @@
 @extends('app')
 @section('title','Thêm những đứa trẻ mới')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" >
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			@include('message')
@@ -9,7 +9,7 @@
 				<div class="panel-heading">Thêm đứa trẻ mới</div>
 			</hr>
 			<div class="panel-body">
-				<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostAdd') }}">
+				<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostAdd') }}" novalidate="">
 					<input type="hidden" name="_token" value="{!! csrf_token() !!}" >
 					<div class="form-group">
 						<label class="col-md-4 control-label">Tên đứa trẻ:</label>
@@ -43,7 +43,7 @@
 							<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
 								Thêm
 							</button>
-							<a class="btn btn-default" href="{{url('childs/')}}">Trở về</a>
+							<a class="btn btn-default" href="{{url('childs/myChild')}}">Trở về</a>
 						</div>
 					</div>
 				</form>
