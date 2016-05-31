@@ -27,7 +27,7 @@
 			<div class="album-item">
 
 				<a href="{{url('/childs/'.$item['id'].'/detail')}}">
-					<img class="album-image img-responsive img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="{{$item['name']}}">
+					<img class="album-image img-responsive img-hover" src="{{CHILD_IMAGE.$item['image']}}" alt="{{$item['name']}}" width="100%">
 				</a>
 
 				<div class="album-info">

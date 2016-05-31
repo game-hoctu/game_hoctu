@@ -141,3 +141,8 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('childs/{id}/adPostEdit',['as'=>'childsAdPostEdit','uses'=>'ChildsController@adPostEdit']);
 	Route::get('childs/{id}/adDelete','ChildsController@adDelete');
 });
+
+//Tim kiem 
+Route::get('search', function(){
+	return view('search');
+});

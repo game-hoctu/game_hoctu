@@ -122,11 +122,11 @@ app.controller('AlbumsController', function($scope, $http){
 		});
 	};
 
-	$scope.viewByCate = function(){
-		$scope.loadCate();
-	};
 	$scope.viewByUsers = function(){
 		$scope.loadUsers();
+	};
+	$scope.viewByCate = function(){
+		$scope.loadCate();
 	};
 
 	$scope.loadAlbumByCate = function(){
@@ -173,7 +173,7 @@ app.controller('ChildsController', function($scope, $http){
 	$scope.count = undefined;
 
 	$scope.loadAllChild = function(){
-		$scope.childs = undefined;
+		$scope.childs = undefined;  
 		$scope.count = undefined;
 
 		$http({
@@ -226,4 +226,67 @@ app.controller('ChildsController', function($scope, $http){
 			$scope.count = response.info.length;
 		});
 	};
+
+});
+
+app.controller('SearchController', function($scope, $http){
+	$scope.albums = undefined;
+
+	$scope.loadAllAlbums = function(){
+		$scope.albums = undefined;
+		$scope.count = undefined;
+		console.log($scope.insert);
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/albums/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.albums = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
+	$scope.loadAllAlbums();
+
+
+	$scope.loadAllChild = function(){
+		$scope.childs = undefined;  
+		$scope.count = undefined;
+
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/childs/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.childs = response.info;
+			}
+			$scope.count = response.info.length;
+		});
+	};
+	$scope.loadAllChild();
+
+	$scope.loadUsers = function(){
+		$scope.albums = undefined;
+		$scope.count = undefined;
+
+		$http({
+			method  : 'GET',
+			url     : SERVER_PATH + "ajax/users/getList",
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(response) {
+			console.log(response);
+			if(response.status == 'SUCCESS')
+			{
+				$scope.users = response.info;
+			}
+		});
+	};
+
+	$scope.loadUsers();
 });

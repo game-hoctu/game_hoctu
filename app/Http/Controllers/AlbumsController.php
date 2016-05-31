@@ -268,6 +268,7 @@ class AlbumsController extends Controller {
 			{
 				$image = Images::where('albums_id', $albums[$i]['id'])->get();
 				$albums[$i]['count'] = $image->count();
+				$albums[$i]['image'] = ALBUM_IMAGE.$albums[$i]['id'].".jpg";
 			}
 			$data['status'] = 'SUCCESS';
 			$data['info'] = $albums;
