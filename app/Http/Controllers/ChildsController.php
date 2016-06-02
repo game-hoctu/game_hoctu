@@ -237,7 +237,7 @@ class ChildsController extends Controller {
 		$child = new Childs(); 
 		$result = $child::find($id);
 		$urlAlbumImage = CHILD_IMAGE.$result['image'];
-		if(!File::exists($urlAlbumImage))
+		if($result['image']==null)
 		{
 			$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
 		}
