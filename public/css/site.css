@@ -21,8 +21,51 @@
 	text-shadow: 0px 0px 3px #111;
 }
 
+.search{
+	display: inline-table;
+	margin: 8px 10px;
+	max-width: 400px;
+	width: 100%;
+}
+
+.search-result{
+	width: 340px;
+	margin: 0px 10px;
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.search-result-header{
+	font-size: 12px;
+	color: #aaa;
+	background: #f5f5f5;
+	padding: 3px;
+}
+.search-page .form-control{
+	max-width: 100% !important;
+}
+
+.circle{
+	max-width: 150px;
+	background: #30a2ee;
+	border-radius: 50%;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+}
+
+.circle-100{
+	width: 100px;
+	height: 100px;
+}
+
+.circle-80{
+	width: 80px;
+	height: 80px;
+}
+
 @media only screen and (min-width: 768px) {
-    .form-control{
-    	max-width: 280px;
-    }
+	.form-control{
+		max-width: 300px;
+	}
 }

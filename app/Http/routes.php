@@ -49,7 +49,7 @@ Route::group(['prefix' => 'childs'], function(){
 	Route::get('{id}/edit','ChildsController@edit');
 	Route::post('{id}/postEdit',['as'=>'childsPostEdit','uses'=>'ChildsController@postEdit']);
 	Route::get('{id}/delete','ChildsController@delete');
-	//Route::get('detail','ChildsController@detail');
+	Route::get('{id}/detail','ChildsController@detail');
 });
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');
@@ -63,17 +63,18 @@ Route::group(['prefix' => 'albums'], function(){
 
 Route::group(['prefix' => 'categories'], function(){
 	Route::get('all', 'CategoriesController@all');
-	Route::get('/add','CategoriesController@add');
-	Route::post('/postAdd',['as'=>'catePostAdd','uses'=>'CategoriesController@postAdd']);
-	Route::get('/{id}/edit','CategoriesController@edit');
-	Route::post('/{id}/postEdit',['as'=>'catePostEdit','uses'=>'CategoriesController@postEdit']);
-	Route::get('/{id}/delete','CategoriesController@delete');
+	Route::get('add','CategoriesController@add');
+	Route::post('postAdd',['as'=>'catePostAdd','uses'=>'CategoriesController@postAdd']);
+	Route::get('{id}/edit','CategoriesController@edit');
+	Route::post('{id}/postEdit',['as'=>'catePostEdit','uses'=>'CategoriesController@postEdit']);
+	Route::get('{id}/delete','CategoriesController@delete');
 });	
 //chỉnh sửa thông tin cá nhân
 Route::group(['prefix' => 'users'], function(){
 	Route::get('myProfile','UsersController@myProfile');
-	Route::get('/{id}/edit','UsersController@edit');
-	Route::post('/{id}/postEdit',['as'=>'postedit','uses'=>'UsersController@postEdit']);
+	Route::get('{id}/edit','UsersController@edit');
+	Route::get('{id}/detail','UsersController@detail');
+	Route::post('{id}/postEdit',['as'=>'postedit','uses'=>'UsersController@postEdit']);
 });
 
 //ADMIN----------------------------------------------------------------------------------

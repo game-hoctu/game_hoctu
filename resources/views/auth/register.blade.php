@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title', 'Đăng ký tài khoản')
 @section('content')
 
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="RegisterController">

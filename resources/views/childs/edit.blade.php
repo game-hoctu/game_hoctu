@@ -38,7 +38,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-6">
-						<img src="{{ UPLOAD_FOLDER.old('image', $getchildById['image'])}}" width="200px" />
+						<img src="{{ old('image', $getchildById['image'])}}" width="200px" />
 					</div>
 				</div>
 				<div class="form-group">

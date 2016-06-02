@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 use App\User;
+use App\Albums;
+use App\Childs;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -27,6 +30,30 @@ class UsersController extends Controller {
         return view('users.edit')->with('getuserById', $getuserById);
 
     }
+    function detail($id)
+    {
+        $albumCtr = new AlbumsController();
+        $user = User::find($id);
+        if(is_null($user))
+        {
+            warning("Không tồn tại nội dung bạn muốn xem!");
+            return redirect()->action('HomeController@index');
+        }
+        $album = Albums::where('users_id', $id)->get()->toArray();
+        if(count($album) > 0)
+        {
+            for($i = 0; $i < count($album); $i++)
+            {
+                $album[$i] = $albumCtr->getInfo($album[$i]['id']);
+            }
+        }
+        $child = Childs::where('users_id', $id)->get()->toArray();
+        //debugArr($album);
+        // debugArr($child);
+        $data = ['user' => $user, 'album' => $album, 'child' => $child];
+        return view('users.detail', ['data' => $data]);
+    }
+
     public function postEdit(Request $request)
     {
         $allRequest = $request->all();
@@ -44,7 +71,7 @@ class UsersController extends Controller {
 
     public function myProfile()
     {
-    	return $this->callAction('edit', ['id' => Auth::user()->id]);
+    	return $this->callAction('detail', ['id' => Auth::user()->id]);
     }
 //ADMIN-----------------------------------------------------------------------------------
     public function adGetList()

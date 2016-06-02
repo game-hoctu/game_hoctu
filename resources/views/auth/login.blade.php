@@ -6,7 +6,7 @@
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="LoginController">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<h1>Đăng nhập</h1>
+			<h1><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</h1>
 			<hr/>
 			@include('message')
 			<form name="formLogin" class="form-horizontal" role="form" method="POST" action="{{ url('auth/login') }}" novalidate>

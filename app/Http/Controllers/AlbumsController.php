@@ -12,6 +12,7 @@ use App\Http\Requests\AlbumsRequest;
 use File;
 use Image;
 use Input;
+use App\Childs;
 class AlbumsController extends Controller {
 
 	public function index()
@@ -108,7 +109,7 @@ class AlbumsController extends Controller {
 		return redirect()->action('AlbumsController@myAlbum');
 	}
 
-	 function delete($id)
+	function delete($id)
 	{
 		$item = Albums::findOrFail($id);
 		$item->delete();
@@ -129,27 +130,52 @@ class AlbumsController extends Controller {
 			$result = $albums::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
 			for($i = 0; $i < count($result); $i++)
 			{
-				$urlAlbumImage = ALBUM_IMAGE.$result[$i]['id'].".jpg";
-				if(!File::exists($urlAlbumImage))
-				{
-					$image = Images::where('albums_id', $result[$i]['id'])->get()->toArray();
-					$numImage = count($image);
-					if($numImage > 0)
-					{
-						$imageName = UPLOAD_FOLDER.$image[0]['url'];
-						$path = public_path("/upload/albums/".$result[$i]['id'].".jpg");
-						Image::make($imageName)->resize(700, 400)->save($path);
-					}
-					else
-					{
-						$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
-					}
-				}
-				$result[$i]['image'] = $urlAlbumImage;
-				$result[$i]['count'] = $numImage;
+				// $urlAlbumImage = ALBUM_IMAGE.$result[$i]['id'].".jpg";
+				// if(!File::exists($urlAlbumImage))
+				// {
+				// 	$image = Images::where('albums_id', $result[$i]['id'])->get()->toArray();
+				// 	$numImage = count($image);
+				// 	if($numImage > 0)
+				// 	{
+				// 		$imageName = UPLOAD_FOLDER.$image[0]['url'];
+				// 		$path = public_path("/upload/albums/".$result[$i]['id'].".jpg");
+				// 		Image::make($imageName)->resize(700, 400)->save($path);
+				// 	}
+				// 	else
+				// 	{
+				// 		$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
+				// 	}
+				// }
+				$data = $this->autoloadImage($result[$i]['id']);
+				$result[$i]['image'] = $data['image'];
+				$result[$i]['count'] = $data['count'];
 			}
 			return view('albums.list', ['data' => $result]);
 		}
+	}
+
+	function autoloadImage($id)
+	{
+		$albums = new Albums(); 
+		$result = $albums::find($id)->toArray();
+		$urlAlbumImage = ALBUM_IMAGE.$result['id'].".jpg";
+		if(!File::exists($urlAlbumImage))
+		{
+			$image = Images::where('albums_id', $result['id'])->get()->toArray();
+			$numImage = count($image);
+			if($numImage > 0)
+			{
+				$imageName = UPLOAD_FOLDER.$image[0]['url'];
+				$path = public_path("/upload/albums/".$result['id'].".jpg");
+				Image::make($imageName)->resize(700, 400)->save($path);
+			}
+			else
+			{
+				$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
+			}
+		}
+		$data = ['image' => $urlAlbumImage, 'count' => $numImage];
+		return $data;
 	}
 
 	public function myAlbum()
@@ -167,6 +193,13 @@ class AlbumsController extends Controller {
 
 	function detail($albums_id)
 	{
+		$data = $this->getInfo($albums_id);
+		//debugArr($data);
+		return view('albums.detail',['data'=>$data]);
+	}
+
+	function getInfo($albums_id)
+	{
 		$model = new Albums();
 		$data = $model->find($albums_id)->toArray();
 		//Lấy thông tin categories của album
@@ -174,8 +207,10 @@ class AlbumsController extends Controller {
 		$data['users'] = User::where('id', $data['users_id'])->get()->first()->toArray();
 		//Lấy danh sách các image trong album
 		$data['images'] = Images::where('albums_id', $albums_id)->get()->toArray();
-		//debugArr($data);
-		return view('albums.detail',['data'=>$data]);
+		$result = $this->autoloadImage($albums_id);
+		$data['image'] = $result['image'];
+		$data['count'] = $result['count'];
+		return $data;
 	}
 
 
@@ -253,6 +288,51 @@ class AlbumsController extends Controller {
 		{
 			$data['status'] = 'SUCCESS';
 			$data['info'] = $albums;
+		}
+		return $data;
+	}
+	public function ajaxGetListByChilds($child_id)
+	{
+		$data['status'] = 'ERROR';
+		$child = Childs::find($child_id);
+		if(!is_null($child))
+		{
+			$albums = Albums::where('users_id', $child->users_id)->get();
+			$albumCount = $albums->count();
+			if($albumCount > 0)
+			{
+				for($i = 0; $i < $albumCount; $i++)
+				{
+					$image = Images::where('albums_id', $albums[$i]['id'])->get();
+					$albums[$i]['count'] = $image->count();
+					$albums[$i]['image'] = ALBUM_IMAGE.$albums[$i]['id'].".jpg";
+				}
+				$data['status'] = 'SUCCESS';
+				$data['info'] = $albums;
+			}
+		}
+		return $data;
+	}
+
+	public function ajaxGetListByNoChilds($child_id)
+	{
+		$data['status'] = 'ERROR';
+		$child = Childs::find($child_id);
+		if(!is_null($child))
+		{
+			$albums = Albums::where('users_id', '!=', $child->users_id)->get();
+			$albumCount = $albums->count();
+			if($albumCount > 0)
+			{
+				for($i = 0; $i < $albumCount; $i++)
+				{
+					$image = Images::where('albums_id', $albums[$i]['id'])->get();
+					$albums[$i]['count'] = $image->count();
+					$albums[$i]['image'] = ALBUM_IMAGE.$albums[$i]['id'].".jpg";
+				}
+				$data['status'] = 'SUCCESS';
+				$data['info'] = $albums;
+			}
 		}
 		return $data;
 	}

@@ -11,11 +11,6 @@
 	<!-- Custom Fonts -->
 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
-	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
-	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>
-	<script src="{{ asset('/public/js/app.js') }}"></script>
-	<script src="{{ asset('/public/js/config.js') }}"></script>
-
 </head>
 <body>
 	
@@ -31,7 +26,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index">Game Học Từ - Trang quản trị</a>
+				<a class="navbar-brand" href="index">KidLeen - Trang quản trị</a>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
@@ -80,6 +75,10 @@
 
 	</div>
 	<!-- /#wrapper -->
+	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
+	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>
+	<script src="{{ asset('/public/js/app.js') }}"></script>
+	<script src="{{ asset('/public/js/config.js') }}"></script>
 
 	<!-- jQuery -->
 	<script src="{{ asset('/public/js/jquery.js') }}"></script>

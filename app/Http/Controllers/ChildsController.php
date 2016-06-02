@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Childs;
 use App\User;
 use Auth;
+use File;
 use Input;
 class ChildsController extends Controller {
 
@@ -42,6 +43,7 @@ class ChildsController extends Controller {
 	{
 		$item = new Childs();
 		$getchildById = $item->find($id)->toArray();
+		$getchildById['image'] = $this->getImage($id);
 		return view('childs.edit')->with('getchildById',$getchildById);
 	}
 	function postEdit(Request $request)
@@ -77,6 +79,20 @@ class ChildsController extends Controller {
 		success("Đã xóa thành công!");
 		return redirect()->action('ChildsController@myChild');
 	}
+
+	function detail($id)
+	{
+		$child = Childs::find($id);
+		if(is_null($child))
+		{
+			warning("Không tìm thấy nội dung bạn muốn xem!");
+			return redirect()->action('HomeController@index');
+		}
+		$user = User::find($child->users_id);
+		$data = ['child' => $child->toArray(), 'user' => $user->toArray()];
+		//debugArr($data);
+		return view('childs.detail', ['data' => $data]);
+	}
 	//AJAX------------------------------------------------------------------------------
 	//Lấy danh sách child theo user id
 	function ajaxGetListByUser($users_id)
@@ -95,8 +111,13 @@ class ChildsController extends Controller {
 	{
 		$data['status'] = "ERROR";
 		$result = Childs::all();
-		if($result->count() > 0)
+		if(!is_null($result))
 		{
+			
+			for($i = 0; $i < count($result); $i++)
+			{
+				$result[$i]['image'] = $this->getImage($result[$i]['id']);
+			}
 			$data['status'] = "SUCCESS";
 			$data['info'] = $result;
 		}
@@ -108,7 +129,7 @@ class ChildsController extends Controller {
 	{
 		$data['status'] = "ERROR";
 		$result = Childs::find($childs_id);
-		if($result->count() > 0)
+		if(!is_null($result))
 		{
 			$data['status'] = "SUCCESS";
 			$data['info'] = $result;
@@ -202,7 +223,24 @@ class ChildsController extends Controller {
 		{
 			$child = new Childs(); 
 			$result = $child::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
+			$count = count($result);
+			for($i = 0; $i < $count; $i++)
+			{
+				$result[$i]['image'] = $this->getImage($result[$i]['id']);
+			}
 			return view('childs.list', ['data' => $result]);
 		}
+	}
+
+	function getImage($id)
+	{
+		$child = new Childs(); 
+		$result = $child::find($id);
+		$urlAlbumImage = CHILD_IMAGE.$result['image'];
+		if(!File::exists($urlAlbumImage))
+		{
+			$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
+		}
+		return $urlAlbumImage;
 	}
 }

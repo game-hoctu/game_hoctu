@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder {
 	{
 		//Model::unguard();
 
-		// $this->call('UsersSeeder');
-		// $this->call('CategoriesSeeder');
-		// $this->call('AlbumsSeeder');
-		// $this->call('ImagesSeeder');
+		$this->call('UsersSeeder');
+		$this->call('CategoriesSeeder');
+		$this->call('AlbumsSeeder');
+		//$this->call('ImagesSeeder');
 		$this->call('ChildsSeeder');
 	}
 
@@ -73,15 +73,15 @@ class ChildsSeeder extends Seeder{
 	public function run()
 	{
 		DB::table('childs')->insert([
-			['name'=>'Bảo Trân', 'users_id'=>'1'],
-			['name'=>'Bảo Khánh', 'users_id'=>'1'],
-			['name'=>'Bảo Kiệt', 'users_id'=>'2'],
-			['name'=>'Bảo Vệ', 'users_id'=>'2'],
-			['name'=>'Bảo Bọc', 'users_id'=>'2'],
-			['name'=>'Bảo Trợ', 'users_id'=>'3'],
-			['name'=>'Bảo Là Phải Nghe', 'users_id'=>'3'],
-			['name'=>'Bảo Kiếm', 'users_id'=>'4'],
-			['name'=>'Bảo Việt Nhân Thọ', 'users_id'=>'4']
+			['name'=>'Bảo Trân', 'users_id'=>'1', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Khánh', 'users_id'=>'1', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Kiệt', 'users_id'=>'2', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Vệ', 'users_id'=>'2', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Bọc', 'users_id'=>'2', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Trợ', 'users_id'=>'3', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Là Phải Nghe', 'users_id'=>'3', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Kiếm', 'users_id'=>'4', 'date_of_birth' => '2006-3-8'],
+			['name'=>'Bảo Việt Nhân Thọ', 'users_id'=>'4', 'date_of_birth' => '2006-3-8']
 			]);
 	}
 }

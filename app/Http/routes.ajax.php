@@ -10,6 +10,8 @@ Route::group(['prefix' => 'ajax'], function(){
 	Route::group(['prefix' => 'albums'], function(){
 		Route::get('{cates_id}/getListByCates', 'AlbumsController@ajaxGetListByCates');
 		Route::get('{users_id}/getListByUsers', 'AlbumsController@ajaxGetListByUsers');
+		Route::get('{child_id}/getListByChilds', 'AlbumsController@ajaxGetListByChilds');
+		Route::get('{child_id}/getListByNoChilds', 'AlbumsController@ajaxGetListByNoChilds');
 		Route::get('getList', 'AlbumsController@ajaxGetList');
 		//Route::get('search', 'AlbumsController@ajaxGetList');
 	});

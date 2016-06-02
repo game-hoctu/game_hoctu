@@ -54,17 +54,16 @@
 			<h5><span class="glyphicon glyphicon-tag"></span> Mô tả: {{$data['description']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$data['users']['name']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{count($data['images'])}}</h5>
-			@if(Auth::user()->id == $data['users']['id'])
-
-				<a href="{{url('albums/'.$data['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-				<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('albums/'.$data['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+			@if(!Auth::guest() && Auth::user()->id == $data['users']['id'])
+			<a href="{{url('albums/'.$data['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+			<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('albums/'.$data['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
 			@endif
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<h2><span class="glyphicon glyphicon-book"></span> Danh sách hình ảnh</h2>
+			<h2><span class="glyphicon glyphicon-list"></span> Danh sách hình ảnh</h2>
 			<div class="table-responsive">
 				<table class="table table-hover table-bordered table-striped">
 					<thead>
@@ -88,8 +87,10 @@
 							</td>
 							<td>{{strtoupper($image['word'])}}</td>
 							<td>
+								@if(!Auth::guest() && Auth::user()->id == $data['users']['id'])
 								<a href="{{url('/images/'.$image['id'].'/edit')}}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
 								<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('/images/'.$image['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+								@endif
 							</td>
 						</tr>
 						@endforeach	

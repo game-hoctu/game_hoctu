@@ -14,8 +14,8 @@ class InsertColumnChils extends Migration {
 	{
 		Schema::table('childs', function(Blueprint $table)
 		{
-			$table->date('date_of_birth')->nullable->change();
-			$table->string('image')->nullable;
+			$table->date('date_of_birth')->nullable();
+			$table->string('image')->nullable();
 		});
 	}
 
