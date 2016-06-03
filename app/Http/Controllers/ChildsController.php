@@ -15,10 +15,10 @@ class ChildsController extends Controller {
 	function test()
 	{
 		$child = Childs::find(1);
-		foreach($child->images as $image)
-		{
-			echo $image->word;
-		}
+		// foreach($child->images as $image)
+		// {
+		// 	echo $image->word;
+		// }
 	}
 
 	function add()
