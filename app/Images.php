@@ -12,6 +12,6 @@ class Images extends Model {
 	}
 	public function childs()
 	{
-		return $this->belongsToMany('App\Childs');
+		return $this->belongsToMany('App\Childs', 'results', 'childs_id', 'images_id');
 	}
 }
