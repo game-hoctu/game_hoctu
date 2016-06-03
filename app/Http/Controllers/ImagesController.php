@@ -4,7 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Images;
 use App\Albums;
+use App\Categories;
 use Input;
+use Image;
 use Illuminate\Http\Request;
 
 class ImagesController extends Controller {
@@ -44,6 +46,43 @@ class ImagesController extends Controller {
         $item->delete();
         success("Đã xóa thành công!");
         return redirect()->action('AlbumsController@detail');
+    }
+
+    function addByAlbums($albums_id)
+    {
+        $albums = Albums::find($albums_id);
+        $albums['cates'] = Categories::find($albums['categories_id']);
+        return view('images.addbyalbums', ['albums' => $albums->toArray()]);
+    }
+    function postAddByAlbums(Request $request)
+    {
+        $words = Input::all()['words'];
+        $albums_id = $request->albums_id;
+        if(Input::hasFile('fImage'))
+        {
+            $i = 0;
+            foreach(Input::file('fImage') as $img) {
+                $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+                $path = public_path('/upload/images/' . $img_name);
+                Image::make($img->getRealPath())->resize(700, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path);
+                $item = new Images();
+                $item->url  = $img_name;
+                $item->word = strtoupper($words[$i]);
+                $item->albums_id = $albums_id;
+                $item->save();
+                if($i == 0)
+                {
+                    $imageName = UPLOAD_FOLDER.$img_name;
+                    $path = public_path("/upload/albums/".$albums_id.".jpg");
+                    Image::make($imageName)->resize(350, 200)->save($path);
+                }
+                $i++;
+            }
+        }
+        success("Đã cập nhật thành công!");
+        return redirect()->action('AlbumsController@myAlbum');
     }
 
 //ADMIN----------------------------------------------------------------------------------------

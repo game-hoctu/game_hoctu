@@ -1,11 +1,11 @@
 @extends('app')
 @section('title','Sửa Album')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu" ng-init="data = {{json_encode($getalbumById)}}">
+<div class="container" ng-app="game_hoctu" ng-init="data = {{json_encode($getalbumById)}}">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-12">
 			@include('message')
-			<h1><span class="glyphicon glyphicon-pencil"></span>Sửa Album</h1>
+			<h1><span class="glyphicon glyphicon-pencil"></span> Sửa Album</h1>
 			<hr/>
 			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
@@ -37,11 +37,9 @@
 				<input type="hidden" class="form-control" name=users_id value="{{ old('users_id', $getalbumById['users_id'])}}">
 				<div class="form-group">
 					<label class="col-md-4 control-label">Thể loại: </label>
-					<div class="col-md-6">
+					<div class="col-md-6" ng-init="cates = {{json_encode($cates)}}">
 						<select name="categories_id" class="form-control">
-							@foreach($cates as $cate )
-							<option value="{{$cate['id']}}">{{$cate['name']}}</option>
-							@endforeach
+							<option value="<%cate.id%>" ng-repeat="cate in cates" ng-selected="cate.id == data.categories_id"><%cate.name%></option>
 						</select>
 					</div>
 				</div>

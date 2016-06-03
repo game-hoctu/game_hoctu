@@ -1,75 +1,97 @@
 @extends('app')
 @section('title','Thêm album mới')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container" ng-controller="AlbumsController">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-12">
 			@include('message')
-			<div class="panel panel-default">
-				<div class="panel-heading">Thêm Album</div>
-			</hr>
-			<div class="panel-body">
-				<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostAdd') }}" novalidate>
-					<input type="hidden" name="_token" value="{!! csrf_token() !!}" >
-					<div class="form-group">
-						<label class="col-md-4 control-label">Tên album:</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="name"  ng-model="name" required="" minlength="6">
-							<div ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
-								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+			<h1><span class="glyphicon glyphicon-picture"></span> Thêm mới album ảnh</h1>
+			<hr/>
+			<form enctype="multipart/form-data" name="form_AbAdd" method="POST" action="{{ route('albumsPostAdd') }}">
+				<input type="hidden" name="_token" value="{!! csrf_token() !!}" >	
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-horizontal" role="form" >
+							<div class="form-group">
+								<label class="control-label col-sm-4">Tên album:</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="name"  ng-model="name" required="" minlength="6" placeholder="Nhập tên album...">
+									<div class="input-error" ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
+										<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-4">Mô tả:</label>
+								<div class="col-sm-8">
+									<div class="input-error" ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
+										<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+									</div>
+									<input type="text" class="form-control" name="description" ng-model="description" required="" minlength="6" placeholder="Nhập mô tả album...">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-4">Thể loại:</label>
+								<div class="col-sm-8">
+									<select name="categories_id" class="form-control">
+										@foreach($cates as $cate )
+										<option value="{{$cate['id']}}">{{$cate['name']}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-8 col-md-offset-4">
+									<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
+										Tạo album
+									</button>
+									<a class="btn btn-default" href="{{url('albums/')}}">Trở về</a>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Mô tả:</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="description" ng-model="description" required="" minlength="6">
-							<div ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
-								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+
+					<div class="col-sm-8">
+						<div class="row">
+							<div class="col-sm-12">
+								<a class="btn btn-info addImage">
+									<span class="glyphicon glyphicon-plus"></span> Thêm ảnh
+								</a>
+								<span>Dự kiến thêm <span class="numImg">0</span> hình ảnh</span>
+							</div>
+
+							<div class="col-sm-12">
+								<hr/>
+								<div class="panel-image"></div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Thể loại:</label>
-						<div class="col-md-6">
-							<select name="categories_id" class="form-control">
-								@foreach($cates as $cate )
-								<option value="{{$cate['id']}}">{{$cate['name']}}</option>
-								@endforeach
-							</select>
+					
+				</div>
+			</form>
+				<!-- @for($i=1; $i <= 2; $i++)
+				<div class="form-group">
+					<label class="col-md-4 control-label">Hình ảnh {{$i}}:</label>
+					<div class="col-md-6">
+						<input type="file" accept="image/*" class="form-control" name="fImage[]" ng-model="fImage{{$i}}">
+						<div ng-show="form_AbAdd.fImage{{$i}}.$touched" ng-messages="form_AbAdd.fImage{{$i}}.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 						</div>
 					</div>
-					@for($i=1; $i <= 2; $i++)
-					<div class="form-group">
-						<label class="col-md-4 control-label">Hình ảnh {{$i}}:</label>
-						<div class="col-md-6">
-							<input type="file" accept="image/*" class="form-control" name="fImage[]" ng-model="fImage{{$i}}">
-							<div ng-show="form_AbAdd.fImage{{$i}}.$touched" ng-messages="form_AbAdd.fImage{{$i}}.$error">
-								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-							</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Từ ngữ {{$i}}:</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="words[]" ng-model="word{{$i}}" required="">
+						<div ng-show="form_AbAdd.word{{$i}}.$touched" ng-messages="form_AbAdd.word{{$i}}.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Từ ngữ {{$i}}:</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="words[]" ng-model="word{{$i}}" required="">
-							<div ng-show="form_AbAdd.word{{$i}}.$touched" ng-messages="form_AbAdd.word{{$i}}.$error">
-								<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-							</div>
-						</div>
-					</div>
-					@endfor
-					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
-								Thêm
-							</button>
-							<a class="btn btn-default" href="{{url('albums/')}}">Trở về</a>
-						</div>
-					</div>
-				</form>
+				</div>
+				@endfor -->
+				
+
 			</div>
 		</div>
 	</div>
-</div>
-@endsection
+	@endsection

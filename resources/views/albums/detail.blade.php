@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-7">
+		<div class="col-md-6">
 			<div id="listImage" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<?php $i = 0; $active="active";?>
@@ -32,7 +32,7 @@
 					@foreach($data['images'] as $image)
 					<?php $url = $image['url'];?>
 					<div class="item {{$active}}">
-						<img src="{{UPLOAD_FOLDER.$url}}" class="img-responsive" alt="{{$image['word']}}" width="768" height="1024">
+						<img src="{{UPLOAD_FOLDER.$url}}" class="img-responsive" alt="{{$image['word']}}">
 						<div class="carousel-caption">
 							<h2>{{strtoupper($image['word'])}}</h2>
 						</div>
@@ -49,12 +49,14 @@
 				</a>
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<h2>{{$data['name']}}</h2>
 			<h5><span class="glyphicon glyphicon-tag"></span> Mô tả: {{$data['description']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$data['users']['name']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{count($data['images'])}}</h5>
+			<h5><span class="glyphicon glyphicon-tag"></span> Thể loại: {{$data['categories']['name']}}</h5>
 			@if(!Auth::guest() && Auth::user()->id == $data['users']['id'])
+			<a href="{{url('images/'.$data['id'].'/addByAlbums')}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-picture"></span> Thêm ảnh</a>
 			<a href="{{url('albums/'.$data['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
 			<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('albums/'.$data['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
 			@endif
@@ -82,7 +84,7 @@
 							<td>
 								<button data-toggle="collapse" data-target="#image{{$image['id']}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon glyphicon-eye-open"></span> Xem hình ảnh</button>
 								<div id="image{{$image['id']}}" class="collapse">
-									<img src="{{UPLOAD_FOLDER}}{{$image['url']}}" width="300"/>
+									<img src="{{UPLOAD_FOLDER}}{{$image['url']}}" width="150"/>
 								</div>
 							</td>
 							<td>{{strtoupper($image['word'])}}</td>

@@ -8,7 +8,7 @@
 			<hr/>
 		</div>
 		<div class="col-md-6">
-			<img src="{{CHILD_IMAGE.$data['child']['images']}}" class="img-responsive">
+			<img src="{{$data['child']['image']}}" class="img-responsive">
 			<h4>Họ tên: {{$data['child']['name']}}</h4>
 			<h4>Ngày sinh: {{$data['child']['date_of_birth']}}</h4>
 			<h4>Cha mẹ: {{$data['user']['name']}}</h4>

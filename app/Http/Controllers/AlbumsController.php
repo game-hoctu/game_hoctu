@@ -44,7 +44,8 @@ class AlbumsController extends Controller {
 	{
 		if(Auth::guest())
 		{
-			return view('auth.login', ['requestLogin' => 'true']);
+			warning("Bạn cần phải đăng nhập!");
+			return view('auth.login');
 		}
 		else
 		{
@@ -62,17 +63,19 @@ class AlbumsController extends Controller {
 				foreach(Input::file('fImage') as $img) {
 					$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
 					$path = public_path('/upload/images/' . $img_name);
-					Image::make($img->getRealPath())->save($path);
+					Image::make($img->getRealPath())->resize(700, null, function ($constraint) {
+						$constraint->aspectRatio();
+					})->save($path);
 					$item = new Images();
 					$item->url  = $img_name;
-					$item->word = $words[$i];
+					$item->word = strtoupper($words[$i]);
 					$item->albums_id = $albums_id;
 					$item->save();
 					if($i == 0)
 					{
 						$imageName = UPLOAD_FOLDER.$img_name;
 						$path = public_path("/upload/albums/".$albums_id.".jpg");
-						Image::make($imageName)->resize(700, 400)->save($path);
+						Image::make($imageName)->resize(350, 200)->save($path);
 					}
 					$i++;
 				}

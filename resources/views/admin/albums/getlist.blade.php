@@ -1,7 +1,7 @@
 @extends('admin')
 @section('title', 'Quản lý các album')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu" ng-controller="AlbumsController">
+<div class="container-fluid" ng-app="game_hoctu" ng-controller="AlbumsController" ng-init="loadAllAlbums()">
   <div class="row">
     <div class="col-md-12">
       <h1>Danh sách album</h1>

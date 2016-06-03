@@ -7,8 +7,19 @@ use App\Childs;
 use App\User;
 use Auth;
 use File;
+use Image;
 use Input;
+
 class ChildsController extends Controller {
+
+	function test()
+	{
+		$child = Childs::find(1);
+		foreach($child->images as $image)
+		{
+			echo $image->word;
+		}
+	}
 
 	function add()
 	{
@@ -23,7 +34,11 @@ class ChildsController extends Controller {
 	}
 	function postAdd(Request $request)
 	{
-		$img = $request->file('fImage');
+		if(Input::hasFile('fImage'))
+		{
+			$img = $request->file('fImage');
+		}	
+
 		$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
 		
 		$item = new Childs();
@@ -32,9 +47,11 @@ class ChildsController extends Controller {
 		$item->image  = $img_name;
 		$item->users_id = Auth::user()->id;
 		$item->save();
-
-		$des = 'public/upload/images';
-		$img->move($des, $img_name);
+		if(Input::hasFile('fImage'))
+		{
+			$path = public_path('/upload/childs/' . $img_name);
+			Image::make($img->getRealPath())->resize(350, 200)->save($path);
+		}
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@myChild');
 	}
@@ -65,8 +82,8 @@ class ChildsController extends Controller {
 
 		if(Input::hasFile('fImage'))
 		{
-			$des = 'public/upload/childs';
-			$img->move($des, $getchildById->image);
+			$path = public_path('/upload/childs/' . $getchildById->image);
+			Image::make($img->getRealPath())->resize(350, 200)->save($path);
 		}
 
 		success("Đã sửa thành công!");
@@ -89,6 +106,7 @@ class ChildsController extends Controller {
 			return redirect()->action('HomeController@index');
 		}
 		$user = User::find($child->users_id);
+		$child['image'] = $this->getImage($id);
 		$data = ['child' => $child->toArray(), 'user' => $user->toArray()];
 		//debugArr($data);
 		return view('childs.detail', ['data' => $data]);
@@ -228,6 +246,7 @@ class ChildsController extends Controller {
 			{
 				$result[$i]['image'] = $this->getImage($result[$i]['id']);
 			}
+			//debugArr($result);
 			return view('childs.list', ['data' => $result]);
 		}
 	}
@@ -235,12 +254,11 @@ class ChildsController extends Controller {
 	function getImage($id)
 	{
 		$child = new Childs(); 
-		$result = $child::find($id);
-		$urlAlbumImage = CHILD_IMAGE.$result['image'];
-		if(!File::exists($urlAlbumImage))
+		$result = $child::find($id)->toArray();
+		if(is_null($result['image']))
 		{
-			$urlAlbumImage = SERVER_PATH."/public/images/no-image.png";
+			return SERVER_PATH."public/images/no-image.png";
 		}
-		return $urlAlbumImage;
+		return CHILD_IMAGE.$result['image'];
 	}
 }

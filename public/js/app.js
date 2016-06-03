@@ -67,7 +67,7 @@ app.controller("ImagesController", function($scope, $http){
 
 app.controller('AlbumsController', function($scope, $http){
 	$scope.albums = undefined;
-
+	
 	$scope.loadAllAlbums = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
@@ -86,7 +86,7 @@ app.controller('AlbumsController', function($scope, $http){
 		});
 	};
 
-	$scope.loadAllAlbums();
+	//$scope.loadAllAlbums();
 
 	$scope.loadCate = function(){
 		$scope.albums = undefined;
@@ -165,7 +165,6 @@ app.controller('AlbumsController', function($scope, $http){
 			$scope.count = response.info.length;
 		});
 	};
-
 });
 
 app.controller('ChildsController', function($scope, $http){

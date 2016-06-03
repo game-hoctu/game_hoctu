@@ -39,6 +39,8 @@ Route::group(['prefix' => 'images'], function(){
 		echo json_encode(['info' => $data]);
 	});
 	Route::get('{id}/edit','ImagesController@edit');
+	Route::get('{albums_id}/addByAlbums','ImagesController@addByAlbums');
+	Route::post('{albums_id}/postAddByAlbums',['as'=>'imagesPostAddByAlbums', 'uses' => 'ImagesController@postAddByAlbums']);
 	Route::post('{id}/postEdit',['as'=>'imagesPostEdit','uses'=>'ImagesController@postEdit']);
 	Route::get('{id}/delete','ImagesController@delete');
 });
@@ -50,6 +52,7 @@ Route::group(['prefix' => 'childs'], function(){
 	Route::post('{id}/postEdit',['as'=>'childsPostEdit','uses'=>'ChildsController@postEdit']);
 	Route::get('{id}/delete','ChildsController@delete');
 	Route::get('{id}/detail','ChildsController@detail');
+	Route::get('test','ChildsController@test');
 });
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');

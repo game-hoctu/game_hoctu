@@ -10,5 +10,8 @@ class Images extends Model {
 	{
 		return $this->belongsTo("App\Albums");
 	}
-
+	public function childs()
+	{
+		return $this->belongsToMany('App\Childs');
+	}
 }

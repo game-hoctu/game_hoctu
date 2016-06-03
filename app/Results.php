@@ -7,11 +7,12 @@ class Results extends Model {
 	//
 	protected $table = 'results';
 	protected $fillable = ['childs_id','images_id','word', 'correct', 'incorrect'];
-	protected $primaryKey = ['childs_id','images_id'];
+	
 	public function childs()
 	{
 		return $this->belongsTo("App\Childs");
 	}
+
 	public function images()
 	{
 		return $this->belongsTo("App\Images");

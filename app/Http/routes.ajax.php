@@ -33,7 +33,8 @@ Route::group(['prefix' => 'ajax'], function(){
 	});
 
 	Route::group(['prefix' => 'results'], function(){
-		Route::get('add/{childs_id}/{images_id}/{word}/{correct}/{incorrect}', 'ResultsController@ajaxAdd');
+		Route::get('add', 'ResultsController@ajaxAddResult');
+		Route::get('{result}/add', 'ResultsController@ajaxAdd');
 	});
 });
 
