@@ -19,20 +19,20 @@
 	<div class="row">
 		<div class="col-md-4 img-portfolio">
 			<a href="{{url('albums/add')}}">
-				<img class="img-responsive img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="">
+				<img class="img-responsive img-thumbnail img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="">
 			</a>
 		</div>
 		@foreach($data as $item)
 		<div class="col-md-4 img-portfolio album-item">
 			<a href="{{url('/albums/'.$item['id'].'/detail')}}">
-				<img class="album-image img-responsive img-hover" src="{{$item['image']}}" alt="{{$item['name']}}">
+				<img class="album-image img-responsive img-thumbnail img-hover" src="{{$item['image']}}" alt="{{$item['name']}}">
 			</a>
 			<div class="album-info">
 				<h2>
-					<a href="{{url('/albums/'.$item['id'].'/detail')}}">{{$item['name']}}</a>
+					<a href="{{url('/albums/'.$item['id'].'/detail')}}"><span class="glyphicon glyphicon-picture"></span> {{$item['name']}}</a>
 				</h2>
-				<p>{{$item['description']}}</p>
-				<p>Số lượng ảnh: {{$item['count']}}</p>
+				<p><span class="glyphicon glyphicon-list"></span> {{$item['description']}}</p>
+				<p><span class="glyphicon glyphicon-list"></span> Số lượng ảnh: {{$item['count']}}</p>
 			</div>
 		</div>
 		@endforeach

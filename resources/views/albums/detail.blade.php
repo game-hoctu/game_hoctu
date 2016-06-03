@@ -32,7 +32,7 @@
 					@foreach($data['images'] as $image)
 					<?php $url = $image['url'];?>
 					<div class="item {{$active}}">
-						<img src="{{UPLOAD_FOLDER.$url}}" class="img-responsive" alt="{{$image['word']}}">
+						<img src="{{UPLOAD_FOLDER.$url}}" class="img-thumbnail img-responsive" alt="{{$image['word']}}">
 						<div class="carousel-caption">
 							<h2>{{strtoupper($image['word'])}}</h2>
 						</div>
@@ -84,7 +84,7 @@
 							<td>
 								<button data-toggle="collapse" data-target="#image{{$image['id']}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon glyphicon-eye-open"></span> Xem hình ảnh</button>
 								<div id="image{{$image['id']}}" class="collapse">
-									<img src="{{UPLOAD_FOLDER}}{{$image['url']}}" width="150"/>
+									<img src="{{UPLOAD_FOLDER}}{{$image['url']}}" class="img-thumbnail" width="150"/>
 								</div>
 							</td>
 							<td>{{strtoupper($image['word'])}}</td>

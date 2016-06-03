@@ -4,7 +4,7 @@
 <div class="container" ng-app="game_hoctu">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Thêm hình ảnh</h1>
+			<h1><span class="glyphicon glyphicon-picture"></span> Thêm hình ảnh vào album</h1>
 			<hr/>
 			@include('message')
 			<div class="row">
@@ -31,22 +31,18 @@
 									<input type="text" class="form-control" name="description" value="{{$albums['cates']['name']}}" required="" minlength="6" placeholder="Nhập mô tả album..." disabled="">
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-md-8 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										Cập nhật
-									</button>
-									<a class="btn btn-default" href="{{url('albums/')}}">Trở về</a>
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="col-md-8">
 
 						<div class="row">
 							<div class="col-sm-12">
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-edit"></span> Cập nhật
+								</button>
+								<a class="btn btn-info" href="{{url('albums/')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
 								<a class="btn btn-info addImage">
-									<span class="glyphicon glyphicon-plus"></span> Thêm ảnh
+									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>
 								<span>Dự kiến thêm <span class="numImg">0</span> hình ảnh</span>
 							</div>

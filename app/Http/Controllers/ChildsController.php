@@ -7,19 +7,12 @@ use App\Childs;
 use App\User;
 use Auth;
 use File;
+use App\Results;
+use App\Images;
 use Image;
 use Input;
 
 class ChildsController extends Controller {
-
-	function test()
-	{
-		$child = Childs::find(1);
-		foreach($child->images as $image)
-		{
-			echo $image->pivot->word;
-		}
-	}
 
 	function add()
 	{
@@ -107,8 +100,19 @@ class ChildsController extends Controller {
 		}
 		$user = User::find($child->users_id);
 		$child['image'] = $this->getImage($id);
-		$data = ['child' => $child->toArray(), 'user' => $user->toArray()];
-		//debugArr($data);
+		$results = Results::where('childs_id', $id)->orderBy('created_at','desc')->get()->toArray();
+		$score = 0;
+		for($i = 0; $i < count($results); $i++)
+		{
+			$results[$i]['url'] = Images::select('url')->where('id', $results[$i]['images_id'])->get()->first()->toArray()['url'];
+			if(strlen($results[$i]['incorrect']) != 10)
+			{
+				$score += strlen($results[$i]['correct']);
+			}
+			
+		}
+		$data = ['child' => $child->toArray(), 'user' => $user->toArray(), 'results' => $results, 'score' => $score];
+		// debugArr($data);
 		return view('childs.detail', ['data' => $data]);
 	}
 	//AJAX------------------------------------------------------------------------------

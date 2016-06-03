@@ -48,6 +48,11 @@ class UsersController extends Controller {
             }
         }
         $child = Childs::where('users_id', $id)->get()->toArray();
+        for($i = 0; $i < count($child); $i++)
+        {
+            $childCtr = new ChildsController();
+            $child[$i]["image"] = $childCtr->getImage($child[$i]['id']);
+        }
         //debugArr($album);
         // debugArr($child);
         $data = ['user' => $user, 'album' => $album, 'child' => $child];

@@ -46,34 +46,37 @@ class ResultsController extends Controller {
 		echo $child;
 	}
 
-	function ajaxAdd($result)
+	function ajaxAdd($jsonStr)
 	{
-		//echo $result;
-		$json = json_decode($result, true);
-		foreach($json["info"] as $data)
+		$added = 0;
+		$response["status"] = "ERROR";
+		$jsonArr = json_decode($jsonStr, true);
+		$totalItem = count($jsonArr["info"]);
+		$childs = Childs::find($jsonArr["childs_id"]);
+		foreach ($childs->images as $image) {
+			$image->delete();
+			$image->save();
+		}
+		foreach($jsonArr["info"] as $data)
 		{
-			$result = new Results();
-			$child = Childs::find($data["childs_id"])->toArray();
-			$image = Images::find($data["images_id"])->toArray();
-			$checkResult = Results::where('childs_id', $data["childs_id"])->where('images_id', $data["images_id"])->get()->toArray();
-			if(count($child) != 0 && count($image) != 0)
+			$image = Images::find($data["images_id"]);
+			if(!is_null($image))
 			{
-				if(count($checkResult) == 0)
-				{
-					$result->childs_id = $data["childs_id"];
-					$result->images_id = $data["images_id"];
-					$result->word = $data["word"];
-					$result->correct = $data["correct"];
-					$result->incorrect = $data["incorrect"];
-					$result->save();
-				}
-				else
-				{
-
-				}
+				$record = new Results();
+				$record->childs_id = $jsonArr["childs_id"];
+				$record->images_id = $data["images_id"];
+				$record->word = $data["word"];
+				$record->correct = $data["correct"];
+				$record->incorrect = $data["incorrect"];
+				$record->save();
+				$added++;
 			}
 		}
-		return "OK";
+		if($added == $totalItem)
+		{
+			$response = ["status" => "SUCCESS", "message" => "Added $added item!"];
+		}
+		return json_encode($response);
 	}
 
 }

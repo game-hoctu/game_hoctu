@@ -52,7 +52,6 @@ Route::group(['prefix' => 'childs'], function(){
 	Route::post('{id}/postEdit',['as'=>'childsPostEdit','uses'=>'ChildsController@postEdit']);
 	Route::get('{id}/delete','ChildsController@delete');
 	Route::get('{id}/detail','ChildsController@detail');
-	Route::get('test','ChildsController@test');
 });
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');
