@@ -109,8 +109,8 @@
                 <th >Mã số</th>
                 <th>Tên album</th>
                 <th>Mô tả</th>
-                <th>Thời gian tạo</th>
-                <th>Thời gian cập nhật</th>
+                <th>Tạo lúc</th>
+                <th>Cập nhật lúc</th>
                 <th>Hành động</th>
               </tr>
             </thead>

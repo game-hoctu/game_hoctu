@@ -32,8 +32,8 @@
                 <th>Mã số</th>
                 <th>Hình ảnh</th>
                 <th>Từ ngữ</th>
-                <th>Thời gian tạo</th>
-                <th>Thời gian cập nhật</th>
+                <th>Tạo lúc</th>
+                <th>Cập nhật lúc</th>
                 <th>Hành động</th>
               </tr>
               <tr ng-repeat="image in images | filter:search">

@@ -102,8 +102,8 @@
             <th>Tên trẻ</th>
             <th>Ngày sinh</th>
             <th>Hình ảnh</th>
-            <th>Thời gian tạo</th>
-            <th>Thời gian cập nhật</th>
+            <th>Tạo lúc</th>
+            <th>Cập nhật lúc</th>
             <th>Hành động</th>
           </tr>
           <tr ng-repeat="child in childs | filter:search">
