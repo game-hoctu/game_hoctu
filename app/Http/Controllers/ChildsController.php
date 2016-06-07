@@ -265,7 +265,7 @@ class ChildsController extends Controller {
 	{
 		$child = new Childs(); 
 		$result = $child::find($id)->toArray();
-		if(is_null($result['image']))
+		if($result['image'] == "")
 		{
 			return SERVER_PATH."public/images/no-image.png";
 		}
