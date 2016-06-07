@@ -51,6 +51,15 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-md-4 control-label">Giới tính: </label>
+					<div class="col-md-6">
+						<select name="sex" class="form-control">
+							<option value="0" ng-selected="data.sex == 0">Nam</option>
+							<option value="1" ng-selected="data.sex == 1">Nữ</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
 						<button ng-disabled="formRegister.$invalid || register.password != register.password_confirmation" type="submit" class="btn btn-primary">
 							Đăng ký

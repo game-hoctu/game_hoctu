@@ -4,7 +4,7 @@
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="AlbumsController" ng-init="loadAllAlbums()">
   <div class="row">
     <div class="col-md-12">
-      <h1>Danh sách album</h1>
+      <h1><span class="glyphicon glyphicon-list-alt"></span> Quản lý album</h1>
       <hr/>
       @include('message')
       <ul class="nav nav-tabs">

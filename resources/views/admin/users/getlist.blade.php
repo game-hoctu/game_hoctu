@@ -4,7 +4,7 @@
 <div class="container-fluid" ng-app="game_hoctu">
   <div class="row">
     <div class="col-md-12">
-      <h1>Quản lý người dùng</h1>
+      <h1><span class="glyphicon glyphicon-tasks"></span> Quản lý người dùng</h1>
       <hr/>
       @include('message')
       <ul class="nav nav-tabs">
@@ -23,9 +23,10 @@
                   <th>Mã số</th>
                   <th>Email</th>
                   <th>Họ tên</th>
+                  <th>Giới tính</th>
                   <th>Địa chỉ</th>
-                  <th>Thời gian tạo</th>
-                  <th>Thời gian cập nhật</th>
+                  <th>Tạo lúc</th>
+                  <th>Cập nhật lúc</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
@@ -34,6 +35,10 @@
                   <td><%item.id%></td>
                   <td><%item.email%></td>
                   <td><%item.name%></td>
+                  <td>
+                    <span ng-show="item.sex == 0">Nam</span>
+                    <span ng-show="item.sex == 1">Nữ</span>
+                  </td>
                   <td><%item.address%></td>
                   <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
                   <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
@@ -57,6 +62,16 @@
                 <div ng-show="formadduser.name.$touched" ng-messages="formadduser.name.$error">
                   <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
                 </div>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Giới tính: </label>
+              <div class="col-md-6">
+                <select name="sex" class="form-control">
+                  <option value="0">Nam</option>
+                  <option value="1">Nữ</option>
+                </select>
 
               </div>
             </div>

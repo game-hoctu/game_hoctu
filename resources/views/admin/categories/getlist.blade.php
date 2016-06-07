@@ -4,7 +4,7 @@
 <div class="container-fluid" ng-app="game_hoctu">
   <div class="row">
     <div class="col-md-12">
-      <h1>Quản lý thể loại</h1>
+      <h1><span class="glyphicon glyphicon-th-list"></span> Quản lý thể loại</h1>
       <hr/>
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Danh sách thể loại</a></li>
@@ -20,8 +20,8 @@
               <tr class="active">
                 <th>Mã số</th>
                 <th>Tên album</th>
-                <th>Thời gian tạo</th>
-                <th>Thời gian cập nhật</th>
+                <th>Tạo lúc</th>
+                <th>Cập nhật lúc</th>
                 <th>Hành động</th>
               </tr>
               <tr ng-repeat="item in data | filter:search">

@@ -4,7 +4,7 @@
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="ChildsController">
   <div class="row">
     <div class="col-md-12">
-      <h1>Danh sách những đứa trẻ</h1>
+      <h1><span class="glyphicon glyphicon-leaf"></span> Quản lý những đứa trẻ</h1>
       <hr/>
       @include('message')
       <ul class="nav nav-tabs">
@@ -72,12 +72,12 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Giới tính:</label>
+              <label class="col-md-4 control-label">Giới tính: </label>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="sex" required="" ng-model="sex">
-                <div ng-show="form_childAdd.sex.$touched" ng-messages="form_childAdd.sex.$error">
-                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-                </div>
+                <select name="sex" class="form-control">
+                  <option value="0">Nam</option>
+                  <option value="1">Nữ</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
@@ -101,6 +101,7 @@
             <th>Mã số</th>
             <th>Tên trẻ</th>
             <th>Ngày sinh</th>
+            <th>Giới tính</th>
             <th>Hình ảnh</th>
             <th>Tạo lúc</th>
             <th>Cập nhật lúc</th>
@@ -110,6 +111,10 @@
             <td><%child.id%></td>
             <td><%child.name%></td>
             <td><%child.date_of_birth%></td>
+            <td>
+              <span ng-show="child.sex == 0">Nam</span>
+              <span ng-show="child.sex == 1">Nữ</span>
+            </td>
             <td>
               <button data-toggle="collapse" data-target="#child<%child.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
               <div id="child<%child.id%>" class="collapse">

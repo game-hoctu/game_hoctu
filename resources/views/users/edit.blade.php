@@ -34,14 +34,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label">Vai trò:</label>
-                    <div class="col-md-6">
-                        <select name="role" class="form-control">
-                            <option value="1" selected="">Người dùng thường</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-4 control-label">Địa chỉ:</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="address" value="{{ old('address', $getuserById['address'])}}" required="">

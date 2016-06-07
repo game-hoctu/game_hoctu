@@ -37,7 +37,11 @@
 						</div>
 						<div class="col-sm-8">
 							<h4><%child.name%></h4>
-							<p><%child.date_of_birth%></p>
+							<p><%child.date_of_birth | asDate | date:'dd/MM/yyyy' %></p>
+							<p>
+								<span ng-show="child.sex == 0">Nam</span>
+								<span ng-show="child.sex == 1">Nữ</span>
+							</p>
 						</div>
 					</div>
 				</a>

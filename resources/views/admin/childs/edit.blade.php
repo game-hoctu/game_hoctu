@@ -43,9 +43,18 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-md-4 control-label">Giới tính: </label>
+					<div class="col-md-6">
+						<select name="sex" class="form-control">
+							<option value="0" ng-selected="data.sex == 0">Nam</option>
+							<option value="1" ng-selected="data.sex == 1">Nữ</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-6">
-						<img src="{{ CHILD_IMAGE }}<%data.image%> " width="200px">
+						<img src="<%data.image%> " width="200px">
 					</div>
 				</div>
 				<div class="form-group">
@@ -53,15 +62,6 @@
 					<div class="col-md-6">
 						<input type="file" class="form-control" name="fImage">
 						<input type="hidden" class="form-control" name="image" value="data.image" >
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label">Giới tính: </label>
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="sex" required="" ng-model="data.sex">
-						<div ng-show="form.sex.$touched" ng-messages="form.sex.$error">
-							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-						</div>
 					</div>
 				</div>
 				<div class="form-group">

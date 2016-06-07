@@ -4,7 +4,7 @@
 <div class="container-fluid" ng-app="game_hoctu" ng-controller="ImagesController">
   <div class="row">
     <div class="col-md-12">
-      <h1>Quản lý hình ảnh</h1>
+      <h1><span class="glyphicon glyphicon-picture"></span> Quản lý hình ảnh</h1>
       <hr/>
       @include('message')
       <ul class="nav nav-tabs">

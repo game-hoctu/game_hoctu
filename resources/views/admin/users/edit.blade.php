@@ -31,18 +31,27 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Quyền: </label>
+					<label class="col-md-4 control-label">Giới tính: </label>
 					<div class="col-md-6">
-						<select name="role" class="form-control">
-							<option value="1" ng-selected="data.role == 1">Người dùng thường</option>
-							<option value="3" ng-selected="data.role == 3">Quản trị viên</option>
+						<select name="sex" class="form-control">
+							<option value="0" ng-selected="data.sex == 0">Nam</option>
+							<option value="1" ng-selected="data.sex == 1">Nữ</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Địa chỉ: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" disabled="" name="address" value="{{ old('address', $getuserById['address'])}}" required="">
+						<input type="text" class="form-control" name="address" value="{{ old('address', $getuserById['address'])}}" required="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Quyền: </label>
+					<div class="col-md-6">
+						<select name="role" class="form-control">
+							<option value="1" ng-selected="data.role == 1">Người dùng thường</option>
+							<option value="3" ng-selected="data.role == 3">Quản trị viên</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">

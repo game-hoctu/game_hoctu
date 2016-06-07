@@ -11,6 +11,10 @@
 			<img src="{{$data['child']['image']}}" class="img-responsive img-thumbnail">
 			<h4>Họ tên: {{$data['child']['name']}}</h4>
 			<h4>Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h4>
+			<h4>Giới tính:
+				<span ng-show="{{$data['child']['sex']}}== 0">Nam</span>
+				<span ng-show="{{$data['child']['sex']}} == 1">Nữ</span>
+			</h4>
 			<h4>Cha mẹ: {{$data['user']['name']}}</h4>
 			<h4>Tổng số điểm hiện tại: {{$data['score']}}</h4>
 		</div>

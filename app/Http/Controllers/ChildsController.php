@@ -188,6 +188,7 @@ class ChildsController extends Controller {
 		$users = User::all()->toArray();
 		$item = new Childs();
 		$getchildById = $item->find($id)->toArray();
+		$getchildById['image'] = $this->getImage($id);
 		return view('admin.childs.edit', compact('users', 'cates'))->with('getchildById',$getchildById);
 	}
 	public function adPostEdit(Request $request)

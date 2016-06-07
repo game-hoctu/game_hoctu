@@ -69,7 +69,7 @@ class UsersController extends Controller {
         $item = new User();
         $getuserById = $item->find($idcate);
         $getuserById->name = $name;
-        $getuserById->role = $role;
+       // $getuserById->role = $role;
         $getuserById->address= $address;
         $getuserById->save();
         success("Đã sửa thành công!");
