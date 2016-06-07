@@ -64,11 +64,13 @@ class UsersController extends Controller {
         $allRequest = $request->all();
         $name = $allRequest['name'];
         $role = $allRequest['role'];
+        $address = $allRequest['address'];
         $idcate = $allRequest['id'];
         $item = new User();
         $getuserById = $item->find($idcate);
         $getuserById->name = $name;
         $getuserById->role = $role;
+        $getuserById->address= $address;
         $getuserById->save();
         success("Đã sửa thành công!");
         return redirect()->action('UsersController@edit');
@@ -92,6 +94,7 @@ class UsersController extends Controller {
         $item->email = $request->email;
         $item->password = Hash::make($request->password);
         $item->role = $request->role;
+        $item->address = $request->address;
         //$user->remember_token = $request->_token;
         $item->save();
         success("Đã thêm thành công!");
@@ -108,11 +111,13 @@ class UsersController extends Controller {
         $allRequest = $request->all();
         $name = $allRequest['name'];
         $role = $allRequest['role'];
+        $address = $allRequest['address'];
         $idcate = $allRequest['id'];
         $item = new User();
         $getuserById = $item->find($idcate);
         $getuserById->name = $name;
         $getuserById->role = $role;
+        $getuserById->address = $address;
         $getuserById->save();
         success("Đã sửa thành công!");
         return redirect()->action('UsersController@adGetList');

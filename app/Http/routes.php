@@ -80,22 +80,22 @@ Route::group(['prefix' => 'users'], function(){
 });
 
 //ADMIN----------------------------------------------------------------------------------
-Route::get('admin', function(){
-	if(Auth::guest())
-	{
-		warning("Bạn cần phải đăng nhập để sử dụng chức năng này!");
-		return view('auth.login');
-	}
-	elseif(Auth::user()->role < 3)
-	{
-		warning("Bạn không có quyền sử dụng chức năng này!");
-		return redirect()->action('HomeController@index');
-	}
-	else
-	{
-		return view('admin.index');
-	}	
-});
+// Route::get('admin', function(){
+// 	if(Auth::guest())
+// 	{
+// 		warning("Bạn cần phải đăng nhập để sử dụng chức năng này!");
+// 		return view('auth.login');
+// 	}
+// 	elseif(Auth::user()->role < 3)
+// 	{
+// 		warning("Bạn không có quyền sử dụng chức năng này!");
+// 		return redirect()->action('HomeController@index');
+// 	}
+// 	else
+// 	{
+// 		return view('admin.index');
+// 	}	
+//});
 Route::group(['prefix' => 'admin'], function(){
 	Route::get('index',function(){
 		if(Auth::guest())

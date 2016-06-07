@@ -23,6 +23,7 @@
                   <th>Mã số</th>
                   <th>Email</th>
                   <th>Họ tên</th>
+                  <th>Địa chỉ</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
@@ -31,6 +32,7 @@
                   <td><%item.id%></td>
                   <td><%item.email%></td>
                   <td><%item.name%></td>
+                  <td><%item.address%></td>
                   <td>
                     <a href="users/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                     <a href="users/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
@@ -82,6 +84,15 @@
                   <option value="3">Quản trị viên</option>
                 </select>
 
+              </div>
+            </div>
+            <div class="form-group">
+            <label class="col-md-4 control-label">Địa chỉ: </label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="address" required="" ng-model="address">
+                <div ng-show="formadduser.address.$touched" ng-messages="formadduser.address.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
               </div>
             </div>
             <div class="form-group">

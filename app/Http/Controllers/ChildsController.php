@@ -38,6 +38,7 @@ class ChildsController extends Controller {
 		$item->name = $request->name;
 		$item->date_of_birth = $request->date_of_birth;
 		$item->image  = $img_name;
+		$item->sex = $request->sex;
 		$item->users_id = Auth::user()->id;
 		$item->save();
 		if(Input::hasFile('fImage'))
@@ -66,11 +67,13 @@ class ChildsController extends Controller {
 		$image = $allRequest['image'];
 		$name = $allRequest['name'];
 		$date_of_birth = $allRequest['date_of_birth'];
+		$sex = $allRequest['sex'];
 		$idchild = $allRequest['id'];
 		$item = new Childs();
 		$getchildById = $item->find($idchild);
 		$getchildById->name = $name;
 		$getchildById->date_of_birth = $date_of_birth;
+		$getchildById->sex = $sex;
 		$getchildById->save();
 
 		if(Input::hasFile('fImage'))

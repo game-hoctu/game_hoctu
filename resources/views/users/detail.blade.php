@@ -19,6 +19,7 @@
 				<div class="col-sm-9">
 					<h4>{{$data['user']['name']}}</h4>
 					<h4>{{$data['user']['email']}}</h4>
+					<h4>{{$data['user']['address']}}</h4>
 					@if(!Auth::guest() && Auth::user()->id == $data['user']['id'])
 					<a href="{{url('users/'.$data['user']['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Cập nhật</a>
 					@endif

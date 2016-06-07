@@ -56,6 +56,15 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-md-4 control-label">Giới tính: </label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="sex" required="" ng-model="data.sex">
+						<div ng-show="form.sex.$touched" ng-messages="form.sex.$error">
+							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
 						<button type="submit" class="btn btn-primary">
 							Sửa
