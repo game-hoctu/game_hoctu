@@ -27,8 +27,8 @@
               <tr ng-repeat="item in data | filter:search">
                 <td><%item.id%></td>
                 <td><%item.name%></td>
-                <td><%item.created_at%></td>
-                <td><%item.updated_at%></td>
+                <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                  <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
                 <td>
                   <a href="categories/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                   <a href="categories/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>

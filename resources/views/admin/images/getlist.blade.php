@@ -45,8 +45,8 @@
                   </div>
                 </td>
                 <td><%image.word%></td>
-                <td><%item.created_at%></td>
-                <td><%item.updated_at%></td>
+                <td><%image.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                  <td><%image.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
                 <td>
                   <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                   <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>

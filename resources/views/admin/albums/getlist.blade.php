@@ -119,8 +119,8 @@
                 <td><%album.id%></td>
                 <td><%album.name%></td>
                 <td><%album.description%></td>
-                <td><%item.created_at%></td>
-                <td><%item.updated_at%></td>
+                <td><%album.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                <td><âlbum.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
                 <td>
                   <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                   <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
