@@ -2,6 +2,11 @@ var app = angular.module('game_hoctu', ['ngMessages'], function($interpolateProv
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 });
+app.filter("asDate", function () {
+	return function (input) {
+		return new Date(input);
+	}
+});
 app.controller('LoginController',function($scope){
 
 });

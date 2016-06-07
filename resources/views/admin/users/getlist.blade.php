@@ -35,8 +35,8 @@
                   <td><%item.email%></td>
                   <td><%item.name%></td>
                   <td><%item.address%></td>
-                  <td><%item.created_at%></td>
-                  <td><%item.updated_at%></td>
+                  <td><%item.created_at | asDate | date:'dd/MM/yyyy'%></td>
+                  <td><%item.updated_at | asDate | date:'dd/MM/yyyy'%></td>
                   <td>
                     <a href="users/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                     <a href="users/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
