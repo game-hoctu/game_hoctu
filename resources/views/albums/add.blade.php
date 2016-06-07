@@ -57,7 +57,6 @@
 								<a class="btn btn-info addImage">
 									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>
-								<span>Dự kiến thêm <span class="numImg">0</span> hình ảnh</span>
 							</div>
 
 							<div class="col-sm-12">
