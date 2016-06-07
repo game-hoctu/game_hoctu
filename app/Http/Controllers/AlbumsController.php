@@ -276,7 +276,7 @@ class AlbumsController extends Controller {
 	public function ajaxGetListByCates($cates_id)
 	{
 		$data['status'] = 'ERROR';
-		$albums = Albums::where('categories_id', $cates_id)->get();
+		$albums = Albums::where('categories_id', $cates_id)->orderBy('id','desc')->get();
 		if($albums->count() > 0)
 		{
 			$data['status'] = 'SUCCESS';
@@ -288,7 +288,7 @@ class AlbumsController extends Controller {
 	public function ajaxGetListByUsers($users_id)
 	{
 		$data['status'] = 'ERROR';
-		$albums = Albums::where('users_id', $users_id)->get();
+		$albums = Albums::where('users_id', $users_id)->orderBy('id','desc')->get();
 		$albumCount = $albums->count();
 		if($albumCount > 0)
 		{
@@ -303,7 +303,7 @@ class AlbumsController extends Controller {
 		$child = Childs::find($child_id);
 		if(!is_null($child))
 		{
-			$albums = Albums::where('users_id', $child->users_id)->get();
+			$albums = Albums::where('users_id', $child->users_id)->orderBy('id','desc')->get();
 			$albumCount = $albums->count();
 			if($albumCount > 0)
 			{
@@ -326,7 +326,7 @@ class AlbumsController extends Controller {
 		$child = Childs::find($child_id);
 		if(!is_null($child))
 		{
-			$albums = Albums::where('users_id', '!=', $child->users_id)->get();
+			$albums = Albums::where('users_id', '!=', $child->users_id)->orderBy('id','desc')->get();
 			$albumCount = $albums->count();
 			if($albumCount > 0)
 			{
@@ -352,7 +352,7 @@ class AlbumsController extends Controller {
 		{
 			for($i = 0; $i < $albumCount; $i++)
 			{
-				$image = Images::where('albums_id', $albums[$i]['id'])->get();
+				$image = Images::where('albums_id', $albums[$i]['id'])->orderBy('created_at', 'desc')->get();
 				$albums[$i]['count'] = $image->count();
 				$albums[$i]['image'] = ALBUM_IMAGE.$albums[$i]['id'].".jpg";
 			}

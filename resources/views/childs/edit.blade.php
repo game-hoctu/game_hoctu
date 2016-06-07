@@ -3,9 +3,8 @@
 @section('content')
 <div class="container" ng-app="game_hoctu"  ng-init="data = {{json_encode($getchildById)}}">
 	<div class="row">
-		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-pencil"></span> Cập nhật thông tin đứa trẻ</h1>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar"><span class="glyphicon glyphicon-pencil"></span> Cập nhật thông tin đứa trẻ</h1>
 			@include('message')
 			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
@@ -57,20 +56,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Giới tính: </label>
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="sex" value="{{ old('sex', $getchildById['sex'])}}" required="" ng-model="data.sex">
-						<div ng-show="form_cateEdit.sex.$touched" ng-messages="form_cateEdit.sex.$error">
-							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('childs/myChild')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('childs/'.$getchildById['id'].'/detail')}}">Trở về</a>
 					</div>
 				</div>
 			</form>

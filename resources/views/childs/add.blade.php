@@ -3,9 +3,8 @@
 @section('content')
 <div class="container" ng-app="game_hoctu" >
 	<div class="row">
-		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-plus"></span> Thêm một đứa trẻ</h1>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar"><span class="glyphicon glyphicon-plus"></span> Thêm một đứa trẻ</h1>
 			@include('message')
 
 			<form enctype="multipart/form-data" name="form_AbAdd" class="form-horizontal" role="form" method="POST" action="{{ route('childsPostAdd') }}" novalidate="">
@@ -22,7 +21,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Ngày sinh:</label>
 					<div class="col-md-6">
-						<input type="date" class="form-control" name="date_of_birth" required="" ng-model="date_of_birth">
+						<input type="date" class="form-control" name="date_of_birth" required="" ng-model="date_of_birth"  min="2002-01-01" max="2012-01-01">
 						<div ng-show="form_childAdd.date_of_birth.$touched" ng-messages="form_childAdd.date_of_birth.$error">
 							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 						</div>
@@ -38,12 +37,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Giới tính:</label>
+					<label class="col-md-4 control-label">Giới tính: </label>
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="sex" required="" ng-model="sex">
-						<div ng-show="form_childAdd.sex.$touched" ng-messages="form_childAdd.sex.$error">
-							<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
-						</div>
+						<select name="sex" class="form-control">
+							<option value="0" ng-selected="data.sex == 0">Nam</option>
+							<option value="1" ng-selected="data.sex == 1">Nữ</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Phòng Trưng Bày
+		<div class="col-sm-12">
+			<h1 class="page-header title-bar">Phòng Trưng Bày
 				<small>Albums của tôi!</small>
 			</h1>
 			<ol class="breadcrumb">

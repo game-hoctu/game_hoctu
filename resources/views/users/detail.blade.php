@@ -3,9 +3,8 @@
 @section('content')
 <div class="container" ng-init="childs = {{json_encode($data['child'])}}">
 	<div class="row">
-		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-user"></span> Thông tin người dùng</h1>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar"><span class="glyphicon glyphicon-user"></span> Thông tin người dùng</h1>
 		</div>
 		<div class="col-md-6">
 			<h3><span class="glyphicon glyphicon-list"></span> Thông tin</h3>

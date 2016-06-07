@@ -1,12 +1,11 @@
 @extends('app')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container" ng-app="game_hoctu">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-sm-12">
 			@include('message')
 			<div class="panel panel-default">
 				<div class="panel-heading">Thêm Thể Loại</div>
-				</hr>
 				<div class="panel-body">
 						<form name="form_Add" class="form-horizontal" role="form" method="POST" action="{{ route('cate_postadd') }}">
 							<input type="hidden" name="_token" value="{!! csrf_token() !!}" novalidate>

@@ -3,20 +3,24 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-leaf"></span> Thông tin đứa trẻ</h1>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar"><span class="glyphicon glyphicon-leaf"></span> Thông tin đứa trẻ</h1>
 		</div>
 		<div class="col-md-5">
 			<img src="{{$data['child']['image']}}" class="img-responsive img-thumbnail">
-			<h4>Họ tên: {{$data['child']['name']}}</h4>
-			<h4>Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h4>
-			<h4>Giới tính:
+			<h4><span class="glyphicon glyphicon-tag"></span> Họ tên: {{$data['child']['name']}}</h4>
+			<h4><span class="glyphicon glyphicon-tag"></span>
+			Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h4>
+			<h4><span class="glyphicon glyphicon-tag"></span> Giới tính:
 				<span ng-show="{{$data['child']['sex']}}== 0">Nam</span>
 				<span ng-show="{{$data['child']['sex']}} == 1">Nữ</span>
 			</h4>
-			<h4>Cha mẹ: {{$data['user']['name']}}</h4>
-			<h4>Tổng số điểm hiện tại: {{$data['score']}}</h4>
+			<h4><span class="glyphicon glyphicon-tag"></span> Cha mẹ: {{$data['user']['name']}}</h4>
+			<h4><span class="glyphicon glyphicon-tag"></span> Tổng số điểm hiện tại: {{$data['score']}}</h4>
+			<h4>
+				<a href="{{url('childs/'.$data['child']['id'].'/edit')}}" class="btn btn-success btn"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+				<a href="{{url('childs/'.$data['child']['id'].'/delete')}}" class="btn btn-danger btn" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
+			</h4>
 		</div>
 		<div class="col-md-7">
 			@if(count($data['results']) > 0)

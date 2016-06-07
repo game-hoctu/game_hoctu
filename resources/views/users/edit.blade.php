@@ -1,11 +1,10 @@
 @extends('app')
 @section('title','Sủa thông tin cá nhân')
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Thông tin cá nhân</h1>
-            <hr/>
+        <div class="col-sm-12">
+            <h1 class="title-bar">Thông tin cá nhân</h1>
             @include('message')
 
             <form class="form-horizontal" role="form" method="POST" action="{{ route('postedit') }}">
@@ -31,6 +30,15 @@
                         <input type="text" class="form-control" name="name" value="{{ old('name', $getuserById['name'])}}" required="">
                         <!--<label class="label label-danger">{!! $errors->first('txttenalbum') !!}</label>-->
 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Giới tính: </label>
+                    <div class="col-md-6">
+                        <select name="role" class="form-control">
+                            <option value="0" ng-selected="data.sex == 0">Nam</option>
+                            <option value="1" ng-selected="data.sex == 1">Nữ</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

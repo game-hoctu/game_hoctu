@@ -5,8 +5,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			@include('message')
-			<h1><span class="glyphicon glyphicon-picture"></span> Thêm mới album ảnh</h1>
-			<hr/>
+			<h1 class="title-bar"><span class="glyphicon glyphicon-picture"></span> Thêm mới album</h1>
 			<form enctype="multipart/form-data" name="form_AbAdd" method="POST" action="{{ route('albumsPostAdd') }}">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}" >	
 				<div class="row">
@@ -45,7 +44,7 @@
 									<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
 										<span class="glyphicon glyphicon-save"></span> Tạo album
 									</button>
-									<a class="btn btn-default" href="{{url('albums/')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
+									<a class="btn btn-default" href="{{url('albums/myAlbum')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
 								</div>
 							</div>
 						</div>

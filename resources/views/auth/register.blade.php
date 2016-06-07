@@ -3,10 +3,10 @@
 @section('title', 'Đăng ký tài khoản')
 @section('content')
 
-<div class="container-fluid" ng-app="game_hoctu" ng-controller="RegisterController">
+<div class="container" ng-app="game_hoctu" ng-controller="RegisterController">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<h1>Đăng ký</h1>
+		<div class="col-sm-12">
+			<h1 class="title-bar">Đăng ký</h1>
 			<hr/>
 			<form name="formRegister" class="form-horizontal" role="form" method="POST" action="{{ url('auth/register') }}" novalidate>
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -59,6 +59,15 @@
 						</select>
 					</div>
 				</div>
+				 <div class="form-group">
+              <label class="col-md-4 control-label">Địa chỉ: </label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="address" required="" ng-model="address">
+                <div ng-show="formadduser.address.$touched" ng-messages="formadduser.address.$error">
+                  <div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
+                </div>
+              </div>
+            </div>
 				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
 						<button ng-disabled="formRegister.$invalid || register.password != register.password_confirmation" type="submit" class="btn btn-primary">

@@ -3,9 +3,8 @@
 @section('content')
 <div class="container" ng-app="game_hoctu">
 	<div class="row">
-		<div class="col-md-12">
-			<h1><span class="glyphicon glyphicon-picture"></span> Thêm hình ảnh vào album</h1>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar"><span class="glyphicon glyphicon-picture"></span> Thêm hình ảnh</h1>
 			@include('message')
 			<div class="row">
 				<form enctype="multipart/form-data" name="form" class="form-horizontal" role="form" method="POST" action="{{ route('imagesPostAddByAlbums') }}" novalidate="">
@@ -40,7 +39,7 @@
 								<button type="submit" class="btn btn-primary">
 									<span class="glyphicon glyphicon-edit"></span> Cập nhật
 								</button>
-								<a class="btn btn-info" href="{{url('albums/')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
+								<a class="btn btn-info" href="{{url('albums/'.$albums['id'].'/detail')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
 								<a class="btn btn-info addImage">
 									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>

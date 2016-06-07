@@ -3,9 +3,8 @@
 @section('content')
 <div class="container" ng-app="game_hoctu" ng-init="data = {{json_encode($getimageById)}}">
 	<div class="row">
-		<div class="col-md-12">
-			<h2>Cập nhật hình ảnh</h2>
-			<hr/>
+		<div class="col-sm-12">
+			<h1 class="title-bar">Cập nhật hình ảnh</h1>
 			@include('message')
 			<form enctype="multipart/form-data" name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('imagesPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}" >
@@ -53,7 +52,7 @@
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('albums/myAlbum')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('albums/'.$album['id'].'/detail')}}">Trở về</a>
 					</div>
 				</div>
 			</form>

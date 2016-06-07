@@ -4,9 +4,8 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header"><span class="glyphicon glyphicon-leaf"></span> Những đứa trẻ
-				<small>Danh sách</small>
+		<div class="col-sm-12">
+			<h1 class="page-header title-bar"><span class="glyphicon glyphicon-leaf"></span> Những đứa trẻ
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="/">Trang chủ</a>

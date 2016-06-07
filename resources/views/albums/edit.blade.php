@@ -3,10 +3,9 @@
 @section('content')
 <div class="container" ng-app="game_hoctu" ng-init="data = {{json_encode($getalbumById)}}">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-sm-12">
 			@include('message')
-			<h1><span class="glyphicon glyphicon-pencil"></span> Sửa Album</h1>
-			<hr/>
+			<h1 class="title-bar"><span class="glyphicon glyphicon-pencil"></span> Sửa Album</h1>
 			<form name="form_cateEdit" class="form-horizontal" role="form" method="POST" action="{{ route('albumsPostEdit') }}" novalidate="">
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
@@ -48,7 +47,7 @@
 						<button type="submit" class="btn btn-primary">
 							Sửa
 						</button>
-						<a class="btn btn-default" href="{{url('albums/myAlbum')}}">Trở về</a>
+						<a class="btn btn-default" href="{{url('albums/'.$getalbumById['id'].'/detail')}}">Trở về</a>
 					</div>
 				</div>
 			</form>
