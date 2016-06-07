@@ -38,8 +38,11 @@
 	</a>
 </header>
 <div class="container">
-	<h1><span class="glyphicon glyphicon-home"></span> Trang chủ</h1>
-	<hr/>
-	@include('message')
+	<div class="row">
+		<div class="col-md-12">
+			@include('message')
+			<h2 class="title-bar"><span class="glyphicon glyphicon-home"></span> Trang chủ</h2>
+		</div>
+	</div>
 </div>
 @endsection

@@ -62,6 +62,9 @@ class AlbumsController extends Controller {
 				$i = 0;
 				foreach(Input::file('fImage') as $img) {
 					$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+					$arrName = explode(".", $img_name);
+					$arrName[count($arrName)-1] = "jpg";
+					$img_name = implode(".", $arrName);
 					$path = public_path('/upload/images/' . $img_name);
 					Image::make($img->getRealPath())->resize(700, null, function ($constraint) {
 						$constraint->aspectRatio();
