@@ -32,6 +32,8 @@
                 <th>Mã số</th>
                 <th>Hình ảnh</th>
                 <th>Từ ngữ</th>
+                <th>Thời gian tạo</th>
+                <th>Thời gian cập nhật</th>
                 <th>Hành động</th>
               </tr>
               <tr ng-repeat="image in images | filter:search">
@@ -43,6 +45,8 @@
                   </div>
                 </td>
                 <td><%image.word%></td>
+                <td><%item.created_at%></td>
+                <td><%item.updated_at%></td>
                 <td>
                   <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
                   <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>

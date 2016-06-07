@@ -176,6 +176,7 @@ class ChildsController extends Controller {
 		$item->users_id = $request->users_id;
 		$item->date_of_birth = $request->date_of_birth;
 		$item->image  = $img_name;
+		$item->sex = $request->sex;
 		$item->save();
 		$des = 'public/upload/childs';
 		$img->move($des, $img_name);
@@ -199,12 +200,14 @@ class ChildsController extends Controller {
 		$name = $allRequest['name'];
 		$date_of_birth = $allRequest['date_of_birth'];
 		$user = $allRequest['users_id'];
+		$sex = $allRequest['sex'];
 		$idchild = $allRequest['id'];
 
 		$item = new Childs();
 		$getchildById = $item->find($idchild);
 		$getchildById->name = $name;
 		$getchildById->date_of_birth = $date_of_birth;
+		$getchildById->sex = $sex;
 		$getchildById->save();
 
 		if(Input::hasFile('fImage'))

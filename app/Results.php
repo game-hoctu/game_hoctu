@@ -6,7 +6,7 @@ class Results extends Model {
 
 	//
 	protected $table = 'results';
-	protected $fillable = ['childs_id','images_id','word', 'correct', 'incorrect'];
+	protected $fillable = ['childs_id','images_id','word', 'correct', 'incorrect','created_at', 'updated_at'];
 	
 	public function childs()
 	{
