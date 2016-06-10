@@ -13,6 +13,7 @@ Route::group(['prefix' => 'ajax'], function(){
 		Route::get('{child_id}/getListByChilds', 'AlbumsController@ajaxGetListByChilds');
 		Route::get('{child_id}/getListByNoChilds', 'AlbumsController@ajaxGetListByNoChilds');
 		Route::get('getList', 'AlbumsController@ajaxGetList');
+		Route::get('{albums_id}/detail', 'AlbumsController@ajaxDetail');
 		//Route::get('search', 'AlbumsController@ajaxGetList');
 	});
 

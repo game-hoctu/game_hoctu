@@ -361,4 +361,19 @@ class AlbumsController extends Controller {
 		}
 		return $data;
 	}
+
+	function ajaxDetail($albums_id)
+	{
+		$data['status'] = 'ERROR';
+		$albums = Albums::find($albums_id);
+		if(!is_null($albums))
+		{
+			$albums = $albums->toArray();
+			$albums['image'] = ALBUM_IMAGE.$albums['id'].".jpg";
+			$data['status'] = 'SUCCESS';
+			$data['info'] = $albums;
+		}
+		//debugArr($albums);
+		return $data;
+	}
 }

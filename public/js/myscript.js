@@ -9,7 +9,18 @@ $(document).ready(function(){
 	$(".addImage").click(function(){
 		addImage();
 	});
-
+	$(".search-input").focus(function(){
+		$(".search").animate({
+			'max-width': '350px'
+		});
+	});
+	$(".search-input").blur(function(){
+		$(".search").animate({
+			'max-width': '150px'
+		});
+		$(this).val("");
+		$(".search-result").slideUp();
+	});
 });
 
 function addImage()

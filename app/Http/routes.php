@@ -146,6 +146,6 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 //Tim kiem 
-Route::get('search', function(){
-	return view('search');
+Route::get('search/{key?}', function($key=""){
+	return view('search', ['key' => $key]);
 });

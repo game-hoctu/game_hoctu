@@ -253,7 +253,6 @@ app.controller('SearchController', function($scope, $http){
 			$scope.count = response.info.length;
 		});
 	};
-	$scope.loadAllAlbums();
 
 
 	$scope.loadAllChild = function(){
@@ -273,7 +272,6 @@ app.controller('SearchController', function($scope, $http){
 			$scope.count = response.info.length;
 		});
 	};
-	$scope.loadAllChild();
 
 	$scope.loadUsers = function(){
 		$scope.albums = undefined;
@@ -292,5 +290,9 @@ app.controller('SearchController', function($scope, $http){
 		});
 	};
 
-	$scope.loadUsers();
+	$scope.load = function(){
+		$scope.loadUsers();
+		$scope.loadAllChild();
+		$scope.loadAllAlbums();
+	}
 });

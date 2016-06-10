@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -28,7 +28,7 @@
 				</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="SearchController">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="SearchController" ng-init="load()">
 				<ul class="nav navbar-nav">
 					<li>
 						<div class="form-group search">
@@ -36,7 +36,7 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-search"></span>
 								</span>
-								<input type="text" class="form-control search-input" placeholder="Bạn muốn tìm kiếm điều gì?" ng-model="search">
+								<input type="text" class="form-control search-input" placeholder="Tìm kiếm..." ng-model="search">
 							</div>
 						</div>
 						<ul class="dropdown-menu search-result" role="menu" ng-hide="search == undefined || search == ''">
@@ -46,6 +46,7 @@
 							<li ng-repeat="child in childs | filter:search"><a href="{{ url('/childs/<%child.id%>/detail') }}"><span class="glyphicon glyphicon-leaf"></span> <%child.name%></a></li>
 							<li class="search-result-header">Kết quả cho những người dùng:</li>
 							<li ng-repeat="user in users | filter:search"><a href="{{ url('/users/<%user.id%>/detail') }}"><span class="glyphicon glyphicon-user"></span> <%user.name%></a></li>
+							<li class="text-right"><a class=" label label-info" href="{{url('/search/<%search%>')}}">Đến trang tìm kiếm</a></li>
 						</ul>
 					</li>
 				</ul>

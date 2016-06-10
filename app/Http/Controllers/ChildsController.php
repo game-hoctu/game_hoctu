@@ -108,11 +108,8 @@ class ChildsController extends Controller {
 		for($i = 0; $i < count($results); $i++)
 		{
 			$results[$i]['url'] = Images::select('url')->where('id', $results[$i]['images_id'])->get()->first()->toArray()['url'];
-			if(strlen($results[$i]['incorrect']) != 10)
-			{
-				$score += strlen($results[$i]['correct']);
-			}
-			
+			$answer = str_replace(" ","",$results[$i]['correct']);
+			$score += 5 * strlen($answer);
 		}
 		$data = ['child' => $child->toArray(), 'user' => $user->toArray(), 'results' => $results, 'score' => $score];
 		// debugArr($data);
