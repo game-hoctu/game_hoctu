@@ -10,17 +10,19 @@
 			<ol class="breadcrumb">
 				<li><a href="/">Trang chủ</a>
 				</li>
-				<li class="active">Những đứa trẻ</li>
+				<li class="active">Những đứa trẻ của {{$user['name']}}</li>
 			</ol>
 			@include('message')
 		</div>
 	</div>
 	<div class="row">
+		@if(!Auth::guest() && Auth::user()->id == $user['id'])
 		<div class="col-md-4 img-portfolio">
 			<a href="{{url('childs/add')}}">
 				<img class="img-responsive img-thumbnail img-hover" src="{{SERVER_PATH.'public/images/new-child.png'}}" alt="">
 			</a>
 		</div>
+		@endif
 		@foreach($data as $item)
 		<div class="col-md-4 img-portfolio album-item">
 			<div class="album-item">

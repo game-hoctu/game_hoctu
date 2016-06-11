@@ -7,18 +7,18 @@
 			<h1 class="title-bar"><span class="glyphicon glyphicon-user"></span> Thông tin người dùng</h1>
 		</div>
 		<div class="col-md-6">
-			<h3><span class="glyphicon glyphicon-list"></span> Thông tin</h3>
-			<hr/>
+			<h3 class="title-bar"><span class="glyphicon glyphicon-list"></span> Thông tin</h3>
 			<div class="row">
-				<div class="col-sm-3 text-center">
-					<button class="circle circle-100">
+				<div class="col-sm-12 text-center">
+					<button class="circle circle-300 circle-{{$data['user']['id'] % 4}}">
 						{{$data['user']['name']}}
 					</button>
 				</div>
-				<div class="col-sm-9">
-					<h4>{{$data['user']['name']}}</h4>
-					<h4>{{$data['user']['email']}}</h4>
-					<h4>{{$data['user']['address']}}</h4>
+				<div class="col-sm-12 text-center">
+					<h4>Họ tên: {{$data['user']['name']}}</h4>
+					<h4>Giới tính: {{$data['user']['sex'] == 0 ? 'Nam' : 'Nữ'}}</h4>
+					<h4>Email: {{$data['user']['email']}}</h4>
+					<h4>Địa chỉ: {{$data['user']['address']}}</h4>
 					@if(!Auth::guest() && Auth::user()->id == $data['user']['id'])
 					<a href="{{url('users/'.$data['user']['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Cập nhật</a>
 					@endif
@@ -26,8 +26,7 @@
 			</div>		
 		</div>
 		<div class="col-md-6">
-			<h3><span class="glyphicon glyphicon-leaf"></span> Những đứa trẻ</h3>
-			<hr/>
+			<h3 class="title-bar"><span class="glyphicon glyphicon-leaf"></span> Những đứa trẻ</h3>
 			<div class="list-group">
 				<a ng-repeat="child in childs | filter:search" href="{{ url('/childs/<%child.id%>/detail') }}" class="list-group-item">
 					<div class="row">
@@ -36,8 +35,8 @@
 						</div>
 						<div class="col-sm-8">
 							<h4><%child.name%></h4>
-							<p><%child.date_of_birth | asDate | date:'dd/MM/yyyy' %></p>
-							<p>
+							<p>Ngày sinh: <%child.date_of_birth | asDate | date:'dd/MM/yyyy' %></p>
+							<p>Giới tính:
 								<span ng-show="child.sex == 0">Nam</span>
 								<span ng-show="child.sex == 1">Nữ</span>
 							</p>
@@ -45,10 +44,10 @@
 					</div>
 				</a>
 			</div>
+			<a class="btn btn-info" href="{{url('childs/'.$data['user']['id'].'/getListByUser')}}">Xem tất cả những đứa trẻ <span class="glyphicon glyphicon-arrow-right"></span></a>
 		</div>
 		<div class="col-md-12">
-			<h3><span class="glyphicon glyphicon-picture"></span> Những album của {{$data['user']['name']}}</h3>
-			<hr/>
+			<h3 class="title-bar"><span class="glyphicon glyphicon-picture"></span> Những album của {{$data['user']['name']}}</h3>
 			<div class="row">
 				@foreach($data['album'] as $item)
 				<div class="col-md-4 img-portfolio album-item">
@@ -57,13 +56,18 @@
 					</a>
 					<div class="album-info">
 						<h2>
-							<a href="{{url('/albums/'.$item['id'].'/detail')}}">{{$item['name']}}</a>
+							<a href="{{url('/albums/'.$item['id'].'/detail')}}"><span class="glyphicon glyphicon-picture"></span> {{$item['name']}}</a>
 						</h2>
-						<p>{{$item['description']}}</p>
-						<p>Số lượng ảnh: {{$item['count']}}</p>
+						<p><span class="glyphicon glyphicon-tag"></span> {{$item['description']}}</p>
+						<p><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{$item['count']}}</p>
 					</div>
 				</div>
 				@endforeach
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<a class="btn btn-info" href="{{url('albums/'.$data['user']['id'].'/getListByUser')}}">Xem tất cả album <span class="glyphicon glyphicon-arrow-right"></span></a>
+				</div>
 			</div>
 		</div>
 	</div>

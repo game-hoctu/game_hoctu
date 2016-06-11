@@ -11,11 +11,31 @@ app.controller('LoginController',function($scope){
 
 });
 
-app.controller('RegisterController',function($scope){
+app.controller('UsersController',function($scope){
+	$scope.exportData = function () {
+		var blob = new Blob([document.getElementById('exportable').innerHTML], {
+			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+		});
+		saveAs(blob, "users.xls");
+	};
+});
 
+app.controller('CategoriesController',function($scope){
+	$scope.exportData = function () {
+		var blob = new Blob([document.getElementById('exportable').innerHTML], {
+			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+		});
+		saveAs(blob, "categories.xls");
+	};
 });
 
 app.controller("ImagesController", function($scope, $http){
+	$scope.exportData = function () {
+		var blob = new Blob([document.getElementById('exportable').innerHTML], {
+			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+		});
+		saveAs(blob, "images.xls");
+	};
 	$scope.loadAlbum = function(){
 		$http({
 			method  : 'GET',
@@ -71,6 +91,12 @@ app.controller("ImagesController", function($scope, $http){
 
 
 app.controller('AlbumsController', function($scope, $http){
+	$scope.exportData = function () {
+		var blob = new Blob([document.getElementById('exportable').innerHTML], {
+			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+		});
+		saveAs(blob, "albums.xls");
+	};
 	$scope.albums = undefined;
 	
 	$scope.loadAllAlbums = function(){
@@ -173,6 +199,12 @@ app.controller('AlbumsController', function($scope, $http){
 });
 
 app.controller('ChildsController', function($scope, $http){
+	$scope.exportData = function () {
+		var blob = new Blob([document.getElementById('exportable').innerHTML], {
+			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+		});
+		saveAs(blob, "childs.xls");
+	};
 	$scope.childs = undefined;
 	$scope.count = undefined;
 

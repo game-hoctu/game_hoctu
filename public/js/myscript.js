@@ -9,17 +9,14 @@ $(document).ready(function(){
 	$(".addImage").click(function(){
 		addImage();
 	});
-	$(".search-input").focus(function(){
-		$(".search").animate({
-			'max-width': '350px'
-		});
-	});
 	$(".search-input").blur(function(){
-		$(".search").animate({
-			'max-width': '150px'
-		});
-		$(this).val("");
+		//$(this).val("");
 		$(".search-result").slideUp();
+	});
+	$(".top").click(function(){
+		$("html, body").animate({
+			scrollTop: 0
+		});
 	});
 });
 

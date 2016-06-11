@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'SimpleSoftwareIO\QrCode\QrCodeServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Chencha\Share\ShareServiceProvider',
 
 	],
 
@@ -196,6 +197,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'QrCode' 	=> 'SimpleSoftwareIO\QrCode\Facades\QrCode',
 		'Image'     => 'Intervention\Image\Facades\Image',
+		'Share' 	=> 'Chencha\Share\ShareFacade',
 	],
 
 ];

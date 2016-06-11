@@ -27,32 +27,35 @@
           <div class="table-responsive" ng-show="images != undefined">
             <hr/>
             @include('admin.search')
-            <table class="table table-hover table-bordered table-striped">
-              <tr class="active">
-                <th>Mã số</th>
-                <th>Hình ảnh</th>
-                <th>Từ ngữ</th>
-                <th>Tạo lúc</th>
-                <th>Cập nhật lúc</th>
-                <th>Hành động</th>
-              </tr>
-              <tr ng-repeat="image in images | filter:search">
-                <td><%image.id%></td>
-                <td>
-                  <button data-toggle="collapse" data-target="#image<%image.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
-                  <div id="image<%image.id%>" class="collapse">
-                    <img src="{{UPLOAD_FOLDER}}<%image.url%>" width="300"/>
-                  </div>
-                </td>
-                <td><%image.word%></td>
-                <td><%image.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+            <div id="exportable">
+
+              <table class="table table-hover table-bordered table-striped">
+                <tr class="active">
+                  <th>Mã số</th>
+                  <th>Hình ảnh</th>
+                  <th>Từ ngữ</th>
+                  <th>Tạo lúc</th>
+                  <th>Cập nhật lúc</th>
+                  <th>Hành động</th>
+                </tr>
+                <tr ng-repeat="image in images | filter:search">
+                  <td><%image.id%></td>
+                  <td>
+                    <button data-toggle="collapse" data-target="#image<%image.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
+                    <div id="image<%image.id%>" class="collapse">
+                      <img src="{{UPLOAD_FOLDER}}<%image.url%>" width="300"/>
+                    </div>
+                  </td>
+                  <td><%image.word%></td>
+                  <td><%image.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
                   <td><%image.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                <td>
-                  <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-                  <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-                </td>
-              </tr>
-            </table>
+                  <td>
+                    <a href="images/<%image.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                    <a href="images/<%image.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
         <div id="insert" class="tab-pane fade">

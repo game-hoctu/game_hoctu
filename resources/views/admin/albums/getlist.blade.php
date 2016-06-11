@@ -100,34 +100,36 @@
         <span ng-show="count != undefined">Có tất cả <%count%> album.</span>
         <span ng-show="count == undefined">Không có album nào.</span>
 
-        <div class="table-responsive" ng-show="albums != undefined">
+        <div class="table-responsive" ng-show="albums != undefined" id="table">
           <hr/>
           @include('admin.search')
-          <table class="table table-hover table-bordered table-striped">
-            <thead>
-              <tr>
-                <th >Mã số</th>
-                <th>Tên album</th>
-                <th>Mô tả</th>
-                <th>Tạo lúc</th>
-                <th>Cập nhật lúc</th>
-                <th>Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="album in albums | filter:search">
-                <td><%album.id%></td>
-                <td><%album.name%></td>
-                <td><%album.description%></td>
-                <td><%album.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                <td><%album.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                <td>
-                  <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-                  <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="exportable">
+            <table class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Mã số</th>
+                  <th>Tên album</th>
+                  <th>Mô tả</th>
+                  <th>Tạo lúc</th>
+                  <th>Cập nhật lúc</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="album in albums | filter:search">
+                  <td><%album.id%></td>
+                  <td><%album.name%></td>
+                  <td><%album.description%></td>
+                  <td><%album.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                  <td><%album.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                  <td>
+                    <a href="albums/<%album.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                    <a href="albums/<%album.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

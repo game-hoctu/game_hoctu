@@ -39,7 +39,7 @@ class UsersController extends Controller {
             warning("Không tồn tại nội dung bạn muốn xem!");
             return redirect()->action('HomeController@index');
         }
-        $album = Albums::where('users_id', $id)->get()->toArray();
+        $album = Albums::where('users_id', $id)->orderBy('id','desc')->take(6)->get()->toArray();
         if(count($album) > 0)
         {
             for($i = 0; $i < count($album); $i++)
@@ -47,7 +47,7 @@ class UsersController extends Controller {
                 $album[$i] = $albumCtr->getInfo($album[$i]['id']);
             }
         }
-        $child = Childs::where('users_id', $id)->get()->toArray();
+        $child = Childs::where('users_id', $id)->orderBy('id','desc')->take(4)->get()->toArray();
         for($i = 0; $i < count($child); $i++)
         {
             $childCtr = new ChildsController();
@@ -79,6 +79,93 @@ class UsersController extends Controller {
     public function myProfile()
     {
     	return $this->callAction('detail', ['id' => Auth::user()->id]);
+    }
+
+    function getListByNumber($skip, $take, $order = "id", $sort = "desc", $where = "name", $compare = "like", $value = "%%")
+    {
+        $data = User::skip($skip)->take($take)->orderBy($order, $sort)->get()->toArray();
+        return $data;
+    }
+    function getListSortByAlbumLength($take)
+    {
+        $user = new User(); 
+        $data = $user->select('users.id')->join('albums', 'users.id', '=', 'albums.users_id')->groupBy('id')->get()->toArray();
+        for($i = 0; $i < count($data); $i++)
+        {
+            $data[$i] = User::find($data[$i]['id'])->toArray();
+            $album = Albums::where('users_id', '=', $data[$i]['id'])->count();
+            $data[$i]['albumlength'] = $album;
+        }
+        $data = collect($data);
+        $data = $data->sortByDesc('albumlength')->take($take)->toArray();
+        return $data;
+    }
+    function hot()
+    {
+        $data = $this->getListSortByAlbumLength(50);
+        return view("users.hot", ['data' => $data]);
+    }
+    function all(Request $request)
+    {
+        $rowperpage = 12;
+        if(!is_null($request->page))
+        {
+            $page = $request->page;
+        }
+        else
+        {
+            $page = 1;
+        }
+        if(!is_null($request->order) && $request->order != "")
+        {
+            $order = $request->order;
+        }
+        else
+        {
+            $order = "id";
+        }
+        if(!is_null($request->sort) && $request->sort != "")
+        {
+            $sort = $request->sort;
+        }
+        else
+        {
+            $sort = "desc";
+        }
+        if(!is_null($request->where) && $request->where != "")
+        {
+            $where = $request->where;
+        }
+        else
+        {
+            $where = "name";
+        }
+        if(!is_null($request->compare) && $request->compare != "")
+        {
+            $compare = $request->compare;
+        }
+        else
+        {
+            $compare = "like";
+        }
+        if(!is_null($request->value) && $request->value != "")
+        {
+            $value = $request->value;
+        }
+        else
+        {
+            $value = "%%";
+        }
+        $data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
+        $paging['all'] = ceil(count($data) / $rowperpage);
+        $paging['page'] = $page;
+        $paging['order'] = $order;
+        $paging['sort'] = $sort;
+        $paging['where'] = $where;
+        $paging['compare'] = $compare;
+        $paging['value'] = $value;
+        // debugArr($data);
+        return view('users.all', ['data' => $data, 'paging' => $paging]);
     }
 //ADMIN-----------------------------------------------------------------------------------
     public function adGetList()

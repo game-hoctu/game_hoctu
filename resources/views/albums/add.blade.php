@@ -39,20 +39,16 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-md-8 col-md-offset-4">
-									<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
-										<span class="glyphicon glyphicon-save"></span> Tạo album
-									</button>
-									<a class="btn btn-default" href="{{url('albums/myAlbum')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
-								</div>
-							</div>
 						</div>
 					</div>
 
 					<div class="col-sm-8">
 						<div class="row">
 							<div class="col-sm-12">
+								<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
+									<span class="glyphicon glyphicon-save"></span> Tạo album
+								</button>
+								<a class="btn btn-default" href="{{url('albums/myAlbum')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
 								<a class="btn btn-info addImage">
 									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>

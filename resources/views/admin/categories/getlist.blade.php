@@ -1,11 +1,12 @@
 @extends('admin')
 @section('title', 'Quản lý thể loại')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-controller="CategoriesController">
   <div class="row">
     <div class="col-md-12">
       <h1><span class="glyphicon glyphicon-th-list"></span> Quản lý thể loại</h1>
       <hr/>
+      @include('message')
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Danh sách thể loại</a></li>
         <li><a data-toggle="tab" href="#insert"><span class="glyphicon glyphicon-plus"></span>Thêm</a></li>
@@ -16,26 +17,31 @@
           <div class="table-responsive">
             <input type="hidden" ng-model="data" ng-init="data = {{json_encode($data)}}">
             @include('admin.search')
-            <table class="table table-hover table-bordered table-striped">
-              <tr class="active">
-                <th>Mã số</th>
-                <th>Tên album</th>
-                <th>Tạo lúc</th>
-                <th>Cập nhật lúc</th>
-                <th>Hành động</th>
-              </tr>
-              <tr ng-repeat="item in data | filter:search">
-                <td><%item.id%></td>
-                <td><%item.name%></td>
-                <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                  <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                <td>
-                  <a href="categories/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-                  <a href="categories/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-                </td>
-              </tr>
-              
-            </table>
+            <div id="exportable">
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr class="active">
+                    <th>Mã số</th>
+                    <th>Tên album</th>
+                    <th>Tạo lúc</th>
+                    <th>Cập nhật lúc</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in data | filter:search">
+                    <td><%item.id%></td>
+                    <td><%item.name%></td>
+                    <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                    <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                    <td>
+                      <a href="categories/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                      <a href="categories/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div id="insert" class="tab-pane fade">

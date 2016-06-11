@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<h2>{{$data['name']}}</h2>
+			<h2><span class="glyphicon glyphicon-picture"></span> {{$data['name']}}</h2>
 			<h5><span class="glyphicon glyphicon-tag"></span> Mô tả: {{$data['description']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$data['users']['name']}}</h5>
 			<h5><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{count($data['images'])}}</h5>
@@ -59,6 +59,13 @@
 			<a href="{{url('albums/'.$data['id'].'/edit')}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
 			<a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{url('albums/'.$data['id'].'/delete')}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
 			@endif
+			<?php $load = Share::load(Request::url(), 'Albums '.$data['name'].' của '.$data['users']['name'].' - KidLeen')->services();?>
+			<h5>
+				<span class="glyphicon glyphicon-share"></span> Chia sẻ lên: 
+				<a target="_blank" href="{{$load['facebook']}}"><img width="30px" src="{{SERVER_PATH}}public/images/fb-icon.png" alt="Share Facebook"></a>
+				<a target="_blank" href="{{$load['twitter']}}"><img width="30px" src="{{SERVER_PATH}}public/images/tt-icon.png" alt="Share Twitter"></a>
+				<a target="_blank" href="{{$load['gplus']}}"><img width="30px" src="{{SERVER_PATH}}public/images/gg-icon.png" alt="Share Google Plus"></a>
+			</h5>
 		</div>
 	</div>
 

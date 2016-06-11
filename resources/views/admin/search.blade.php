@@ -6,6 +6,7 @@
 		<div class="form-group form-inline">
 			<label class="form-label">Lọc nội dung:</label>
 			<input class="form-control" type="text" name="search" ng-model="search">
+			<button class="btn btn-info" ng-click="exportData()"><span class="glyphicon glyphicon-save"></span> Xuất dữ liệu</button>
 		</div>
 	</div>
 </div>

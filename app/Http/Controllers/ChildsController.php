@@ -110,10 +110,141 @@ class ChildsController extends Controller {
 			$results[$i]['url'] = Images::select('url')->where('id', $results[$i]['images_id'])->get()->first()->toArray()['url'];
 			$answer = str_replace(" ","",$results[$i]['correct']);
 			$score += 5 * strlen($answer);
+			if(strlen($results[$i]['incorrect']) == 10)
+			{
+				$score -= 10;
+			}
 		}
 		$data = ['child' => $child->toArray(), 'user' => $user->toArray(), 'results' => $results, 'score' => $score];
 		// debugArr($data);
 		return view('childs.detail', ['data' => $data]);
+	}
+	function search($key)
+	{
+		$child = new Childs(); 
+		$result = $child::where('name', 'like', "%$key%")->orWhere('id','$key')->get()->toArray();
+		$count = count($result);
+		for($i = 0; $i < $count; $i++)
+		{
+			$result[$i]['image'] = $this->getImage($result[$i]['id']);
+		}
+			//debugArr($result);
+		return $result;
+	}
+	function getListSortByScore($take)
+	{
+		$child = new Childs(); 
+		$data = $child->select('id')->join('results', 'id', '=', 'childs_id')->groupBy('id')->get()->toArray();
+		for($i = 0; $i < count($data); $i++)
+		{
+			$data[$i] = Childs::find($data[$i]['id'])->toArray();
+			$childresult = Results::where('childs_id', '=', $data[$i]['id'])->get()->toArray();
+			$score = 0;
+			for($j = 0; $j < count($childresult); $j++)
+			{
+				$answer = str_replace(" ","",$childresult[$j]['correct']);
+				$score += 5 * strlen($answer);
+				if(strlen($childresult[$j]['incorrect']) == 10)
+				{
+					$score -= 10;
+				}
+			}
+			$data[$i]['image'] = $this->getImage($data[$i]['id']);
+			$data[$i]['score'] = $score;
+		}
+		$data = collect($data);
+		$data = $data->sortByDesc('score')->take($take)->toArray();
+		return $data;
+	}
+	function getListByNumber($skip, $take, $order = "id", $sort = "desc", $where = "name", $compare = "like", $value = "%%")
+	{
+		$result = Childs::where($where, $compare, $value)->skip($skip)->take($take)->orderBy($order, $sort)->get()->toArray();
+		$count = count($result);
+		for($i = 0; $i < $count; $i++)
+		{
+			$childresult = Results::where('childs_id', '=', $result[$i]['id'])->get()->toArray();
+			$score = 0;
+			for($j = 0; $j < count($childresult); $j++)
+			{
+				$answer = str_replace(" ","",$childresult[$j]['correct']);
+				$score += 5 * strlen($answer);
+				if(strlen($childresult[$j]['incorrect']) == 10)
+				{
+					$score -= 10;
+				}
+			}
+			$result[$i]['score'] = $score;
+			$result[$i]['image'] = $this->getImage($result[$i]['id']);
+			$result[$i]['user'] = User::find($result[$i]['users_id'])->toArray();
+		}
+		return $result;
+	}
+	function all(Request $request)
+	{
+		$rowperpage = 12;
+		if(!is_null($request->page))
+		{
+			$page = $request->page;
+		}
+		else
+		{
+			$page = 1;
+		}
+		if(!is_null($request->order) && $request->order != "")
+		{
+			$order = $request->order;
+		}
+		else
+		{
+			$order = "id";
+		}
+		if(!is_null($request->sort) && $request->sort != "")
+		{
+			$sort = $request->sort;
+		}
+		else
+		{
+			$sort = "desc";
+		}
+		if(!is_null($request->where) && $request->where != "")
+		{
+			$where = $request->where;
+		}
+		else
+		{
+			$where = "name";
+		}
+		if(!is_null($request->compare) && $request->compare != "")
+		{
+			$compare = $request->compare;
+		}
+		else
+		{
+			$compare = "like";
+		}
+		if(!is_null($request->value) && $request->value != "")
+		{
+			$value = $request->value;
+		}
+		else
+		{
+			$value = "%%";
+		}
+		$data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
+		$paging['all'] = ceil(count($data) / $rowperpage);
+		$paging['page'] = $page;
+		$paging['order'] = $order;
+		$paging['sort'] = $sort;
+		$paging['where'] = $where;
+		$paging['compare'] = $compare;
+		$paging['value'] = $value;
+		// debugArr($data);
+		return view('childs.all', ['data' => $data, 'paging' => $paging]);
+	}
+	function hot()
+	{
+		$data = $this->getListSortByScore(50);
+		return view("childs.hot", ['data' => $data]);
 	}
 	//AJAX------------------------------------------------------------------------------
 	//Lấy danh sách child theo user id
@@ -247,6 +378,7 @@ class ChildsController extends Controller {
 		}
 		else
 		{
+			$user = User::find($user_id)->toArray();
 			$child = new Childs(); 
 			$result = $child::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
 			$count = count($result);
@@ -255,7 +387,7 @@ class ChildsController extends Controller {
 				$result[$i]['image'] = $this->getImage($result[$i]['id']);
 			}
 			//debugArr($result);
-			return view('childs.list', ['data' => $result]);
+			return view('childs.list', ['data' => $result, 'user' => $user]);
 		}
 	}
 

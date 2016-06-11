@@ -46,6 +46,9 @@ Route::group(['prefix' => 'images'], function(){
 });
 Route::group(['prefix' => 'childs'], function(){
 	Route::get('myChild', 'ChildsController@myChild');
+	Route::get('all', 'ChildsController@all');
+	Route::get('hot', 'ChildsController@hot');
+	Route::get('{user_id}/getListByUser', 'ChildsController@getListByUser');
 	Route::get('add','ChildsController@add');
 	Route::post('postAdd',['as'=>'childsPostAdd','uses'=>'ChildsController@postAdd']);
 	Route::get('{id}/edit','ChildsController@edit');
@@ -55,6 +58,8 @@ Route::group(['prefix' => 'childs'], function(){
 });
 Route::group(['prefix' => 'albums'], function(){
 	Route::get('myAlbum', 'AlbumsController@myAlbum');
+	Route::get('all', 'AlbumsController@all');
+	Route::get('{user_id}/getListByUser', 'AlbumsController@getListByUser');
 	Route::get('add','AlbumsController@add');
 	Route::post('postAdd',['as'=>'albumsPostAdd','uses'=>'AlbumsController@postAdd']);
 	Route::get('{id}/edit','AlbumsController@edit');
@@ -73,6 +78,8 @@ Route::group(['prefix' => 'categories'], function(){
 });	
 //chỉnh sửa thông tin cá nhân
 Route::group(['prefix' => 'users'], function(){
+	Route::get('all', 'UsersController@all');
+	Route::get('hot', 'UsersController@hot');
 	Route::get('myProfile','UsersController@myProfile');
 	Route::get('{id}/edit','UsersController@edit');
 	Route::get('{id}/detail','UsersController@detail');
@@ -146,6 +153,4 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 //Tim kiem 
-Route::get('search/{key?}', function($key=""){
-	return view('search', ['key' => $key]);
-});
+Route::get('search', ['as' => 'search', 'uses' => "HomeController@search"]);

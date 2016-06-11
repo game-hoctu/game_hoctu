@@ -13,6 +13,7 @@ use File;
 use Image;
 use Input;
 use App\Childs;
+use DB;
 class AlbumsController extends Controller {
 
 	public function index()
@@ -132,6 +133,7 @@ class AlbumsController extends Controller {
 		}
 		else
 		{
+			$user = User::find($user_id)->toArray();
 			$albums = new Albums(); 
 			$result = $albums::where('users_id', $user_id)->orderBy('id','desc')->get()->toArray();
 			for($i = 0; $i < count($result); $i++)
@@ -156,7 +158,7 @@ class AlbumsController extends Controller {
 				$result[$i]['image'] = $data['image'];
 				$result[$i]['count'] = $data['count'];
 			}
-			return view('albums.list', ['data' => $result]);
+			return view('albums.list', ['data' => $result, 'user' => $user]);
 		}
 	}
 
@@ -173,7 +175,7 @@ class AlbumsController extends Controller {
 			{
 				$imageName = UPLOAD_FOLDER.$image[0]['url'];
 				$path = public_path("/upload/albums/".$result['id'].".jpg");
-				Image::make($imageName)->resize(700, 400)->save($path);
+				Image::make($imageName)->resize(350, 200)->save($path);
 			}
 			else
 			{
@@ -219,7 +221,93 @@ class AlbumsController extends Controller {
 		return $data;
 	}
 
+	function search($key)
+	{
+		$albums = new Albums(); 
+		$result = $albums::where('name', 'like', "%$key%")->orWhere('id','$key')->get()->toArray();
+		for($i = 0; $i < count($result); $i++)
+		{
+			$data = $this->autoloadImage($result[$i]['id']);
+			$result[$i]['image'] = $data['image'];
+			$result[$i]['count'] = $data['count'];
+		}
+		return $result;
+	}
 
+	function getListByNumber($skip, $take, $order = "id", $sort = "desc", $where = "name", $compare = "like", $value = "%%")
+	{
+		$result = Albums::where($where, $compare, $value)->skip($skip)->take($take)->orderBy($order, $sort)->get()->toArray();
+		for($i = 0; $i < count($result); $i++)
+		{
+			$data = $this->autoloadImage($result[$i]['id']);
+			$result[$i]['image'] = $data['image'];
+			$result[$i]['count'] = $data['count'];
+		}
+		return $result;
+	}
+
+	function all(Request $request)
+	{
+		$rowperpage = 12;
+		if(!is_null($request->page))
+		{
+			$page = $request->page;
+		}
+		else
+		{
+			$page = 1;
+		}
+		if(!is_null($request->order) && $request->order != "")
+		{
+			$order = $request->order;
+		}
+		else
+		{
+			$order = "id";
+		}
+		if(!is_null($request->sort) && $request->sort != "")
+		{
+			$sort = $request->sort;
+		}
+		else
+		{
+			$sort = "desc";
+		}
+		if(!is_null($request->where) && $request->where != "")
+		{
+			$where = $request->where;
+		}
+		else
+		{
+			$where = "name";
+		}
+		if(!is_null($request->compare) && $request->compare != "")
+		{
+			$compare = $request->compare;
+		}
+		else
+		{
+			$compare = "like";
+		}
+		if(!is_null($request->value) && $request->value != "")
+		{
+			$value = $request->value;
+		}
+		else
+		{
+			$value = "%%";
+		}
+		$data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
+		$paging['all'] = ceil(count($data) / $rowperpage);
+		$paging['page'] = $page;
+		$paging['order'] = $order;
+		$paging['sort'] = $sort;
+		$paging['where'] = $where;
+		$paging['compare'] = $compare;
+		$paging['value'] = $value;
+		// debugArr($data);
+		return view('albums.all', ['data' => $data, 'paging' => $paging]);
+	}
 	//ADMIN---------------------------------------------------
 	public function adGetList()
 	{
@@ -236,7 +324,7 @@ class AlbumsController extends Controller {
 		$item->categories_id = $request->categories_id;
 		$item->save();
 		success("Đã thêm thành công!");
-		return redirect()->action('AlbumsController@adGetlist');
+		return redirect()->action('AlbumsController@adGetList');
 	}
 	public function adEdit($id)
 	{
@@ -262,14 +350,14 @@ class AlbumsController extends Controller {
 		$getalbumById->categories_id = $theloai;
 		$getalbumById->save();
 		success("Đã sửa thành công!");
-		return redirect()->action('AlbumsController@adGetlist');
+		return redirect()->action('AlbumsController@adGetList');
 	}
 	public function adDelete($id)
 	{
 		$item = Albums::findOrFail($id);
 		$item->delete();
 		success("Đã xóa thành công!");
-		return redirect()->action('AlbumsController@adGetlist');
+		return redirect()->action('AlbumsController@adGetList');
 	}
 
 	//Ajax------------------------------------------------------
@@ -366,6 +454,8 @@ class AlbumsController extends Controller {
 	{
 		$data['status'] = 'ERROR';
 		$albums = Albums::find($albums_id);
+		$albums->downloads += 1;
+		$albums->save();
 		if(!is_null($albums))
 		{
 			$albums = $albums->toArray();

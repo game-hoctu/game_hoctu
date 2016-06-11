@@ -49,6 +49,7 @@ class ResultsController extends Controller {
 	function ajaxAdd($jsonStr)
 	{
 		$added = 0;
+		$noadded = 0;
 		$response["status"] = "ERROR";
 		$jsonArr = json_decode($jsonStr, true);
 		$totalItem = count($jsonArr["info"]);
@@ -63,38 +64,29 @@ class ResultsController extends Controller {
 				$image->delete();
 				$image->save();
 			}
-			$notfoundimage = false;
+
 			foreach($jsonArr["info"] as $data)
 			{
 				$image = Images::find($data["images_id"]);
-				if(is_null($image))
+				if(!is_null($image))
 				{
-					$response["message"] = "Không tồn tại images với id = ".$data["images_id"];
-					$notfoundimage = true;
-					break;
+					$record = new Results();
+					$record->childs_id = $jsonArr["childs_id"];
+					$record->images_id = $data["images_id"];
+					$record->word = $data["word"];
+					$record->correct = $data["correct"];
+					$record->incorrect = $data["incorrect"];
+					$record->save();
+					$added++;
+				}
+				else
+				{
+					$noadded++;
 				}
 			}
-			if(!$notfoundimage)
+			if(($added + $noadded) == $totalItem)
 			{
-				foreach($jsonArr["info"] as $data)
-				{
-					$image = Images::find($data["images_id"]);
-					if(!is_null($image))
-					{
-						$record = new Results();
-						$record->childs_id = $jsonArr["childs_id"];
-						$record->images_id = $data["images_id"];
-						$record->word = $data["word"];
-						$record->correct = $data["correct"];
-						$record->incorrect = $data["incorrect"];
-						$record->save();
-						$added++;
-					}
-				}
-				if($added == $totalItem)
-				{
-					$response = ["status" => "SUCCESS", "message" => "Added $added item!"];
-				}
+				$response = ["status" => "SUCCESS", "message" => "Added $added item!"];
 			}
 		}
 		return json_encode($response);

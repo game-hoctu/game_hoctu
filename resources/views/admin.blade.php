@@ -12,7 +12,7 @@
 	<link href="{{ asset('/public/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
 </head>
-<body>
+<body style="padding-top: 0px">
 	
 	<div id="wrapper">
 
@@ -81,13 +81,14 @@
 	<script src="{{ asset('/public/js/config.js') }}"></script>
 
 	<!-- jQuery -->
-	<script src="{{ asset('/public/js/jquery.js') }}"></script>
+	<script src="{{ asset('/public/js/jquery-1.12.3.min.js') }}"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ asset('/public/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/public/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('/public/js/dataTables.bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/public/js/myscript.js') }}"></script>
+	<script src="{{ asset('/public/js/FileSaver.js') }}"></script>
 	<script>
 		$('.carousel').carousel({
 			interval: 5000

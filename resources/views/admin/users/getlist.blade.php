@@ -1,7 +1,7 @@
 @extends('admin')
 @section('title', 'Quản lý người dùng')
 @section('content')
-<div class="container-fluid" ng-app="game_hoctu">
+<div class="container-fluid" ng-app="game_hoctu" ng-controller="UsersController">
   <div class="row">
     <div class="col-md-12">
       <h1><span class="glyphicon glyphicon-tasks"></span> Quản lý người dùng</h1>
@@ -17,38 +17,40 @@
           <div class="table-responsive">
             <input type="hidden" name="data" ng-model="data" ng-init="data = {{json_encode($data)}}">
             @include('admin.search')
-            <table class="table table-hover table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Mã số</th>
-                  <th>Email</th>
-                  <th>Họ tên</th>
-                  <th>Giới tính</th>
-                  <th>Địa chỉ</th>
-                  <th>Tạo lúc</th>
-                  <th>Cập nhật lúc</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in data | filter:search">
-                  <td><%item.id%></td>
-                  <td><%item.email%></td>
-                  <td><%item.name%></td>
-                  <td>
-                    <span ng-show="item.sex == 0">Nam</span>
-                    <span ng-show="item.sex == 1">Nữ</span>
-                  </td>
-                  <td><%item.address%></td>
-                  <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                  <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-                  <td>
-                    <a href="users/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-                    <a href="users/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div id="exportable">
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Mã số</th>
+                    <th>Email</th>
+                    <th>Họ tên</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                    <th>Tạo lúc</th>
+                    <th>Cập nhật lúc</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in data | filter:search">
+                    <td><%item.id%></td>
+                    <td><%item.email%></td>
+                    <td><%item.name%></td>
+                    <td>
+                      <span ng-show="item.sex == 0">Nam</span>
+                      <span ng-show="item.sex == 1">Nữ</span>
+                    </td>
+                    <td><%item.address%></td>
+                    <td><%item.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                    <td><%item.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                    <td>
+                      <a href="users/<%item.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                      <a href="users/<%item.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div id="insert" class="tab-pane fade">

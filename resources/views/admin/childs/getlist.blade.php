@@ -96,39 +96,45 @@
       <span ng-show="count == undefined">Không có đứa trẻ nào.</span>
       <div class="table-responsive" ng-show="childs != undefined">
         @include('admin.search')
-        <table class="table table-hover table-bordered table-striped">
-          <tr class="active">
-            <th>Mã số</th>
-            <th>Tên trẻ</th>
-            <th>Ngày sinh</th>
-            <th>Giới tính</th>
-            <th>Hình ảnh</th>
-            <th>Tạo lúc</th>
-            <th>Cập nhật lúc</th>
-            <th>Hành động</th>
-          </tr>
-          <tr ng-repeat="child in childs | filter:search">
-            <td><%child.id%></td>
-            <td><%child.name%></td>
-            <td><%child.date_of_birth%></td>
-            <td>
-              <span ng-show="child.sex == 0">Nam</span>
-              <span ng-show="child.sex == 1">Nữ</span>
-            </td>
-            <td>
-              <button data-toggle="collapse" data-target="#child<%child.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
-              <div id="child<%child.id%>" class="collapse">
-                <img src="<%child.image%>" width="200"/>
-              </div>
-            </td>
-            <td><%child.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-            <td><%child.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
-            <td>
-              <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
-              <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
-            </td>
-          </tr>
-        </table>
+        <div id="exportable">
+          <table class="table table-hover table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Mã số</th>
+                <th>Tên trẻ</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Hình ảnh</th>
+                <th>Tạo lúc</th>
+                <th>Cập nhật lúc</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="child in childs | filter:search">
+                <td><%child.id%></td>
+                <td><%child.name%></td>
+                <td><%child.date_of_birth%></td>
+                <td>
+                  <span ng-show="child.sex == 0">Nam</span>
+                  <span ng-show="child.sex == 1">Nữ</span>
+                </td>
+                <td>
+                  <button data-toggle="collapse" data-target="#child<%child.id%>" class="btn btn-primary btn-sm">Xem hình ảnh</button>
+                  <div id="child<%child.id%>" class="collapse">
+                    <img src="<%child.image%>" width="200"/>
+                  </div>
+                </td>
+                <td><%child.created_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                <td><%child.updated_at | asDate | date:'dd/MM/yyyy hh:mm'%></td>
+                <td>
+                  <a href="childs/<%child.id%>/adEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
+                  <a href="childs/<%child.id%>/adDelete" class="btn btn-default btn-sm" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span>Xóa</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

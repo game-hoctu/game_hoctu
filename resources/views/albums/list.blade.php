@@ -8,19 +8,21 @@
 			<h1 class="page-header title-bar"><span class="glyphicon glyphicon-picture"></span> Phòng Trưng Bày
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="/">Trang chủ</a>
+				<li><a href="{{url('/')}}">Trang chủ</a>
 				</li>
-				<li class="active">Album của tôi</li>
+				<li class="active">Danh sách album của {{$user['name']}}</li>
 			</ol>
 			@include('message')
 		</div>
 	</div>
 	<div class="row">
+		@if(!Auth::guest() && Auth::user()->id == $user['id'])
 		<div class="col-md-4 img-portfolio">
 			<a href="{{url('albums/add')}}">
 				<img class="img-responsive img-thumbnail img-hover" src="{{SERVER_PATH.'public/images/new-album.png'}}" alt="">
 			</a>
 		</div>
+		@endif
 		@foreach($data as $item)
 		<div class="col-md-4 img-portfolio album-item">
 			<a href="{{url('/albums/'.$item['id'].'/detail')}}">
@@ -30,7 +32,7 @@
 				<h2>
 					<a href="{{url('/albums/'.$item['id'].'/detail')}}"><span class="glyphicon glyphicon-picture"></span> {{$item['name']}}</a>
 				</h2>
-				<p><span class="glyphicon glyphicon-list"></span> {{$item['description']}}</p>
+				<p><span class="glyphicon glyphicon-list"></span> Mô tả: {{substr($item['description'], 0, 100)}}...</p>
 				<p><span class="glyphicon glyphicon-list"></span> Số lượng ảnh: {{$item['count']}}</p>
 			</div>
 		</div>
