@@ -13,7 +13,7 @@
 					{!! QrCode::size(200)->generate($data['child']['id']); !!}
 				</div>
 				<div class="col-md-6">
-					
+					<h4><span class="glyphicon glyphicon-tag"></span> ID: {{$data['child']['id']}}</h4>
 					<h4><span class="glyphicon glyphicon-tag"></span> Họ tên: {{$data['child']['name']}}</h4>
 					<h4><span class="glyphicon glyphicon-tag"></span> Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h4>
 					<h4><span class="glyphicon glyphicon-tag"></span> Giới tính:
