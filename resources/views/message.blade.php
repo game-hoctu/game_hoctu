@@ -1,14 +1,14 @@
-@if(isset($_SESSION['success']))
+@if(Session::has('success'))
 <div class="message alert alert-success">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	<strong>Thông báo!</strong> {{$_SESSION['success']}}
+	<strong>Thông báo!</strong> {{Session::get('success')}}
 </div>
-<?php unset($_SESSION['success']); ?>
+{{Session::forget('success')}}
 @endif
-@if(isset($_SESSION['warning']))
+@if(Session::has('warning'))
 <div class="message alert alert-danger">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	<strong>Thông báo!</strong> {{$_SESSION['warning']}}
+	<strong>Thông báo!</strong> {{Session::get('warning')}}
 </div>
-<?php unset($_SESSION['warning']); ?>
+{{Session::forget('warning')}}
 @endif

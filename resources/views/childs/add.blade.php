@@ -47,7 +47,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-md-6 col-md-offset-4">
-						<button type="submit" class="btn btn-primary" ng-disabled="!form_AbAdd.$valid">
+						<button type="submit" class="btn btn-primary">
 							Thêm mới
 						</button>
 						<a class="btn btn-default" href="{{url('childs/myChild')}}">Trở về</a>

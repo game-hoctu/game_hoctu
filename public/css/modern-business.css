@@ -27,6 +27,7 @@ body {
 
 header.carousel {
     height: 50%;
+    margin-bottom: 30px;
 }
 
 header.carousel .item,

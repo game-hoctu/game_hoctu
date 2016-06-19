@@ -14,6 +14,9 @@
 </head>
 <body style="padding-top: 0px">
 	
+	@if(!Auth::guest() && !Session::has('authadmin'))
+	@include('admin.auth')
+	@else
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -72,8 +75,8 @@
 
 		</div>
 		<!-- /#page-wrapper -->
-
 	</div>
+	@endif
 	<!-- /#wrapper -->
 	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
 	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>

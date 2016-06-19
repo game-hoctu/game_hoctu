@@ -120,6 +120,8 @@ Route::group(['prefix' => 'admin'], function(){
 			return view('admin.index');
 		}
 	});
+		Route::post('admin/auth',['as'=>'authadmin','uses'=>'HomeController@authadmin']);
+
 //thêm, sửa, xóa trang thể loại
 	Route::get('categories','CategoriesController@adGetList');
 	Route::post('categories/adPostAdd',['as'=>'cateAdPostAdd','uses'=>'CategoriesController@adPostAdd']);

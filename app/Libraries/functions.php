@@ -51,13 +51,37 @@ function cate_parent($data)
 
 function warning($text)
 {
-     $_SESSION['warning'] = $text;
+     Session::put('warning', $text);
+
 }
 
 function success($text)
 {
-     $_SESSION['success'] = $text;
+     Session::put('success', $text);
 }
+
+function checkLogin()
+{
+     if(!Auth::guest() && !Session::has('logined'))
+     {
+          Session::put('logined', 'logined');
+          success("Bạn đã đăng nhập thành công!");
+     }
+}
+
+function checkLogout()
+{
+     if(Auth::guest() && Session::has('logined'))
+     {
+          Session::forget('logined');
+          if(Session::has('authadmin'))
+          {
+               Session::forget('authadmin');
+          }
+          success("Bạn đã đăng xuất thành công!");
+     }
+}
+
 function debugArr($arr)
 {
      echo "<pre>";

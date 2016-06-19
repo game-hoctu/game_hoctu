@@ -60,13 +60,15 @@ class ResultsController extends Controller {
 		}
 		else
 		{
-			foreach ($childs->images as $image) {
-				$image->delete();
-				$image->save();
-			}
-
 			foreach($jsonArr["info"] as $data)
 			{
+				foreach ($childs->images as $image) {
+					if($image->id == $data['images_id'])
+					{
+						$image->delete();
+						$image->save();
+					}
+				}
 				$image = Images::find($data["images_id"]);
 				if(!is_null($image))
 				{

@@ -3,7 +3,7 @@
 @section('title', 'Đăng ký tài khoản')
 @section('content')
 
-<div class="container" ng-app="game_hoctu" ng-controller="RegisterController">
+<div class="container">
 	<div class="row">
 		<div class="col-sm-12">
 			<h1 class="title-bar">Đăng ký</h1>

@@ -4,6 +4,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Albums;
 use App\Childs;
+use Auth;
+use Hash;
+use Session;
 class HomeController extends Controller {
 
 	/*
@@ -22,10 +25,12 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	// public function __construct()
-	// {
-	// 	$this->middleware('auth');
-	// }
+	public function __construct()
+	{
+		checkLogin();
+		checkLogout();
+		//$this->middleware('auth');
+	}
 
 	/**
 	 * Show the application dashboard to the user.
@@ -60,5 +65,22 @@ class HomeController extends Controller {
 		$childsCtrl = new ChildsController();
 		$childs = $childsCtrl->search($key);
 		return view('search', ['key' => $key, 'childs' => $childs, 'albums' => $albums, 'users' => $users]);
+	}
+
+	function authadmin(Request $request)
+	{
+		if(Auth::user())
+		{
+			if(Hash::check($request->password, Auth::user()->password))
+			{
+				Session::put('authadmin', 'authadmin');
+				success("Xác thực thành công!");
+			}
+			else
+			{
+				warning("Mật khẩu không chính xác!");
+			}
+			return view("admin.index");
+		}
 	}
 }
