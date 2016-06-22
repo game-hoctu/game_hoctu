@@ -19,7 +19,7 @@
 		<div class="col-md-12">
 			<form class="form-inline" role="form">
 				<div class="form-group">
-					<label>Theo người dùng:</label>
+					<label>Lọc theo người dùng:</label>
 					<select class="form-control" ng-init="loadUsers()" ng-model="users_id">
 						<option ng-repeat="user in users" value="<%user.id%>"><%user.id%> - <%user.name%></option>
 					</select>

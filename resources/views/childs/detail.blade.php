@@ -13,25 +13,25 @@
 					{!! QrCode::size(200)->generate($data['child']['id']); !!}
 				</div>
 				<div class="col-md-6">
-					<h4><span class="glyphicon glyphicon-tag"></span> ID: {{$data['child']['id']}}</h4>
-					<h4><span class="glyphicon glyphicon-tag"></span> Họ tên: {{$data['child']['name']}}</h4>
-					<h4><span class="glyphicon glyphicon-tag"></span> Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h4>
-					<h4><span class="glyphicon glyphicon-tag"></span> Giới tính:
+					<h5><span class="glyphicon glyphicon-tag"></span> ID: {{$data['child']['id']}}</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Họ tên: {{$data['child']['name']}}</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Ngày sinh: {{Carbon\Carbon::parse($data['child']['date_of_birth'])->format('d/m/Y')}}</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Giới tính:
 						<span ng-show="{{$data['child']['sex']}}== 0">Nam</span>
 						<span ng-show="{{$data['child']['sex']}} == 1">Nữ</span>
-					</h4>
-					<h4><span class="glyphicon glyphicon-tag"></span> Cha mẹ: {{$data['user']['name']}}</h4>
-					<h4><span class="glyphicon glyphicon-tag"></span> Tổng số điểm: {{$data['score']}}</h4>
-					<h4>
+					</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Cha mẹ: {{$data['user']['name']}}</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Tổng số điểm: {{$data['score']}}</h5>
+					<h5>
 						<a href="{{url('childs/'.$data['child']['id'].'/edit')}}" class="btn btn-success btn"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
 						<a href="{{url('childs/'.$data['child']['id'].'/delete')}}" class="btn btn-danger btn" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
-					</h4>
+					</h5>
 					<?php $load = Share::load(Request::url(), 'Bé '.$data['child']['name'].' của '.$data['user']['name'].' - KidLeen')->services();?>
-					<h4>
+					<h5>
 						<a target="_blank" href="{{$load['facebook']}}"><img width="30px" src="{{SERVER_PATH}}public/images/fb-icon.png" alt="Share Facebook"></a>
 						<a target="_blank" href="{{$load['twitter']}}"><img width="30px" src="{{SERVER_PATH}}public/images/tt-icon.png" alt="Share Twitter"></a>
 						<a target="_blank" href="{{$load['gplus']}}"><img width="30px" src="{{SERVER_PATH}}public/images/gg-icon.png" alt="Share Google Plus"></a>
-					</h4>
+					</h5>
 				</div>
 			</div>
 		</div>
@@ -115,9 +115,8 @@
 		</div>
 		<div class="col-md-12">
 			<h2 class="title-bar">Bảng kết quả</h2>
-			<hr/>
 			@if(count($data['results']) == 0)
-			<p class="alert alert-warning">Bé chưa trả lời hình ảnh nào cả!</p>
+			<p class="alert alert-danger">Bé chưa trả lời hình ảnh nào cả!</p>
 			@else
 			<div class="table-responsive">
 				<table class="table table-hover table-bordered table-striped">
@@ -125,8 +124,9 @@
 						<tr>
 							<th>Mã hình ảnh</th>
 							<th>Từ ngữ</th>
-							<th>Bé trả lời</th>
+							<th>Những chữ bé đúng</th>
 							<th>Những chữ bé sai</th>
+							<th>Điểm</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -136,6 +136,13 @@
 							<td>{{$result['word']}}</td>
 							<td>{{$result['correct']}}</td>
 							<td>{{$result['incorrect']}}</td>
+							<td class="text-center">
+								@if(strlen($result['incorrect'])==10)
+								<span class="label label-danger">-10</span>
+								@else
+								<span class="label label-success">+{{strlen($result['correct']) * 5}}</span>
+								@endif
+							</td>
 						</tr>
 						@endforeach
 					</tbody>

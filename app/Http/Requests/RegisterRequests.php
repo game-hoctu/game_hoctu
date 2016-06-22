@@ -22,7 +22,7 @@ class RegisterRequests extends Request {
 	{
 		return [
 			'email' => 'required|unique:parents,email',
-			'password' => 'required|min:6|max:30',
+			'password' => 'required|min:5|max:30',
 			'name' => 'required|'
 		];
 	}

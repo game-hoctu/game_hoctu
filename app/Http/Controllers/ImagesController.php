@@ -6,6 +6,8 @@ use App\Images;
 use App\Albums;
 use App\Categories;
 use Input;
+use File;
+use Storage;
 use Image;
 use Illuminate\Http\Request;
 
@@ -43,9 +45,11 @@ class ImagesController extends Controller {
     public function delete($id)
     {
         $item = Images::findOrFail($id);
+        //Storage::delete('public/upload/images/'.$item->url);
+        File::delete('public/upload/images/'.$item->url);
         $item->delete();
         success("Đã xóa thành công!");
-        return redirect()->action('AlbumsController@detail');
+        return redirect()->action('AlbumsController@detail', [$item->albums_id]);
     }
 
     function addByAlbums($albums_id)
@@ -82,7 +86,7 @@ class ImagesController extends Controller {
             }
         }
         success("Đã cập nhật thành công!");
-        return redirect()->action('AlbumsController@myAlbum');
+        return redirect()->action('AlbumsController@detail', [$albums_id]);
     }
 
 //ADMIN----------------------------------------------------------------------------------------

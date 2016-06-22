@@ -15,7 +15,7 @@
 								<label class="control-label col-sm-4">Tên album:</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" name="name"  ng-model="name" required="" minlength="6" placeholder="Nhập tên album...">
-									<div class="input-error" ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
+									<div ng-show="form_AbAdd.name.$touched" ng-messages="form_AbAdd.name.$error">
 										<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 									</div>
 								</div>
@@ -23,10 +23,11 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4">Mô tả:</label>
 								<div class="col-sm-8">
-									<div class="input-error" ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
+									
+									<input type="text" class="form-control" name="description" ng-model="description" required="" minlength="6" placeholder="Nhập mô tả album...">
+									<div ng-show="form_AbAdd.description.$touched" ng-messages="form_AbAdd.description.$error">
 										<div ng-messages-include="{{ asset('/resources/views/error.html') }}"></div>
 									</div>
-									<input type="text" class="form-control" name="description" ng-model="description" required="" minlength="6" placeholder="Nhập mô tả album...">
 								</div>
 							</div>
 							<div class="form-group">
@@ -49,9 +50,10 @@
 									<span class="glyphicon glyphicon-save"></span> Tạo album
 								</button>
 								<a class="btn btn-default" href="{{url('albums/myAlbum')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
-								<a class="btn btn-info addImage">
+								<a class="btn btn-default addImage">
 									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>
+								<span>Dự kiến upload <span class="imageNum">0</span> hình ảnh.</span>
 							</div>
 
 							<div class="col-sm-12">

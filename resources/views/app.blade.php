@@ -86,9 +86,7 @@
 			</div>
 		</div>
 	</nav>
-
 	@yield('content')
-
 	<div class="container-fluid footer">
 		<!-- Footer -->
 		<div class="row">
@@ -119,6 +117,34 @@
 
 		<!-- /.container -->
 	</div>
+	@if(!Auth::guest())
+	<a class="btn btn-info addbtn" data-toggle="modal" data-target="#addModal">+</a>
+
+	<!-- Modal -->
+	<div id="addModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-sm">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title"><span class="glyphicon glyphicon-plus"></span> Thêm</h3>
+				</div>
+				<div class="modal-body text-center">
+					<a href="{{url('albums/add')}}" class="btn btn-info">
+						<h2><span class="glyphicon glyphicon-picture"></span></h2>
+						Thêm album mới
+					</a>
+					<a href="{{url('childs/add')}}" class="btn btn-info">
+						<h2><span class="glyphicon glyphicon-leaf"></span></h2>
+						Thêm đứa trẻ mới
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	@endif
 	<!-- jQuery -->
 	<script src="{{ asset('/public/js/angular.min.js') }}"></script>
 	<script src="{{ asset('/public/js/angular-messages.min.js') }}"></script>

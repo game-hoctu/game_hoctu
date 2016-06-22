@@ -24,7 +24,7 @@ Route::group(['prefix' => 'ajax'], function(){
 
 	Route::group(['prefix' => 'users'], function(){
 		Route::get('getList', 'UsersController@ajaxGetList');
-
+		Route::get('{email}/checkEmail', 'UsersController@ajaxCheckEmail');
 	});
 	
 	Route::group(['prefix' => 'childs'], function(){

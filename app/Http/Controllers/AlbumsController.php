@@ -119,6 +119,12 @@ class AlbumsController extends Controller {
 	function delete($id)
 	{
 		$item = Albums::findOrFail($id);
+		$images = Images::where('albums_id', $id)->get()->toArray();
+		File::delete('public/upload/albums/'.$item->id.".jpg");
+		foreach($images as $img)
+		{
+			File::delete('public/upload/images/'.$img['url']);
+		}
 		$item->delete();
 		success("Đã xóa thành công!");
 		return redirect()->action('AlbumsController@myAlbum');
@@ -242,6 +248,8 @@ class AlbumsController extends Controller {
 			$data = $this->autoloadImage($result[$i]['id']);
 			$result[$i]['image'] = $data['image'];
 			$result[$i]['count'] = $data['count'];
+			$result[$i]['users'] = User::find($result[$i]['users_id']);
+			$result[$i]['categories'] = Categories::find($result[$i]['categories_id']);
 		}
 		return $result;
 	}

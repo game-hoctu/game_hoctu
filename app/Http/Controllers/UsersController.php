@@ -2,11 +2,12 @@
 use App\User;
 use App\Albums;
 use App\Childs;
-
+use Mail;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use Hash;
+use Input;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 
@@ -167,6 +168,84 @@ class UsersController extends Controller {
         // debugArr($data);
         return view('users.all', ['data' => $data, 'paging' => $paging]);
     }
+
+    function postForgetPass(Request $request)
+    {
+        $email = $request->email;
+        $user = User::where('email', $email)->get()->toArray();
+        //debugArr($user);
+        if(count($user) == 0)
+        {
+            warning('Không tồn tại email bạn đã nhập!');
+        }
+        else
+        {
+            $_GET['user'] = $user[0];
+            Mail::send('mails.forgetPassword', array('name'=> $user[0]['name']), function($msg){
+                $user = $_GET['user'];
+                unset($_GET['user']);
+                $msg->to($user['email'], $user['name'])->subject('Khôi phục mật khẩu của bạn.');
+            });
+            success('Một email đã được gửi đến địa chỉ email của bạn, hãy kiểm tra!');
+        }
+        return view('users.forgetPassword');
+    }
+
+    function changePass($id){
+        if(Auth::guest()){
+            warning('Bạn cần phải đăng nhập để thực hiện.');
+        }
+        else{
+            if(Auth::user()->id == $id){
+                $user = User::find($id);
+                if(!is_null($user)){
+                    return view('users.changePass', ['user' => $user]);
+                }
+                else{
+                    warning('Không tồn tại người dùng này');
+                }
+            }
+            else{
+                warning('Bạn không thể thực hiện thao tác này!');
+            }
+        }
+        return redirect()->back();
+    }
+
+    function postChangePass(Request $request)
+    {
+        if(!Auth::guest())
+        {
+            if($request->new_password != $request->new_password_confirm)
+            {
+                warning('Mật khẩu mới lặp lại không khớp.');
+            }
+            else
+            {
+                if($request->new_password == $request->password)
+                {
+                    warning('Mật khẩu mới phải khác mật khẩu cũ.');
+                }
+                else
+                {
+                    if(Hash::check($request->password, Auth::user()->password))
+                    {
+                        $user = User::find(Auth::user()->id);
+                        $user->password = Hash::make($request->new_password);
+                        $user->save();
+                        success('Đổi mật khẩu thành công!');
+                        return $this->callAction('detail', ['id' => Auth::user()->id]);
+                    }
+                    else
+                    {
+                        warning('Mật khẩu cũ không chính xác!');
+                    }
+                }
+            }
+        }
+        return redirect()->back();
+    }
+
 //ADMIN-----------------------------------------------------------------------------------
     public function adGetList()
     {
@@ -229,5 +308,15 @@ class UsersController extends Controller {
             $data['info'] = $result;
         }
         return $data;
+    }
+
+    function ajaxCheckEmail($email)
+    {
+        $user = User::where('email', $email);
+        if($user->count() > 0)
+        {
+            return json_encode(['status' => 'ERROR']);
+        }
+        return json_encode(['status' => 'SUCCESS']);
     }
 }

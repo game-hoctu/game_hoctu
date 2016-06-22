@@ -88,6 +88,10 @@ class ChildsController extends Controller {
 	function delete($id)
 	{
 		$item = Childs::findOrFail($id);
+		if($item->image != "")
+		{
+			File::delete('public/upload/childs/'.$item->image);
+		}
 		$item->delete();
 		success("Đã xóa thành công!");
 		return redirect()->action('ChildsController@myChild');

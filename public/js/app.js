@@ -7,8 +7,31 @@ app.filter("asDate", function () {
 		return new Date(input);
 	}
 });
-app.controller('LoginController',function($scope){
 
+app.directive("checkEmail", function($http){
+	return {
+		restrict: 'A',
+		link: function(scope, iElement, iAttrs){
+			iElement.on('focus', function(event){
+				scope.validEmail = true;
+			});
+			iElement.on('change', function(event) {
+				$http
+				.get(SERVER_PATH + "ajax/users/" + angular.element(this).val() + "/checkEmail")
+				.then(function(response){
+					console.log(response);
+					if(response.data.status == 'ERROR')
+					{
+						scope.validEmail = false;
+					}
+					else
+					{
+						scope.validEmail = true;
+					}
+				});
+			});
+		}
+	}
 });
 
 app.controller('UsersController',function($scope){
@@ -271,7 +294,6 @@ app.controller('SearchController', function($scope, $http){
 	$scope.loadAllAlbums = function(){
 		$scope.albums = undefined;
 		$scope.count = undefined;
-		console.log($scope.insert);
 		$http({
 			method  : 'GET',
 			url     : SERVER_PATH + "ajax/albums/getList",

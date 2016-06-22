@@ -27,8 +27,8 @@ class HomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		checkLogin();
-		checkLogout();
+		// checkLogin();
+		// checkLogout();
 		//$this->middleware('auth');
 	}
 

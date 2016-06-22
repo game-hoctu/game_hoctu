@@ -150,6 +150,40 @@ body{
 	color: #fff;
 	margin-top: 50px;
 }
+
+.addbtn{
+	border-radius: 50px;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	color: #fff;
+	box-shadow: 0px 0px 5px 1px #000;
+	width: 80px;
+	height: 80px;
+	font-size: 55px;
+	line-height: 67px;
+}
+
+#addModal .modal-header{
+	background: #5cb85c;
+	color: #fff;
+}
+#addModal .modal-body{
+	background: #fff;
+}
+
+#addModal .btn{
+	margin: 2px;
+}
+
+#listResult .carousel-indicators{
+	bottom: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+#wrapper{
+	min-height: 500px;
+}
 @media only screen and (min-width: 768px) {
 	.form-control{
 		max-width: 300px;
@@ -193,6 +227,13 @@ body{
 	h3, .h3{
 		font-size: 20px !important;
 	}
+	.addbtn{
+		border-radius: 50px;
+		width: 65px;
+		height: 65px;
+		font-size: 40px;
+		line-height: 52px;
+	}
 }
 
 @media only screen and (max-width: 350px) {
@@ -225,5 +266,12 @@ body{
 	}
 	h3, .h3{
 		font-size: 15px !important;
+	}
+	.addbtn{
+		border-radius: 30px;
+		width: 50px;
+		height: 50px;
+		font-size: 33px;
+		line-height: 36px;
 	}
 }

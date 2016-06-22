@@ -68,7 +68,7 @@
 						<h3>
 							<a href="{{url('/albums/<%album.id%>/detail')}}"><span class="glyphicon glyphicon-picture"></span> <%album.name%></a>
 						</h3>
-						<p><span class="glyphicon glyphicon-list"></span> Mô tả: <%album.description.substr(0, 100)%>...</p>
+						<p><span class="glyphicon glyphicon-tag"></span> Mô tả: <%album.description.substr(0, 100)%>...</p>
 					</div>
 				</div>
 			</div>
@@ -97,8 +97,8 @@
 						<h3>
 							<a href="{{url('/albums/<%album.id%>/detail')}}"><span class="glyphicon glyphicon-picture"></span> <%album.name%></a>
 						</h3>
-						<p><span class="glyphicon glyphicon-list"></span> Mô tả: <%album.description.substr(0, 100)%>...</p>
-						<p><span class="glyphicon glyphicon-list"></span> Lượt tải: <%album.downloads%></p>
+						<p><span class="glyphicon glyphicon-tag"></span> Mô tả: <%album.description.substr(0, 100)%>...</p>
+						<p><span class="glyphicon glyphicon-tag"></span> Lượt tải: <%album.downloads%></p>
 					</div>
 				</div>
 			</div>

@@ -3,10 +3,11 @@
 @section('title', 'Đăng nhập')
 @section('content')
 
-<div class="container" ng-app="game_hoctu" ng-controller="LoginController">
+<div class="container" ng-app="game_hoctu">
 	<div class="row">
 		<div class="col-sm-12">
 			<h1 class="title-bar"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</h1>
+			<hr/>
 			@include('message')
 			<form name="formLogin" class="form-horizontal" role="form" method="POST" action="{{ url('auth/login') }}" novalidate>
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">

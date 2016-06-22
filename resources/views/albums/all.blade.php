@@ -1,5 +1,4 @@
 @extends('app')
-
 @section('title', 'Danh sách album')
 @section('content')
 <div class="container" ng-controller="AlbumsController">
@@ -19,14 +18,15 @@
 		<div class="col-md-12">
 			<form class="form-inline" role="form">
 				<div class="form-group">
-					<label>Theo thể loại:</label>
-					<select class="form-control" ng-init="loadCate()" ng-model="cates_id">
+					<label>Lọc theo thể loại:</label>
+					<select placeholder="Lọc theo thể loại" class="form-control" ng-init="loadCate()" ng-model="cates_id">
 						<option ng-repeat="cate in cates" value="<%cate.id%>"><%cate.id%> - <%cate.name%></option>
 					</select>
 					<a href="{{url('albums/all')}}?page={{$paging['page']}}&where=categories_id&compare==&value=<%cates_id%>" class="btn btn-default">Xem</a>
 				</div>
+
 				<div class="form-group">
-					<label> - Theo người dùng:</label>
+					<label>Lọc theo người dùng:</label>
 					<select class="form-control" ng-init="loadUsers()" ng-model="users_id">
 						<option ng-repeat="user in users" value="<%user.id%>"><%user.id%> - <%user.name%></option>
 					</select>
@@ -40,15 +40,16 @@
 		@foreach($data as $item)
 		<div class="col-md-4 img-portfolio album-item">
 			<a href="{{url('/albums/'.$item['id'].'/detail')}}">
-				<img class="album-image img-responsive img-thumbnail img-hover" src="{{$item['image']}}" alt="{{$item['name']}}">
+				<img class="album-image img-responsive img-thumbnail img-hover" src="{{$item['image']}}" alt="{{$item['name']}}" width="100%">
 			</a>
 			<div class="album-info">
 				<h2>
 					<a href="{{url('/albums/'.$item['id'].'/detail')}}"><span class="glyphicon glyphicon-picture"></span> {{$item['name']}}</a>
 				</h2>
-				<p><span class="glyphicon glyphicon-list"></span> Mô tả: {{substr($item['description'], 0, 100)}}...</p>
-				<p><span class="glyphicon glyphicon-list"></span> Số lượng ảnh: {{$item['count']}}</p>
-				<p><span class="glyphicon glyphicon-list"></span> Lượt tải: {{$item['downloads']}}</p>
+				<p><span class="glyphicon glyphicon-tag"></span> Mô tả: {{substr($item['description'], 0, 100)}}...</p>
+				<p><span class="glyphicon glyphicon-tag"></span> Thể loại: {{$item['categories']['name']}}</p>
+				<p><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$item['users']['name']}}</p>
+				<p><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{$item['count']}} - Lượt tải: {{$item['downloads']}}</p>
 			</div>
 		</div>
 		@endforeach

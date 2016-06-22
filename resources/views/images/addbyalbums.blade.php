@@ -7,7 +7,7 @@
 			<h1 class="title-bar"><span class="glyphicon glyphicon-picture"></span> Thêm hình ảnh</h1>
 			@include('message')
 			<div class="row">
-				<form enctype="multipart/form-data" name="form" class="form-horizontal" role="form" method="POST" action="{{ route('imagesPostAddByAlbums') }}" novalidate="">
+				<form enctype="multipart/form-data" name="form" class="form-horizontal" role="form" method="POST" action="{{ route('imagesPostAddByAlbums') }}">
 					<input type="hidden" name="_token" value="{!! csrf_token() !!}"/>
 					<input type="hidden" name="albums_id" value="{{old('albums_id', $albums['id'])}}"/>
 					<div class="col-md-4">
@@ -39,10 +39,12 @@
 								<button type="submit" class="btn btn-primary">
 									<span class="glyphicon glyphicon-edit"></span> Cập nhật
 								</button>
-								<a class="btn btn-info" href="{{url('albums/'.$albums['id'].'/detail')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
-								<a class="btn btn-info addImage">
+								<a class="btn btn-default" href="{{url('albums/'.$albums['id'].'/detail')}}"><span class="glyphicon glyphicon-arrow-left"></span> Trở về</a>
+								<a class="btn btn-default addImage">
 									<span class="glyphicon glyphicon-plus"></span> Upload thêm ảnh
 								</a>
+								<span>Dự kiến upload <span class="imageNum">0</span> hình ảnh.</span>
+
 							</div>
 
 							<div class="col-sm-12">

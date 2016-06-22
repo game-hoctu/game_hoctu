@@ -79,11 +79,17 @@ Route::group(['prefix' => 'categories'], function(){
 //chỉnh sửa thông tin cá nhân
 Route::group(['prefix' => 'users'], function(){
 	Route::get('all', 'UsersController@all');
+	Route::get('forgetPassword', function(){
+		return view('users.forgetPassword');
+	});
 	Route::get('hot', 'UsersController@hot');
 	Route::get('myProfile','UsersController@myProfile');
 	Route::get('{id}/edit','UsersController@edit');
 	Route::get('{id}/detail','UsersController@detail');
 	Route::post('{id}/postEdit',['as'=>'postedit','uses'=>'UsersController@postEdit']);
+	Route::get('{id}/changePass','UsersController@changePass');
+	Route::post('postChangePass',['as'=>'usersPostChangePass','uses'=>'UsersController@postChangePass']);
+	Route::post('postForgetPass',['as'=>'usersPostForgetPass','uses'=>'UsersController@postForgetPass']);
 });
 
 //ADMIN----------------------------------------------------------------------------------
