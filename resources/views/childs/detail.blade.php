@@ -21,7 +21,7 @@
 						<span ng-show="{{$data['child']['sex']}} == 1">Nữ</span>
 					</h5>
 					<h5><span class="glyphicon glyphicon-tag"></span> Cha mẹ: {{$data['user']['name']}}</h5>
-					<h5><span class="glyphicon glyphicon-tag"></span> Tổng số điểm: {{$data['score']}}</h5>
+					<h5><span class="glyphicon glyphicon-tag"></span> Tổng số điểm: <span class="label label-success">{{$data['score']}}</span></h5>
 					<h5>
 						<a href="{{url('childs/'.$data['child']['id'].'/edit')}}" class="btn btn-success btn"><span class="glyphicon glyphicon glyphicon-edit"></span> Sửa</a>
 						<a href="{{url('childs/'.$data['child']['id'].'/delete')}}" class="btn btn-danger btn" onclick="return confirm('Bạn có chắc chắc muốn xóa?')"><span class="glyphicon glyphicon glyphicon-trash"></span> Xóa</a>
@@ -38,14 +38,6 @@
 		<div class="col-md-7">
 			@if(count($data['results']) > 0)
 			<div id="listResult" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<?php $i = 0; $active="active";?>
-					@foreach($data['results'] as $result)
-					<li data-target="#{{$result['images_id']}}" data-slide-to="{{$i}}" class="{{$active}}"></li>
-					<?php $i++; $active="";?>
-					@endforeach
-				</ol>
-
 				<div class="carousel-inner">
 					<?php $active="active";?>
 					@foreach($data['results'] as $result)

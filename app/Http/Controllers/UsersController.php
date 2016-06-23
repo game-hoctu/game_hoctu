@@ -158,7 +158,7 @@ class UsersController extends Controller {
             $value = "%%";
         }
         $data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
-        $paging['all'] = ceil(count($data) / $rowperpage);
+        $paging['all'] = ceil(count(User::all()->toArray()) / $rowperpage);
         $paging['page'] = $page;
         $paging['order'] = $order;
         $paging['sort'] = $sort;

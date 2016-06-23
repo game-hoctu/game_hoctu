@@ -67,7 +67,7 @@ class AlbumsController extends Controller {
 					$arrName[count($arrName)-1] = "jpg";
 					$img_name = implode(".", $arrName);
 					$path = public_path('/upload/images/' . $img_name);
-					Image::make($img->getRealPath())->resize(700, null, function ($constraint) {
+					Image::make($img->getRealPath())->resize(699, null, function ($constraint) {
 						$constraint->aspectRatio();
 					})->save($path);
 					$item = new Images();
@@ -305,8 +305,11 @@ class AlbumsController extends Controller {
 		{
 			$value = "%%";
 		}
+		$all = Albums::where($where, $compare, $value)->orderBy($order, $sort)->get()->toArray();
+		$pageall = ceil(count($all) / $rowperpage);
+		$page = ($page > $pageall) ? $pageall : $page;
 		$data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
-		$paging['all'] = ceil(count($data) / $rowperpage);
+		$paging['all'] = ceil(count($all) / $rowperpage);
 		$paging['page'] = $page;
 		$paging['order'] = $order;
 		$paging['sort'] = $sort;

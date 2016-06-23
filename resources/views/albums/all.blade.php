@@ -46,7 +46,6 @@
 				<h2>
 					<a href="{{url('/albums/'.$item['id'].'/detail')}}"><span class="glyphicon glyphicon-picture"></span> {{$item['name']}}</a>
 				</h2>
-				<p><span class="glyphicon glyphicon-tag"></span> Mô tả: {{substr($item['description'], 0, 100)}}...</p>
 				<p><span class="glyphicon glyphicon-tag"></span> Thể loại: {{$item['categories']['name']}}</p>
 				<p><span class="glyphicon glyphicon-tag"></span> Người tạo: {{$item['users']['name']}}</p>
 				<p><span class="glyphicon glyphicon-tag"></span> Số lượng ảnh: {{$item['count']}} - Lượt tải: {{$item['downloads']}}</p>

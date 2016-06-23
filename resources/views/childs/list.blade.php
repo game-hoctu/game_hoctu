@@ -31,6 +31,9 @@
 					<p>
 						<span class="glyphicon glyphicon-calendar"></span> {{Carbon\Carbon::parse($item['date_of_birth'])->format('d/m/Y')}}
 					</p>
+					<p>
+						<span class="glyphicon glyphicon-calendar"></span> Giới tính: {{($item['sex'] == 0) ? 'Nam' : 'Nữ'}}
+					</p>
 				</div>
 			</div>
 		</div>

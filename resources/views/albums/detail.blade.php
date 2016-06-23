@@ -33,7 +33,7 @@
 					<div class="item {{$active}}">
 						<img src="{{UPLOAD_FOLDER.$url}}" class="img-thumbnail img-responsive" alt="{{$image['word']}}">
 						<div class="carousel-caption">
-							<h2>{{strtoupper($image['word'])}}</h2>
+							<h2 class="imageWord">{{strtoupper($image['word'])}}</h2>
 						</div>
 					</div>
 					<?php $active="";?>

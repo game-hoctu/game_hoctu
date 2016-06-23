@@ -114,7 +114,7 @@
               <tr ng-repeat="child in childs | filter:search">
                 <td><%child.id%></td>
                 <td><%child.name%></td>
-                <td><%child.date_of_birth%></td>
+                <td><%child.date_of_birth | asDate | date:'dd/MM/yyyy'%></td>
                 <td>
                   <span ng-show="child.sex == 0">Nam</span>
                   <span ng-show="child.sex == 1">Nữ</span>

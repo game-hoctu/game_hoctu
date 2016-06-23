@@ -27,25 +27,24 @@ class ChildsController extends Controller {
 	}
 	function postAdd(Request $request)
 	{
+		$img_name = "";
 		if(Input::hasFile('fImage'))
 		{
 			$img = $request->file('fImage');
+			$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
 		}	
-
-		$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
-		
 		$item = new Childs();
 		$item->name = $request->name;
 		$item->date_of_birth = $request->date_of_birth;
 		$item->image  = $img_name;
 		$item->sex = $request->sex;
 		$item->users_id = Auth::user()->id;
-		$item->save();
 		if(Input::hasFile('fImage'))
 		{
 			$path = public_path('/upload/childs/' . $img_name);
 			Image::make($img->getRealPath())->resize(350, 200)->save($path);
 		}
+		$item->save();
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@myChild');
 	}
@@ -234,8 +233,11 @@ class ChildsController extends Controller {
 		{
 			$value = "%%";
 		}
+		$all = Childs::where($where, $compare, $value)->orderBy($order, $sort)->get()->toArray();
+		$pageall = ceil(count($all) / $rowperpage);
+		$page = ($page > $pageall) ? $pageall : $page;
 		$data = $this->getListByNumber($rowperpage * ($page - 1), $rowperpage, $order, $sort, $where, $compare, $value);
-		$paging['all'] = ceil(count($data) / $rowperpage);
+		$paging['all'] = ceil(count($all) / $rowperpage);
 		$paging['page'] = $page;
 		$paging['order'] = $order;
 		$paging['sort'] = $sort;
@@ -301,17 +303,26 @@ class ChildsController extends Controller {
 	}
 	public function adPostAdd(Request $request)
 	{
-		$img = $request->file('fImage');
-		$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+		$img_name = "";
+		if(Input::hasFile('fImage'))
+		{
+			$img = $request->file('fImage');
+			$img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
+		}	
 		$item = new Childs();
 		$item->name = $request->name;
 		$item->users_id = $request->users_id;
 		$item->date_of_birth = $request->date_of_birth;
 		$item->image  = $img_name;
 		$item->sex = $request->sex;
+		if(Input::hasFile('fImage'))
+		{
+			$path = public_path('/upload/childs/' . $img_name);
+			Image::make($img->getRealPath())->resize(350, 200)->save($path);
+			// $des = 'public/upload/childs';
+			// $img->move($des, $img_name);
+		}
 		$item->save();
-		$des = 'public/upload/childs';
-		$img->move($des, $img_name);
 		success("Đã thêm thành công!");
 		return redirect()->action('ChildsController@adGetList');
 	}
@@ -345,8 +356,10 @@ class ChildsController extends Controller {
 
 		if(Input::hasFile('fImage'))
 		{
-			$des = 'public/upload/childs';
-			$img->move($des, $getchildById->image);
+			$path = public_path('/upload/childs/' . $getchildById->image);
+			Image::make($img->getRealPath())->resize(350, 200)->save($path);
+			// $des = 'public/upload/childs';
+			// $img->move($des, $getchildById->image);
 		}
 
 		success("Đã sửa thành công!");
@@ -401,7 +414,7 @@ class ChildsController extends Controller {
 		$result = $child::find($id)->toArray();
 		if($result['image'] == "")
 		{
-			return SERVER_PATH."public/images/no-image.png";
+			return SERVER_PATH."public/images/kid-no-image.png";
 		}
 		return CHILD_IMAGE.$result['image'];
 	}

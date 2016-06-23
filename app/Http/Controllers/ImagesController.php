@@ -36,8 +36,12 @@ class ImagesController extends Controller {
         $getimageById->save();
         if(Input::hasFile('fImage'))
         {
-            $des = 'public/upload/images';
-            $img->move($des, $getimageById->url);
+            // $des = 'public/upload/images';
+            // $img->move($des, $getimageById->url);
+            $path = public_path('/upload/images/' . $getimageById->url);
+            Image::make($img->getRealPath())->resize(699, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path);
         }   
         success("Đã sửa thành công!");
         return redirect()->action('AlbumsController@detail', ['albums_id'=>$getimageById->albums_id]);
@@ -68,7 +72,7 @@ class ImagesController extends Controller {
             foreach(Input::file('fImage') as $img) {
                 $img_name = date("dmYHis").stripUnicode($img->getClientOriginalName());
                 $path = public_path('/upload/images/' . $img_name);
-                Image::make($img->getRealPath())->resize(700, null, function ($constraint) {
+                Image::make($img->getRealPath())->resize(699, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save($path);
                 $item = new Images();
@@ -103,10 +107,12 @@ class ImagesController extends Controller {
         $item->url  = $img_name;
         $item->word = $request->word;
         $item->albums_id = $request->albums_id;
-        $item->save();
-        $des = 'public/upload/images';
-        $img->move($des, $img_name);
+        $path = public_path('/upload/images/' . $img_name);
+        Image::make($img->getRealPath())->resize(699, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($path);
         success("Đã thêm thành công!");
+        $item->save();
         return redirect()->action('ImagesController@adGetList');
     }
     public function adEdit($id)
@@ -137,8 +143,12 @@ class ImagesController extends Controller {
 
         if(Input::hasFile('fImage'))
         {
-            $des = 'public/upload/images';
-            $img->move($des, $getimageById->url);
+            $path = public_path('/upload/images/' . $getimageById->url);
+            Image::make($img->getRealPath())->resize(699, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path);
+            // $des = 'public/upload/images';
+            // $img->move($des, $getimageById->url);
         }  
 
         success("Đã sửa thành công!");
