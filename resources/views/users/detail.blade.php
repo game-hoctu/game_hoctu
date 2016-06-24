@@ -5,6 +5,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h1 class="title-bar"><span class="glyphicon glyphicon-user"></span> Thông tin người dùng</h1>
+			@include('message')
 		</div>
 		<div class="col-md-6">
 			<h3 class="title-bar"><span class="glyphicon glyphicon-list"></span> Thông tin</h3>
